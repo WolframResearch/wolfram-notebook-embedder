@@ -1,0 +1,17 @@
+{
+  "name": "wolfram-embedded-notebook",
+  "version": "0.1.0",
+  "description": "Library to embed Wolfram Cloud notebooks on other sites.",
+  "main": "src/main.js",
+  "author": "Jan Poeschko",
+  "license": "MIT",
+  "scripts": {
+    "build": "rollup -c config/rollup.config.js"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "rollup": "^0.67.0",
+    "rollup-plugin-babel": "^4.0.3"
+  }
+}
