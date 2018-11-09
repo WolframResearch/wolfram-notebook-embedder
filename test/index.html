@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>WolframEmbeddedNotebook test</title>
+    <title>WolframNotebookEmbedding test</title>
     <style>
         #path {
             width: 300px;
@@ -9,18 +9,18 @@
 </head>
 <body>
 
-<h1>WolframEmbeddedNotebook test</h1>
+<h1>WolframNotebookEmbedding test</h1>
 <p>
     Enter the path (including user ID) or UUID of a cloud object on your localhost:
     <input id="path" value="30c45b23-d17e-4177-bc52-59056f613367" />
     <button onclick="renderNotebook()">Render Notebook</button>
 </p>
 <div id="container" style="position: relative"></div>
-<script src="./dist/notebook.dev.js"></script>
+<script src="./dist/wolfram-notebook-embedding.dev.js"></script>
 <script>
     function renderNotebook() {
         var url = 'http://localhost/objects/' + document.getElementById('path').value;
-        WolframEmbeddedNotebook.create(url, document.getElementById('container'), {
+        WolframNotebookEmbedding.create(url, document.getElementById('container'), {
             maxWidth: 500,
             maxHeight: 400,
             allowInteract: true

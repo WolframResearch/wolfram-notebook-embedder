@@ -1,4 +1,4 @@
-# wolfram-embedded-notebook
+# wolfram-notebook-embedding
 
 A library to embed Wolfram Cloud notebooks on other sites.
 

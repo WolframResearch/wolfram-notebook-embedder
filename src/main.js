@@ -26,7 +26,7 @@ function loadLibrary(libraryURL) {
             script.onerror = reject;
             let callbackName;
             do {
-                callbackName = '_wolframEmbeddedNotebookCallback' + (++counter);
+                callbackName = '_wolframNotebookEmbeddingCallback' + (++counter);
             } while (window[callbackName]);
             window[callbackName] = (lib) => {
                 delete window[callbackName];
@@ -46,7 +46,7 @@ function getLibraryURL(cloudObjectURL) {
         throw new Error('InvalidCloudObjectURL');
     }
     const suffix = isModernBrowser() ? '.modern.js' : '.js';
-    return cloudObjectURL.substring(0, objectsPos) + '/dist/public/embeddedNotebook' + suffix;
+    return cloudObjectURL.substring(0, objectsPos) + '/dist/public/notebookEmbedding' + suffix;
 }
 
 export function create(url, node, options) {
