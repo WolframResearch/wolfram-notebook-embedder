@@ -9,7 +9,7 @@
     "build": "rollup -c config/rollup.config.js",
     "copy-dist-to-test": "cp -r ./dist ./test/dist",
     "serve-test": "serve test",
-    "test-html": "npm-run-all copy-dist-to-test serve-test"
+    "test-html": "npm-run-all build copy-dist-to-test serve-test"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
