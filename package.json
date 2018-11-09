@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "build": "rollup -c config/rollup.config.js",
-    "copy-dist-to-test": "cp -r ./dist ./test/dist",
+    "copy-dist-to-test": "cp -r ./dist ./test",
     "serve-test": "serve test",
     "test-html": "npm-run-all build copy-dist-to-test serve-test"
   },
