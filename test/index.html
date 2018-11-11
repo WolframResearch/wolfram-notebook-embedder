@@ -15,16 +15,47 @@
     <input id="path" value="30c45b23-d17e-4177-bc52-59056f613367" />
     <button onclick="renderNotebook()">Render Notebook</button>
 </p>
+<p>
+    <button onclick="increaseWidth()">Increase Width</button>
+    <button onclick="resetX()">Reset x</button>
+</p>
 <div id="container" style="position: relative"></div>
 <script src="./dist/wolfram-notebook-embedding.dev.js"></script>
 <script>
+    var nbLoading = null;
+    var width = 500;
+
     function renderNotebook() {
         var url = 'http://localhost/objects/' + document.getElementById('path').value;
-        WolframNotebookEmbedding.create(url, document.getElementById('container'), {
-            maxWidth: 500,
+        nbLoading = WolframNotebookEmbedding.create(url, document.getElementById('container'), {
+            maxWidth: width,
             maxHeight: 400,
             allowInteract: true
         });
+    }
+
+    function increaseWidth() {
+        if (nbLoading) {
+            width += 100;
+            nbLoading.then(function (nb) {
+                nb.setAttributes({maxWidth: width});
+            });
+        }
+    }
+
+    function resetX() {
+        if (nbLoading) {
+            nbLoading.then(function (nb) {
+                nb.getCells().then(({cells}) => {
+                    var lastCell = cells[cells.length - 1];
+                    return nb.setDynamicModuleVariable({
+                        cellId: lastCell.id,
+                        name: 'x$$',
+                        value: 0
+                    });
+                })
+            })
+        }
     }
 </script>
 
