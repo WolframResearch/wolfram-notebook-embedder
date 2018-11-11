@@ -25,18 +25,18 @@
 <div id="container" style="position: relative"></div>
 <script src="./dist/wolfram-notebook-embedding.dev.js"></script>
 <script>
-    var nbLoading = null;
-    var width = 500;
+    let nbLoading = null;
+    let width = 500;
 
     function renderNotebook() {
-        var url = 'http://localhost/objects/' + document.getElementById('path').value;
+        const url = 'http://localhost/objects/' + document.getElementById('path').value;
         nbLoading = WolframNotebookEmbedding.create(url, document.getElementById('container'), {
             maxWidth: width,
             maxHeight: 400,
             allowInteract: true
         });
         nbLoading.then(nb => {
-            nb.addEventListener('resize', function (dimensions) {
+            nb.addEventListener('resize', dimensions => {
                 const span = document.getElementById('dimensions');
                 span.innerHTML = dimensions.width + ' x ' + dimensions.height;
             });
@@ -46,7 +46,7 @@
     function increaseWidth() {
         if (nbLoading) {
             width += 100;
-            nbLoading.then(function (nb) {
+            nbLoading.then(nb => {
                 nb.setAttributes({maxWidth: width});
             });
         }
@@ -54,9 +54,9 @@
 
     function resetX() {
         if (nbLoading) {
-            nbLoading.then(function (nb) {
+            nbLoading.then(nb => {
                 nb.getCells().then(({cells}) => {
-                    var lastCell = cells[cells.length - 1];
+                    const lastCell = cells[cells.length - 1];
                     return nb.setDynamicModuleVariable({
                         cellId: lastCell.id,
                         name: 'x$$',
