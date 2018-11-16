@@ -3,7 +3,12 @@
   "version": "0.1.0",
   "description": "Library to embed Wolfram Cloud notebooks on other sites.",
   "main": "src/main.js",
-  "author": "Jan Poeschko",
+  "keywords": [
+    "wolfram",
+    "cloud",
+    "notebook",
+    "embedding"
+  ],
   "license": "MIT",
   "scripts": {
     "build": "rollup -c config/rollup.config.js",

@@ -1,17 +1,44 @@
 # wolfram-notebook-embedding
 
-A library to embed Wolfram Cloud notebooks on other sites.
+A library to embed [Wolfram Cloud](https://www.wolframcloud.com/) notebooks on other sites.
 
-## Development
+## Installation
 
-To install all required dependencies for development of this library, run:
+If you're using a package manager such as [npm](https://www.npmjs.com/get-npm) or [Yarn](https://yarnpkg.com/en/), you can install this package from the npm repository:
 
-    yarn install
-
-## Testing
-
-To manually test embedded notebooks, run
-
-    yarn test-html
+    npm install wolfram-notebook-embedding
     
-and visit the resulting localhost URL (usually [http://localhost:5000](http://localhost:5000)). On that page, you can enter the path of a notebook on your localhost cloud to embed it.
+and then import it in your JS code like so:
+
+    import WolframNotebookEmbedding from 'wolfram-notebook-embedding';    
+    
+You can also import this library as a `<script>` tag from a CDN:
+
+    <script crossorigin src="https://unpkg.com/wolfram-notebook-embedding@0.1/umd/wolfram-notebook-embedding.min.js"></script>
+    
+and then use the global variable `WolframNotebookEmbedding`.
+
+## Usage & Documentation
+
+* [**Getting started**](./docs/GettingStarted.md)
+* [Library interface](./docs/LibraryInterface.md)
+* [Notebook API](./docs/NotebookAPI.md)
+* [Troubleshooting](./docs/Troubleshooting.md)
+
+## Examples
+
+* [Basic example](./test/index.html)
+
+## Contributing
+
+Everyone is welcome to contribute. Please read the [Development guide](./docs/Development.md) for more information, including how to run the tests.
+
+## Versioning
+
+We use [semantic versioning](https://semver.org/) for this library and its API.
+
+Each version of this library is compatible with a certain range of versions of Wolfram Cloud. Currently, the requirement is Wolfram Cloud 1.50 (which is not released yet) or higher. We try hard not to make any backward-incompatible changes on the Wolfram Cloud side, which would require an update of this library to keep embeddings working.
+
+## License
+
+This project is licensed under the [MIT license](./LICENSE).
