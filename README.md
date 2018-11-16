@@ -29,6 +29,10 @@ and then use the global variable `WolframNotebookEmbedding`.
 
 * [Basic example](./test/index.html)
 
+## Browser Support
+
+We support all modern browsers (the last 2 major versions of Chrome, Firefox, Edge, Safari), and Internet Explorer 11. Particularly for IE 11, this library includes an internal "ponyfill"
+
 ## Contributing
 
 Everyone is welcome to contribute. Please read the [Development guide](./docs/Development.md) for more information, including how to run the tests.
