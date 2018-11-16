@@ -1,8 +1,13 @@
 # Notebook API
 
-Interacts with the main notebook in a cloud window. If a command is sent before the main notebook is initialized, it will wait to respond until it is ready. Thus, if you send a command from the `notebook` API to a window that has (and never will have) a main notebook, you will not receive any response for that command.
+This is the documentation of [methods](#methods) on the object returned by [`mount`](./LibraryInterface.md) to control a notebook from JS code. Each method takes a JS object with *parameters* and returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) resolving to a *response* object. Parameters with a default value ("= `value`") are optional. In case of an error, the returned promise is rejected with an object of the form `{error: "..."}`; the potential errors are listed for each command.
 
-## Commands
+The API also exposes some [events](#events) that can be subscribed to using the API method `addEventListener(eventName, callback)`. The `callback` will receive a JS object with the specified *fields* as its single argument. Event listeners can be removed with `removeEventListener(eventName, callback)`.
+
+Some methods and events marked with "[INTERNAL]" are **internal** and not part of the official API. **Do not rely on internal methods or events in production code.** They might be changed or disappear at any time.
+
+
+## <a name="methods">Methods</a>
 
 ### Cell insertion
 
@@ -42,7 +47,7 @@ Example response:
         "cellId": "1"
     }
 
-#### insertCellBefore *[not implemented yet]*
+#### insertCellBefore
 
 Creates a new cell before another given cell.
 
@@ -302,7 +307,7 @@ Moves the selection to the separator after a cell or cell group.
 
     + `"ElementNotFound"`
 
-#### moveSelection
+#### moveSelection [INTERNAL]
 
 Moves the selection in the given direction.
 
@@ -336,7 +341,7 @@ If the selection is within a cell, the behavior is undefined in terms of this AP
     + `"ImpossibleDirection"` ... The current selection could be moved in the given direction.
     + `"UnknownDirection"` ... The given direction was not `"up"|"down"|"left"|"right"|"previous"|"next"|"in"|"out"`.
 
-#### moveSelectionDirections
+#### moveSelectionDirections [INTERNAL]
 
 Returns the set of possible directions the selection can be moved in.
 
@@ -347,7 +352,7 @@ This takes into account the current selection and the cell structure. For instan
     + `directions` (`Array.<string>`) ... List of possible directions the selection.
 
 
-#### clearSelectionUponKeyboardDismissal
+#### clearSelectionUponKeyboardDismissal [INTERNAL]
 
 Clears the selection when keyboard is dismissed on the iOS mobile app, when the keyboard is dismissed via the "Dismiss" button.
 
@@ -380,7 +385,7 @@ Scrolls to the specified position in the notebook.
 
 ### Copy and Paste
 
-#### copyData
+#### copyData [INTERNAL]
 
 Returns data representing the current selection.
 
@@ -393,11 +398,11 @@ If nothing (or nothing copy-able) is currently selected, `null` is returned.
     + `json` (`Object|Array|string`) ... Structural representation of the currently selected content, made for round-tripping into a notebook.
     + `text` (`string`) ... Plain-text representation of the currently selected content. This is particularly useful for pasting in other applications.
 
-#### cutData
+#### cutData [INTERNAL]
 
 Like `copyData`, but also deletes the currently selected content.
 
-#### pasteData
+#### pasteData [INTERNAL]
 
 Pastes data at the current insertion point.
 
@@ -556,7 +561,7 @@ Sets the value of a DynamicModule variable.
 
 ### Autocompletion
 
-#### insertAutocompletion
+#### insertAutocompletion [INTERNAL]
 
 Inserts a completion at current cursor position.
 
@@ -569,7 +574,7 @@ Inserts a completion at current cursor position.
     + `"UnknownCompletion"` ... The completion is not in the list of completions sent previously.
     + `"NoCompletionAvailable"` ... No completion is available (i.e. the autocompletion menu should have been closed.)
 
-#### getFunctionTemplates
+#### getFunctionTemplates [INTERNAL]
 
 Retrieves the function templates for the given symbol. The symbol should be from the list of completions that would have been previously sent by the `autocompletions` event.
 
@@ -586,7 +591,7 @@ Retrieves the function templates for the given symbol. The symbol should be from
     + `"NoFunctionTemplateAvailable"` ... No function template is available.
     + `"RasterizationError"` ... Kernel call for rasterization failed.
 
-#### insertFunctionTemplate
+#### insertFunctionTemplate [INTERNAL]
 
 Inserts a function template at current cursor position based on the symbol's list of function templates sent through `getFunctionTemplates`.
 
@@ -598,7 +603,8 @@ Inserts a function template at current cursor position based on the symbol's lis
 
     + `"IndexOutOfBounds"` ... The array index is not within the range of the function template list for the given symbol.
 
-## Events
+
+## <a name="events">Events</a>
 
 ### Selection
 
@@ -639,13 +645,13 @@ Fired when scroll position changes.
     + `left` (`number`) ... Number of pixels scrolled in horizontal direction (increases when scrolling to the right).
     + `top` (`number`) ... Number of pixels scrolled in vertical direction (increases when scrolling down).
 
-#### activate-pull-to-refresh
+#### activate-pull-to-refresh [INTERNAL]
 
 Fired upon `touchmove` in a non-interactive notebook element in an unscrolled notebook (i.e. at the top of the page).
 
 ### Code Assist
 
-#### autocompletions
+#### autocompletions [INTERNAL]
 
 Fired when autocompletions are available for the current input text. It is case-insensitive on mobile (as compared to case-sensitive on desktop browser). The `needle` and `completions` array will be empty if no completions are available, and the automcompletions menu in the mobile app should be closed, if it is open.
 
