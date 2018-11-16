@@ -90,7 +90,7 @@ function getNotebookData(url) {
     });
 }
 
-export function create(url, node, options) {
+export function mount(url, node, options) {
     let theNotebookID;
     return Promise.resolve()
         .then(() => {
@@ -104,6 +104,6 @@ export function create(url, node, options) {
             return loadLibrary(mainScript);
         })
         .then(lib => {
-            return lib.create(theNotebookID, node, options);
+            return lib.mount(theNotebookID, node, options);
         });
 }
