@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Server-side rendering</title>
+    <style>
+        #path {
+            width: 300px;
+        }
+        #container {
+            width: 100%;
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Server-side rendering</h1>
+
+<p>
+    Enter the path (including user ID) or UUID of a cloud object on your localhost:
+    <input id="path" value="30c45b23-d17e-4177-bc52-59056f613367" />
+</p>
+<p>
+    <button onclick="loadStaticHTML()">Load static HTML</button>
+    (this would usually happen on the server)
+</p>
+<p>
+    <button onclick="mountNotebook()">Mount live notebook</button>
+    (this always happens on the client side)
+</p>
+
+<div id="container"></div>
+<script src="./dist/wolfram-notebook-embedding.dev.js"></script>
+
+<script>
+    let nbLoading = null;
+
+    function mountNotebook() {
+        const url = 'http://localhost/objects/' + document.getElementById('path').value;
+        nbLoading = WolframNotebookEmbedding.mount(url, document.getElementById('container'), {
+            allowInteract: true
+        });
+    }
+
+    function loadStaticHTML() {
+        const url = 'http://localhost/notebooks/html?public=true&path=' + document.getElementById('path').value;
+        fetch(url, {method: 'GET'}).then(response => response.text()).then(text => {
+            const container = document.getElementById('container');
+            container.innerHTML = text;
+        })
+    }
+</script>
+
+</body>
+</html>

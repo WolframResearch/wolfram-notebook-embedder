@@ -1,6 +1,6 @@
 # wolfram-notebook-embedding
 
-A library to embed [Wolfram Cloud](https://www.wolframcloud.com/) notebooks on other sites.
+A library to embed [Wolfram Cloud](https://www.wolframcloud.com/) notebooks on other sites. It does *not* use an `<iframe>` but renders a notebook directly into a given DOM node, for a more seamless experience.
 
 ## Installation
 
@@ -27,11 +27,12 @@ and then use the global variable `WolframNotebookEmbedding`.
 
 ## Examples
 
-* [Basic example](./test/index.html)
+* [Basic example](test/basic.html)
+* [Server-side rendering](test/ssr.html)
 
 ## Browser Support
 
-We support all modern browsers (the last 2 major versions of Chrome, Firefox, Edge, Safari), and Internet Explorer 11. Particularly for IE 11, this library includes an internal "ponyfill"
+We support all modern browsers (the last 2 major versions of Chrome, Firefox, Edge, Safari), and Internet Explorer 11. Particularly for IE 11, this library includes an internal "ponyfill" for `Promise`, since this library's API heavily depends on promises.
 
 ## Contributing
 
