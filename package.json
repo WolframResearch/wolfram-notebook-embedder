@@ -12,9 +12,9 @@
   "license": "MIT",
   "scripts": {
     "build": "rollup -c config/rollup.config.js",
-    "copy-dist-to-test": "cp -r ./dist ./test",
-    "serve-test": "serve test",
-    "test-html": "npm-run-all build copy-dist-to-test serve-test"
+    "copy-dist-to-examples": "cp -r ./dist ./examples",
+    "serve-examples": "serve examples",
+    "run-examples": "npm-run-all build copy-dist-to-examples serve-examples"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",

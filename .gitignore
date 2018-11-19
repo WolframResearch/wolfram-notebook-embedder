@@ -1,6 +1,6 @@
 dist/
+examples/dist/
 node_modules/
-test/dist/
 
 .idea/
 .vscode/

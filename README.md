@@ -27,8 +27,8 @@ and then use the global variable `WolframNotebookEmbedding`.
 
 ## Examples
 
-* [Basic example](test/basic.html)
-* [Server-side rendering](test/ssr.html)
+* [Basic example](./examples/basic.html)
+* [Server-side rendering](./examples/ssr.html)
 
 ## Browser Support
 
