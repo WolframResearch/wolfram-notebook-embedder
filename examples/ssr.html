@@ -44,6 +44,9 @@
     }
 
     function loadStaticHTML() {
+        // We use the special parameter `public=true` here since this will be a cross-origin request from the browser
+        // to the cloud server. Usually, this request will be made from your server to the cloud server; then there
+        // is no need for the `public=true` parameter.
         const url = 'http://localhost/notebooks/html?public=true&path=' + document.getElementById('path').value;
         fetch(url, {method: 'GET'}).then(response => response.text()).then(text => {
             const container = document.getElementById('container');

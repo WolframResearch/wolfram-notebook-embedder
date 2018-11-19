@@ -23,6 +23,7 @@ and then use the global variable `WolframNotebookEmbedding`.
 * [**Getting started**](./docs/GettingStarted.md)
 * [Library interface](./docs/LibraryInterface.md)
 * [Notebook API](./docs/NotebookAPI.md)
+* [Server-side rendering](./docs/ServerSideRendering.md)
 * [Troubleshooting](./docs/Troubleshooting.md)
 
 ## Examples

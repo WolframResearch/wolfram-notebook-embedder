@@ -34,4 +34,5 @@
                 });
             });
         })
-5. If you run into any issues, take a look at the [Troubleshooting guide](./Troubleshooting.md). If you think you found a bug, please report it.
+5. If you want to serve static HTML from your server so the notebook can be rendered before JS code is loaded (which also helps with SEO), take a look at [server-side rendering](./ServerSideRendering.md).
+6. If you run into any issues, take a look at the [Troubleshooting guide](./Troubleshooting.md). If you think you found a bug, please report it.
