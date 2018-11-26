@@ -14,7 +14,7 @@ and you can make a cloud object public by evaluating:
 
 ## Styling
 
-**As soon as I mount an embedded notebook, some styling on my page (outside the notebook) changes.**
+**As soon as I embed a notebook, some styling on my page (outside the notebook) changes.**
 
 This might be a bug in our (notebook) CSS. We try to isolate CSS selectors as much as possible, but there might still be cases where styling "leaks out" of the notebook. Please file an issue with reproducible steps.
 

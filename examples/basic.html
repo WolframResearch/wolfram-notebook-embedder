@@ -13,7 +13,7 @@
 <p>
     Enter the path (including user ID) or UUID of a cloud object on your localhost:
     <input id="path" value="30c45b23-d17e-4177-bc52-59056f613367" />
-    <button onclick="mountNotebook()">Mount Notebook</button>
+    <button onclick="embedNotebook()">Embed Notebook</button>
 </p>
 <p>
     <button onclick="increaseWidth()">Increase Width</button>
@@ -28,9 +28,9 @@
     let embedding = null;
     let width = 500;
 
-    function mountNotebook() {
+    function embedNotebook() {
         const url = 'http://localhost/objects/' + document.getElementById('path').value;
-        embedding = WolframNotebookEmbedder.mount(url, document.getElementById('container'), {
+        embedding = WolframNotebookEmbedder.embed(url, document.getElementById('container'), {
             maxWidth: width,
             maxHeight: 400,
             allowInteract: true

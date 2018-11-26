@@ -26,7 +26,7 @@
     (this would usually happen on the server)
 </p>
 <p>
-    <button onclick="mountNotebook()">Mount live notebook</button>
+    <button onclick="embedNotebook()">Embed live notebook</button>
     (this always happens on the client side)
 </p>
 
@@ -34,9 +34,9 @@
 <script src="./dist/wolfram-notebook-embedder.dev.js"></script>
 
 <script>
-    function mountNotebook() {
+    function embedNotebook() {
         const url = 'http://localhost/objects/' + document.getElementById('path').value;
-        WolframNotebookEmbedder.mount(url, document.getElementById('container'), {
+        WolframNotebookEmbedder.embed(url, document.getElementById('container'), {
             allowInteract: true
         });
     }
