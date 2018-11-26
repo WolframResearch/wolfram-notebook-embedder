@@ -38,7 +38,7 @@ function loadLibrary(libraryURL) {
             script.onerror = reject;
             let callbackName;
             do {
-                callbackName = '_wolframNotebookEmbeddingCallback' + (++counter);
+                callbackName = '_wolframNotebookEmbedderCallback' + (++counter);
             } while (window[callbackName]);
             window[callbackName] = (lib) => {
                 delete window[callbackName];

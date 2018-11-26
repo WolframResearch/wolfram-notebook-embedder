@@ -1,4 +1,4 @@
-# wolfram-notebook-embedding
+# wolfram-notebook-embedder
 
 A library to embed [Wolfram Cloud](https://www.wolframcloud.com/) notebooks on other sites. It does *not* use an `<iframe>` but renders a notebook directly into a given DOM node, for a more seamless experience.
 
@@ -6,17 +6,17 @@ A library to embed [Wolfram Cloud](https://www.wolframcloud.com/) notebooks on o
 
 If you're using a package manager such as [npm](https://www.npmjs.com/get-npm) or [Yarn](https://yarnpkg.com/en/), you can install this package from the npm repository:
 
-    npm install wolfram-notebook-embedding
+    npm install wolfram-notebook-embedder
     
 and then import it in your JS code like so:
 
-    import WolframNotebookEmbedding from 'wolfram-notebook-embedding';    
+    import WolframNotebookEmbedder from 'wolfram-notebook-embedder';    
     
 You can also import this library as a `<script>` tag from a CDN:
 
-    <script crossorigin src="https://unpkg.com/wolfram-notebook-embedding@0.1/umd/wolfram-notebook-embedding.min.js"></script>
+    <script crossorigin src="https://unpkg.com/wolfram-notebook-embedder@0.1/umd/wolfram-notebook-embedder.min.js"></script>
     
-and then use the global variable `WolframNotebookEmbedding`.
+and then use the global variable `WolframNotebookEmbedder`.
 
 ## Usage & Documentation
 

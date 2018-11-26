@@ -5,8 +5,8 @@ export default {
     input: 'src/main.js',
     output: {
         format: 'iife',
-        file: 'dist/wolfram-notebook-embedding.dev.js',
-        name: 'WolframNotebookEmbedding',
+        file: 'dist/wolfram-notebook-embedder.dev.js',
+        name: 'WolframNotebookEmbedder',
         sourcemap: true,
         strict: true
     },

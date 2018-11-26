@@ -3,7 +3,7 @@
 This library exposes a single function `mount` that renders a notebook into a given DOM node and returns an interface for further interaction with the notebook:
 
 ```js
-WolframNotebookEmbedding.mount(notebookURL, domNode, attributes)
+WolframNotebookEmbedder.mount(notebookURL, domNode, attributes)
 ```
 
 * `notebookURL`: string with a cloud object URL of the notebook to embed, e.g. `'https://www.wolframcloud.com/objects/4beadfbb-84dd-4b26-87b6-bcd30b9abd65'` or `'https://www.wolframcloud.com/objects/myusername/myfolder/mynotebook.nb'`
