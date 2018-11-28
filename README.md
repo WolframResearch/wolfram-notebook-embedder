@@ -14,7 +14,7 @@ and then import it in your JS code like so:
     
 You can also import this library as a `<script>` tag from a CDN:
 
-    <script crossorigin src="https://unpkg.com/wolfram-notebook-embedder@0.1/umd/wolfram-notebook-embedder.min.js"></script>
+    <script crossorigin src="https://unpkg.com/wolfram-notebook-embedder@0.1/dist/wolfram-notebook-embedder.min.js"></script>
     
 and then use the global variable `WolframNotebookEmbedder`.
 
