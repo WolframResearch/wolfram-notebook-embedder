@@ -3,7 +3,7 @@
     <title>Basic example</title>
     <style>
         #path {
-            width: 300px;
+            width: 500px;
         }
     </style>
 </head>
@@ -11,8 +11,8 @@
 
 <h1>Basic example</h1>
 <p>
-    Enter the path (including user ID) or UUID of a cloud object on your localhost:
-    <input id="path" value="30c45b23-d17e-4177-bc52-59056f613367" />
+    Enter the URL a cloud object:
+    <input id="path" value="http://localhost/objects/30c45b23-d17e-4177-bc52-59056f613367" />
     <button onclick="embedNotebook()">Embed Notebook</button>
 </p>
 <p>
@@ -29,7 +29,7 @@
     let width = 500;
 
     function embedNotebook() {
-        const url = 'http://localhost/objects/' + document.getElementById('path').value;
+        const url = document.getElementById('path').value;
         embedding = WolframNotebookEmbedder.embed(url, document.getElementById('container'), {
             maxWidth: width,
             maxHeight: 400,
