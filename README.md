@@ -24,6 +24,7 @@ and then use the global variable `WolframNotebookEmbedder`.
 * [Library interface](./docs/LibraryInterface.md)
 * [Notebook API](./docs/NotebookAPI.md)
 * [Server-side rendering](./docs/ServerSideRendering.md)
+* [Notebook loading phases](./docs/NotebookLoadingPhases.md)
 * [Troubleshooting](./docs/Troubleshooting.md)
 
 ## Examples

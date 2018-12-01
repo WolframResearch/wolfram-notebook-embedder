@@ -2,7 +2,7 @@
 
 This is the documentation of [methods](#methods) on the object returned by [`embed`](./LibraryInterface.md) to control a notebook from JS code. Each method takes a JS object with *parameters* and returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) resolving to a *response* object. Parameters with a default value (specified as "= `...`") are optional. In case of an error, the returned promise is rejected with a standard [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) object with a `message` property; the potential error messages are listed for each command.
 
-The API also exposes some [events](#events) that can be subscribed to using the API method `addEventListener(eventName, callback)`. The `callback` will receive a JS object with the specified *fields* as its single argument. Event listeners can be removed with `removeEventListener(eventName, callback)`.
+The API also exposes some [events](#events) that can be subscribed to using the API method `addEventListener(eventName, callback)`. The `callback` will receive a JS object with the specified *fields* as its single argument. Event listeners can be removed with `removeEventListener(eventName, callback)`. Some events are marked as *singular*, which means that they will usually fire exactly once, and an event listener added after they have already fired will still be executed (right away).
 
 Some methods and events marked with "[INTERNAL]" are **internal** and not part of the official API. **Do not rely on internal methods or events in production code.** They might be changed or disappear at any time.
 
@@ -605,6 +605,31 @@ Inserts a function template at current cursor position based on the symbol's lis
 
 
 ## <a name="events">Events</a>
+
+### Initial render progress
+
+See [notebook loading phases](./NotebookLoadingPhases.md) for more information.
+
+#### first-paint-done (singular)
+
+Fired when either static HTML is shown for the notebook (see [servers-side rendering](./ServerSideRendering.md)) or the notebook starts rendering individual cells.
+
++ Fields
+
+    + `showingStaticHTML` (`boolean`) ... Whether the notebook is showing a piece of static HTML.
+
+#### initial-render-progress
+
+Fired when progress is made during the initial render phase.
+
++ Fields
+
+    + `cellsRendered` (`number`) ... Number of cells that have already been "live-rendered".
+    + `cellsTotal` (`number`) ... Total number of cells that are visible in the notebook.
+
+#### initial-render-done (singular)
+
+Fired when the initial render phase is done, i.e. all visible cells have been live-rendered.
 
 ### Selection
 
