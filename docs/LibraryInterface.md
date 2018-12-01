@@ -14,6 +14,7 @@ The following attributes can be given:
 
 * `maxWidth`, `maxHeight`: maximum width and height of the notebook, in pixels; if the notebook exceeds these dimensions, scrollbars will be used; a value of `Infinity` allows the notebook to grow infinitely in that dimension; a value of `null` (the default) makes the notebook adapt to the size of the container node
 * `allowInteract`: whether to enable interactivity in the notebook, which might use the server-side Wolfram Engine for computations; even if this is set to `true`, the `Permissions` of the cloud notebook must also include `All -> {"React", "Interact"}` for interactions to actually work
+* `showRenderProgress`: whether to show the render progress indicator at the top of the notebook during the initial loading phase (see [Notebook Loading Phases](./NotebookLoadingPhases.md) for more information)
 
 The embedded notebook needs to be public (i.e. with [Permissions](https://reference.wolfram.com/language/ref/Permissions.html) of at least `All->"Read"`). For interactivity to work, the `"Interact"` permission is needed.
 
