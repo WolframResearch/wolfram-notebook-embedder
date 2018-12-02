@@ -12,9 +12,12 @@ WolframNotebookEmbedder.embed(notebookURL, domNode, attributes)
 
 The following attributes can be given:
 
-* `maxWidth`, `maxHeight`: maximum width and height of the notebook, in pixels; if the notebook exceeds these dimensions, scrollbars will be used; a value of `Infinity` allows the notebook to grow infinitely in that dimension; a value of `null` (the default) makes the notebook adapt to the size of the container node
+* `width`: width of the notebook in pixels; a value of `null` (the default) makes the notebook adapt to the width of the container node
+* `maxHeight`: maximum height of the notebook in pixels; a value of `Infinity` (the default) allows the notebook to grow infinitely; a value of `null` makes the notebook adapt to the height of the container node
 * `allowInteract`: whether to enable interactivity in the notebook, which might use the server-side Wolfram Engine for computations; even if this is set to `true`, the `Permissions` of the cloud notebook must also include `All -> {"React", "Interact"}` for interactions to actually work
 * `showRenderProgress`: whether to show the render progress indicator at the top of the notebook during the initial loading phase (see [Notebook Loading Phases](./NotebookLoadingPhases.md) for more information)
+
+If the notebook exceeds the given width or height, scrollbars are introduced in that dimension. The default dimensions (`width: null`, `maxHeight: Infinity`) let the notebook adapt to the container node's width (line-wrapping as necessary) and make the container node grow vertically as necessary; so there won't be a vertical scrollbar, and there will only be a horizontal scrollbar if the notebook's contents are inherently wider than the available width (e.g. a graphic with a fixed size). In the case of `maxHeight: null`, the notebook's background will fill out the whole container node even if the notebook content is smaller. See also the [Dimensions examples](../examples/dimensions.html).
 
 The embedded notebook needs to be public (i.e. with [Permissions](https://reference.wolfram.com/language/ref/Permissions.html) of at least `All->"Read"`). For interactivity to work, the `"Interact"` permission is needed.
 

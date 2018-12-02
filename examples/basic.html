@@ -11,57 +11,38 @@
 
 <h1>Basic example</h1>
 <p>
-    Enter the URL a cloud object:
+    Enter the URL of a cloud object:
     <input id="path" value="http://localhost/objects/30c45b23-d17e-4177-bc52-59056f613367" />
     <button onclick="embedNotebook()">Embed Notebook</button>
 </p>
 <p>
-    <button onclick="increaseWidth()">Increase Width</button>
-    <button onclick="resetX()">Reset x</button>
+    If the notebook's last cell contains a <code>Manipulate</code> with a variable <code>x</code>, this will reset it to 0:
+    <button onclick="resetX()">Reset <code>x</code></button>
 </p>
-<p>
-    Current dimensions: <span id="dimensions"></span>
-</p>
-<div id="container" style="position: relative"></div>
+<div id="container"></div>
 <script src="./dist/wolfram-notebook-embedder.js"></script>
 <script>
     let embedding = null;
-    let width = 500;
 
     function embedNotebook() {
         const url = document.getElementById('path').value;
         embedding = WolframNotebookEmbedder.embed(url, document.getElementById('container'), {
-            maxWidth: width,
-            maxHeight: 400,
             allowInteract: true
         });
-        embedding.then(nb => {
-            nb.addEventListener('resize', dimensions => {
-                const span = document.getElementById('dimensions');
-                span.innerHTML = dimensions.width + ' x ' + dimensions.height;
-            });
-        });
-    }
-
-    function increaseWidth() {
-        if (embedding) {
-            width += 100;
-            embedding.then(nb => {
-                nb.setAttributes({maxWidth: width});
-            });
-        }
     }
 
     function resetX() {
         if (embedding) {
             embedding.then(nb => {
                 nb.getCells().then(({cells}) => {
-                    const lastCell = cells[cells.length - 1];
-                    return nb.setDynamicModuleVariable({
-                        cellId: lastCell.id,
-                        name: 'x$$',
-                        value: 0
-                    });
+                    if (cells) {
+                        const lastCell = cells[cells.length - 1];
+                        return nb.setDynamicModuleVariable({
+                            cellId: lastCell.id,
+                            name: 'x$$',
+                            value: 0
+                        });
+                    }
                 })
             })
         }

@@ -107,8 +107,17 @@ function getNotebookData(url) {
     });
 }
 
+function defaultValue(value, fallback) {
+    if (value === undefined) {
+        return fallback;
+    } else {
+        return value;
+    }
+}
+
 export function embed(url, node, options) {
     let theNotebookID;
+    const theOptions = options || {};
     return Promise.resolve()
         .then(() => {
             return getNotebookData(url);
@@ -121,6 +130,11 @@ export function embed(url, node, options) {
             return loadLibrary(mainScript);
         })
         .then(lib => {
-            return lib.embed(theNotebookID, node, options);
+            return lib.embed(theNotebookID, node, {
+                width: defaultValue(theOptions.width, null),
+                maxHeight: defaultValue(theOptions.maxHeight, Infinity),
+                allowInteract: theOptions.allowInteract,
+                showRenderProgress: theOptions.showRenderProgress
+            });
         });
 }
