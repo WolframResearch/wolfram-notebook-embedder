@@ -4,8 +4,8 @@ import resolve from 'rollup-plugin-node-resolve';
 export default {
     input: 'src/main.js',
     output: {
-        format: 'iife',
-        file: 'dist/wolfram-notebook-embedder.dev.js',
+        format: 'umd',
+        file: 'dist/wolfram-notebook-embedder.js',
         name: 'WolframNotebookEmbedder',
         sourcemap: true,
         strict: true

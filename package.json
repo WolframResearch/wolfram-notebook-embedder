@@ -2,7 +2,7 @@
   "name": "wolfram-notebook-embedder",
   "version": "0.1.0",
   "description": "Library to embed Wolfram Cloud notebooks on other sites.",
-  "main": "src/main.js",
+  "main": "dist/wolfram-notebook-embedder.js",
   "keywords": [
     "wolfram",
     "cloud",
@@ -16,7 +16,7 @@
     "transpile": "rollup -c config/rollup.config.js",
     "copy-dist-to-examples": "cp -r ./dist ./examples",
     "serve-examples": "serve examples",
-    "minify": "uglifyjs dist/wolfram-notebook-embedder.dev.js --compress --mangle --output dist/wolfram-notebook-embedder.min.js",
+    "minify": "uglifyjs dist/wolfram-notebook-embedder.js --compress --mangle --output dist/wolfram-notebook-embedder.min.js",
     "run-examples": "npm-run-all build copy-dist-to-examples serve-examples"
   },
   "devDependencies": {
