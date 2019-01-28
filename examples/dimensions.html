@@ -1,0 +1,94 @@
+<html>
+<head>
+    <title>Dimensions examples</title>
+    <style>
+        #path {
+            width: 500px;
+        }
+        .container {
+            border: 1px solid gray;
+        }
+        #containerFixedCSS {
+            width: 500px;
+            height: 400px;
+        }
+        #containerRelativeCSS {
+            width: 100%;
+            height: 75%;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Dimensions examples</h1>
+<p>
+    Enter the URL of a cloud object:
+    <input id="path" value="http://localhost/objects/30c45b23-d17e-4177-bc52-59056f613367" />
+    <button onclick="embedNotebooks()">Embed Notebook</button>
+</p>
+
+<h2>Infinite height granted to the notebook, width adapting to container node (the default)</h2>
+<p>Current dimensions: <span id="dimensionsInfiniteNB"></span></p>
+<div id="containerInfiniteNB" class="container"></div>
+
+<h2>Fixed maximum dimensions granted to the notebook</h2>
+<p>
+    Width: <input onchange="updateNBDimensions()" oninput="updateNBDimensions()" id="nbWidth" value="300" />
+    Maximum height: <input onchange="updateNBDimensions()" oninput="updateNBDimensions()" id="nbHeight" value="300" />
+</p>
+<p>Current dimensions: <span id="dimensionsFixedNB"></span></p>
+<div id="containerFixedNB" class="container"></div>
+
+<h2>Fixed dimensions set in CSS, notebook adapting accordingly</h2>
+<p>Current dimensions: <span id="dimensionsFixedCSS"></span></p>
+<div id="containerFixedCSS" class="container"></div>
+
+<h2>Relative dimensions set in CSS, notebook adapting accordingly</h2>
+<p>Current dimensions: <span id="dimensionsRelativeCSS"></span></p>
+<div id="containerRelativeCSS" class="container"></div>
+
+<script src="./dist/wolfram-notebook-embedder.js"></script>
+<script>
+    let fixedEmbedding = null;
+    let fixedWidth = 300;
+    let fixedHeight = 300;
+
+    function embedNotebooks() {
+        embedNotebook('containerInfiniteNB', 'dimensionsInfiniteNB', null, Infinity);
+        fixedEmbedding = embedNotebook('containerFixedNB', 'dimensionsFixedNB', fixedWidth, fixedHeight);
+        embedNotebook('containerFixedCSS', 'dimensionsFixedCSS', null, null);
+        embedNotebook('containerRelativeCSS', 'dimensionsRelativeCSS', null, null);
+    }
+
+    function embedNotebook(containerID, dimensionsID, width, maxHeight) {
+        const url = document.getElementById('path').value;
+        return WolframNotebookEmbedder.embed(url, document.getElementById(containerID), {
+            width: width,
+            maxHeight: maxHeight,
+            allowInteract: true
+        }).then(nb => {
+            nb.addEventListener('resize', dimensions => {
+                const span = document.getElementById(dimensionsID);
+                span.innerHTML = dimensions.width + ' x ' + dimensions.height;
+            });
+            return nb;
+        });
+    }
+
+    function updateNBDimensions() {
+        const width = Number.parseInt(document.getElementById('nbWidth').value, 10);
+        if (width !== Number.NaN) {
+            fixedWidth = width;
+        }
+        const height = Number.parseInt(document.getElementById('nbHeight').value, 10);
+        if (height !== Number.NaN) {
+            fixedHeight = height;
+        }
+        fixedEmbedding.then(nb => {
+            nb.setAttributes({width: fixedWidth, maxHeight: fixedHeight});
+        });
+    }
+</script>
+
+</body>
+</html>

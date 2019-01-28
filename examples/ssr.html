@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Server-side rendering example</title>
+    <style>
+        #path {
+            width: 500px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Server-side rendering example</h1>
+
+<p>
+    Enter the URL of a cloud object:
+    <input id="path" value="http://localhost/objects/30c45b23-d17e-4177-bc52-59056f613367" />
+</p>
+<p>
+    <button onclick="loadStaticHTML()">Load static HTML</button>
+    (this would usually happen on the server)
+</p>
+<p>
+    <button onclick="embedNotebook()">Embed live notebook</button>
+    (this always happens on the client side)
+</p>
+
+<div>
+    Render state:
+    <span id="renderState"></span>
+</div>
+
+<div id="container"></div>
+<script src="./dist/wolfram-notebook-embedder.js"></script>
+
+<script>
+    const renderStateElement = document.getElementById('renderState');
+
+    function loadStaticHTML() {
+        const url = document.getElementById('path').value.replace(/\/(obj|objects)\//, '/statichtml/');
+        fetch(url, {method: 'GET'}).then(response => response.text()).then(text => {
+            const container = document.getElementById('container');
+            container.innerHTML = text;
+        })
+    }
+
+    function embedNotebook() {
+        const url = document.getElementById('path').value;
+        WolframNotebookEmbedder.embed(url, document.getElementById('container'), {
+            allowInteract: true
+        }).then(embedding => {
+            embedding.addEventListener('first-paint-done', ({showingStaticHTML}) => {
+                renderStateElement.innerText = 'First paint done ' + (showingStaticHTML ? '(showing static HTML)' : '(live-rendering)');
+            });
+            embedding.addEventListener('initial-render-progress', ({cellsRendered, cellsTotal}) => {
+                renderStateElement.innerText = 'Live-rendered ' + cellsRendered + ' out of ' + cellsTotal + ' cells';
+            });
+            embedding.addEventListener('initial-render-done', () => {
+                renderStateElement.innerText = 'Done with initial rendering';
+            });
+        });
+    }
+</script>
+
+</body>
+</html>

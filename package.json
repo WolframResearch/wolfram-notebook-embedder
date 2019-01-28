@@ -1,0 +1,35 @@
+{
+  "name": "wolfram-notebook-embedder",
+  "version": "0.1.0",
+  "description": "Library to embed Wolfram Cloud notebooks on other sites.",
+  "main": "dist/wolfram-notebook-embedder.js",
+  "keywords": [
+    "wolfram",
+    "cloud",
+    "notebook",
+    "embedding"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "prepublishOnly": "npm-run-all build",
+    "build": "npm-run-all transpile minify",
+    "transpile": "rollup -c config/rollup.config.js",
+    "copy-dist-to-examples": "cp -r ./dist ./examples",
+    "serve-examples": "serve examples",
+    "minify": "uglifyjs dist/wolfram-notebook-embedder.js --compress --mangle --output dist/wolfram-notebook-embedder.min.js",
+    "run-examples": "npm-run-all build copy-dist-to-examples serve-examples"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "npm-run-all": "^4.1.3",
+    "rollup": "^0.67.0",
+    "rollup-plugin-babel": "^4.0.3",
+    "rollup-plugin-node-resolve": "^3.4.0",
+    "serve": "^10.1.1",
+    "uglify-js": "^3.4.9"
+  },
+  "dependencies": {
+    "promise-polyfill": "^8.1.0"
+  }
+}
