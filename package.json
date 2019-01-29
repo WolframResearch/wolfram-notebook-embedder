@@ -10,6 +10,11 @@
     "embedding"
   ],
   "license": "MIT",
+  "files": [
+    "dist/",
+    "LICENSE",
+    "README.md"
+  ],
   "scripts": {
     "prepublishOnly": "npm-run-all build",
     "build": "npm-run-all transpile minify",
