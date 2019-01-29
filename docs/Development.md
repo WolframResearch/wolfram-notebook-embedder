@@ -19,17 +19,17 @@ To release a new version, log in to npm using
     yarn login
     
 as an owner of the [wolfram-notebook-embedder](https://www.npmjs.com/package/wolfram-notebook-embedder) package.
+
+Check out the `master` branch and make sure there are no uncommitted changes:
+
+    git checkout master
     
 Then run
 
-    yarn release
+    yarn publish
     
-which uses [np](https://github.com/sindresorhus/np) to guide through the publishing process. It asks for the new package version, performs a clean build, creates a Git tag, and publishes the package.
+which asks for the new package version, updates `package.json` accordingly, runs a build, creates a Git tag, and publishes the package.
 
 If publishing fails due to missing authentication even though you have run `yarn login`, you might have to delete `~/.npmrc` and log in again (see [this yarn issue](https://github.com/yarnpkg/yarn/issues/4709)).
 
-If you want to run the publishing process again (e.g. because authentication failed in the first run) without bumping the version, run
-
-    yarn publish
-    
-directly, which will by-pass `np` used by `yarn release`.
+If [two-factor authentication](https://docs.npmjs.com/configuring-two-factor-authentication) is enabled for your account, you will be asked for a one-time password during the publishing process.
