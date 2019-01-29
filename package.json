@@ -12,7 +12,7 @@
   "license": "MIT",
   "scripts": {
     "prepublishOnly": "npm-run-all build",
-    "publish": "np",
+    "release": "np",
     "build": "npm-run-all transpile minify",
     "transpile": "rollup -c config/rollup.config.js",
     "copy-dist-to-examples": "cp -r ./dist ./examples",
