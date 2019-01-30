@@ -7,7 +7,7 @@ The API also exposes some [events](#events) that can be subscribed to using the 
 Some methods and events marked with "[INTERNAL]" are **internal** and not part of the official API. **Do not rely on internal methods or events in production code.** They might be changed or disappear at any time.
 
 
-## <a name="methods">Methods</a>
+## <a id="methods"></a> Methods
 
 ### Cell insertion
 
@@ -604,7 +604,7 @@ Inserts a function template at current cursor position based on the symbol's lis
     + `"IndexOutOfBounds"` ... The array index is not within the range of the function template list for the given symbol.
 
 
-## <a name="events">Events</a>
+## <a id="events"></a> Events
 
 ### Initial render progress
 
