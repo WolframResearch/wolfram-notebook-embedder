@@ -6,7 +6,7 @@ This library exposes a single function `embed` that renders a notebook into a gi
 WolframNotebookEmbedder.embed(notebookURL, domNode, attributes)
 ```
 
-* `notebookURL`: string with a cloud object URL of the notebook to embed, e.g. `'https://www.wolframcloud.com/objects/4beadfbb-84dd-4b26-87b6-bcd30b9abd65'` or `'https://www.wolframcloud.com/objects/myusername/myfolder/mynotebook.nb'`
+* `notebookURL`: string with a cloud object URL of the notebook to embed, e.g. `'https://www.wolframcloud.com/obj/4beadfbb-84dd-4b26-87b6-bcd30b9abd65'` or `'https://www.wolframcloud.com/obj/myusername/myfolder/mynotebook.nb'`
 * `domNode`: a DOM node to render the notebook in, e.g. obtained by `document.getElementById('myContainer')`
 * `attributes `: a JS object with attributes
 

@@ -6,7 +6,7 @@ Static HTML is generated ("pre-rendered") for each cloud notebook whenever it is
 
     https://www.wolframcloud.com/statichtml/{path}
     
-where `{path}` is the notebook's cloud object path, which might be a UUID (e.g. `4beadfbb-84dd-4b26-87b6-bcd30b9abd65` for a cloud object at `https://www.wolframcloud.com/objects/4beadfbb-84dd-4b26-87b6-bcd30b9abd65`) or a user base URL + folder/file name (e.g. `myname/foo/bar.nb` for a cloud object at `https://www.wolframcloud.com/objects/myname/foo/bar.nb`).
+where `{path}` is the notebook's cloud object path, which might be a UUID (e.g. `4beadfbb-84dd-4b26-87b6-bcd30b9abd65` for a cloud object at `https://www.wolframcloud.com/obj/4beadfbb-84dd-4b26-87b6-bcd30b9abd65`) or a user base URL + folder/file name (e.g. `myname/foo/bar.nb` for a cloud object at `https://www.wolframcloud.com/obj/myname/foo/bar.nb`).
 
 This API returns a piece of static HTML that can be included right on your page by your server-side code.
 
