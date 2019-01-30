@@ -1,5 +1,7 @@
 # Development
 
+Please read the [Contributing guide](../CONTRIBUTING.md) first. By contributing to this repository, you agree to the licensing terms therein.
+
 To install all required dependencies for development of this library, run:
 
     yarn install
