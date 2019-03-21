@@ -710,3 +710,14 @@ Fired when autocompletions are available for the current input text. It is case-
     + `type` (`string`) ... "symbols" (more options later).
     + `needle` (`string`) ... Text that the user typed.
     + `completions` (`Array.<string>`) ... List of completions for the needle.
+
+### Notebook Edit History
+
+#### undo-state-change [INTERNAL]
+
+Fired when either undo or redo's availability status changes.
+
++ Fields
+
+    + `canUndo` (`boolean`) ... Whether undo history is available.
+    + `canRedo` (`boolean`) ... Whether redo history is available.
