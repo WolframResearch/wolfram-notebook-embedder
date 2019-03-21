@@ -603,6 +603,32 @@ Inserts a function template at current cursor position based on the symbol's lis
 
     + `"IndexOutOfBounds"` ... The array index is not within the range of the function template list for the given symbol.
 
+### Notebook Edit History
+
+#### undo [INTERNAL]
+
+Undoes the most recent action recorded in `UndoHistory`.
+
++ Errors
+
+    + `"NoUndoHistory"`
+
+#### redo [INTERNAL]
+
+Redoes the most recent undone action recorded in `UndoHistory`.
+
++ Errors
+
+    + `"NoRedoHistory"`
+
+#### getUndoState [INTERNAL]
+
+Returns a status object that indicates if undo and redo entries are available.
+
++ Response
+
+    + `canUndo` (`boolean`) ... Whether undo history is available.
+    + `canRedo` (`boolean`) ... Whether redo history is available.
 
 ## <a id="events"></a> Events
 
