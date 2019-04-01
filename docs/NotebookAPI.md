@@ -653,8 +653,7 @@ Currently there are four different rendering methods, as shown below.
 
 + Errors
 
-    + `"NoCellIdSpecified"` ... `cellId` is missing from the query.
-    + `"NoCellFoundForCellId:${cellId}"` ... The requested cell cannot be found.
+    + `"CellNotFound"` ... The cell ID given by `cellId` was not found.
 
 ## <a id="events"></a> Events
 
