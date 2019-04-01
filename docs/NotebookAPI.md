@@ -630,7 +630,7 @@ Returns a status object that indicates if undo and redo entries are available.
     + `canUndo` (`boolean`) ... Whether undo history is available.
     + `canRedo` (`boolean`) ... Whether redo history is available.
 
-#### getCellRenderingMethod [INTERNAL]
+#### getCellRenderingMethod
 
 Returns the rendering method (mode) used by a given cell.
 
