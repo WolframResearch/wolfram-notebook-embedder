@@ -630,6 +630,31 @@ Returns a status object that indicates if undo and redo entries are available.
     + `canUndo` (`boolean`) ... Whether undo history is available.
     + `canRedo` (`boolean`) ... Whether redo history is available.
 
+#### getCellRenderingMethod
+
+Returns the rendering method (mode) used by a given cell.
+
+Currently there are four different rendering methods, as shown below.
+
+| Method   | Meaning |
+|----------|---------|
+| `boxes`  | Live-rendered |
+| `static` | Rendered as static html, from the HTML cache |
+| `image`  | Rendered as rasterized image |
+| `none`   | Rendered as a general placeholer |
+
++ Parameters
+
+    + `cellId` (`string`) ... The ID of the cell.
+
++ Response
+
+    + `method` (`string`) ... The method used to render the given cell.
+
++ Errors
+
+    + `"CellNotFound"` ... The cell ID given by `cellId` was not found.
+
 ## <a id="events"></a> Events
 
 ### Initial render progress
