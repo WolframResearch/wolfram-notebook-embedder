@@ -9,7 +9,7 @@ Some methods and events marked with "[INTERNAL]" are **internal** and not part o
 
 ## <a id="methods"></a> Methods
 
-### Cell insertion
+### Cell insertion and deletion
 
 #### insertCellAtCursor
 
@@ -67,6 +67,19 @@ The cursor is placed at the end of the new cell.
 
     + `"CellNotFound"` ... The cell ID given by `cellId` was not found.
     + `"InsufficientPermissions"`
+    
+#### removeCell
+
+Removes a cell from the notebook.
+
++ Parameters
+
+    + `cellId` (`string`) ... ID of the cell to remove.
+
++ Errors
+
+    + `"CellNotFound"` ... The cell ID given by `cellId` was not found.
+    + `"InsufficientPermissions"`
 
 ### Cell content
 
@@ -81,7 +94,7 @@ Sets the content of a cell.
 
 #### getCellContent
 
-Gets the content of a cell.
+Gets the textual content of a cell.
 
 + Parameters
 
@@ -94,13 +107,12 @@ Gets the content of a cell.
 + Errors
 
     + `"CellNotFound"` ... The cell ID given by `cellId` was not found.
-    + `"NonTextualContent"` ... The cell contains non-textual data (e.g. images), hence it cannot be read using this API.
 
 ### Structure
 
 #### getElements
 
-Retrieves the elements in the notebook or a cell group.
+Retrieves the (top-level) elements in the notebook or a cell group.
 
 + Parameters
 
@@ -151,6 +163,22 @@ Retrieves the parent cell group of a given cell or cell group.
 + Errors
 
     + `"ElementNotFound"` ... The element specified by `id` was not found.
+
+#### getCells
+
+Retrieves all (potentially nested) cells in the notebook or a cell group.
+
++ Parameters
+
+    + `groupId` (`?string`) ... ID of the cell group. If the parameter is omitted or falsy (e.g. `null` or `""`), the cells in the notebook are returned.
+
++ Response
+
+    + `cells` (`Array.<{type: "cell", id: string}>`) ... List of cells in the order they appear in the notebook.
+
++ Errors
+
+    + `"GroupNotFound"` ... The group specified by `groupId` was not found.
 
 #### openGroup
 
@@ -363,6 +391,17 @@ Clears the selection when keyboard is dismissed on the iOS mobile app, when the 
     + `inCell` (`?{cellId: string}`) ... The cell the selection is inside (i.e. on the box level), if any. This is particularly the case when editing a cell. If the selection is on the cell (bracket) level, `inCell` is `null`.
     + `cursorPosition` (`?{left: number, top: number}`) ... Cursor position, if a cell is edited. The position is relative to the document offset. This takes into account the scroll position.
 
+### Dimensions
+
+#### <a id="getDimensions"></a> getDimensions
+
+Returns the dimensions of the notebook content.
+
++ Response
+
+    + `width` (`number`) ... The width of the notebook content (in pixels). Note that a notebook will always fill any available (maximum) width. If there is a horizontal scrollbar, the reported width may be larger than the maximum width available to the notebook. Providing the reported width as horizontal space to the notebook usually ensures that there is no horizontal scrollbar necessary.
+    + `height` (`number`) ... The height of the notebook content (in pixels). This does not include any unused vertical space that would be available to the notebook. It does include the height of the horizontal scrollbar, in case there is one. Providing the reported height as vertical space to the notebook usually ensures that there is no vertical scrollbar necessary.
+
 ### Scrolling
 
 #### getScrollPosition
@@ -456,6 +495,20 @@ The API responds as soon as the evaluation is initiated.
 + Errors
 
     + `"CellNotFound"` ... The cell ID given by `cellId` was not found.
+    + `"InsufficientPermissions"`
+    
+#### evaluateElements
+
+Evaluates a list of elements (cells or groups) in the order they appear in the notebook (the same way as pressing `Shift-Enter` would).
+
+The API responds as soon as the evaluation is initiated.
+
++ Parameters
+
+    + `elements` (`Array.<{id: string}>`) ... List of IDs of elements to evaluate. Elements that cannot be found are ignored.
+    
++ Errors
+
     + `"InsufficientPermissions"`
 
 #### evaluateSelection
@@ -709,6 +762,17 @@ Currently, only one kernel evaluation can happen at any time. However, this migh
 #### evaluation-stop
 
 Fired when an evaluation ends.
+
+### Dimensions
+
+#### resize
+
+Fired when the notebook dimensions change. See [`getDimensions`](#getDimensions) for details.
+
++ Fields
+
+    + `width` (`number`) ... Width of the notebook content (in pixels).
+    + `height` (`number`) ... Height of the notebook content (in pixels).
 
 ### Scrolling
 
