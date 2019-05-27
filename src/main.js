@@ -133,8 +133,8 @@ export function embed(url, node, options) {
             return lib.embed(theNotebookID, node, {
                 width: defaultValue(theOptions.width, null),
                 maxHeight: defaultValue(theOptions.maxHeight, Infinity),
-                allowInteract: theOptions.allowInteract,
-                showRenderProgress: theOptions.showRenderProgress
+                allowInteract: defaultValue(theOptions.allowInteract, true),
+                showRenderProgress: defaultValue(theOptions.showRenderProgress, true)
             });
         });
 }

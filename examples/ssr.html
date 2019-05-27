@@ -47,9 +47,7 @@
 
     function embedNotebook() {
         const url = document.getElementById('path').value;
-        WolframNotebookEmbedder.embed(url, document.getElementById('container'), {
-            allowInteract: true
-        }).then(embedding => {
+        WolframNotebookEmbedder.embed(url, document.getElementById('container')).then(embedding => {
             embedding.addEventListener('first-paint-done', ({showingStaticHTML}) => {
                 renderStateElement.innerText = 'First paint done ' + (showingStaticHTML ? '(showing static HTML)' : '(live-rendering)');
             });

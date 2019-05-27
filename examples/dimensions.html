@@ -64,8 +64,7 @@
         const url = document.getElementById('path').value;
         return WolframNotebookEmbedder.embed(url, document.getElementById(containerID), {
             width: width,
-            maxHeight: maxHeight,
-            allowInteract: true
+            maxHeight: maxHeight
         }).then(nb => {
             nb.addEventListener('resize', dimensions => {
                 const span = document.getElementById(dimensionsID);
