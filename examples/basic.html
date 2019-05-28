@@ -1,52 +1,17 @@
 <html>
 <head>
     <title>Basic example</title>
-    <style>
-        #path {
-            width: 500px;
-        }
-    </style>
 </head>
 <body>
 
 <h1>Basic example</h1>
-<p>
-    Enter the URL of a cloud object:
-    <input id="path" value="https://www.wolframcloud.com/obj/jpoeschko/Public/Example.nb" />
-    <button onclick="embedNotebook()">Embed Notebook</button>
-</p>
-<p>
-    If the notebook's last cell contains a <code>Manipulate</code> with a variable <code>x</code>, this will reset it to 0:
-    <button onclick="resetX()">Reset <code>x</code></button>
-</p>
 <div id="container"></div>
 <script src="./dist/wolfram-notebook-embedder.js"></script>
 <script>
-    let embedding = null;
-
-    function embedNotebook() {
-        const url = document.getElementById('path').value;
-        embedding = WolframNotebookEmbedder.embed(url, document.getElementById('container'), {
-            allowInteract: true
-        });
-    }
-
-    function resetX() {
-        if (embedding) {
-            embedding.then(nb => {
-                nb.getCells().then(({cells}) => {
-                    if (cells) {
-                        const lastCell = cells[cells.length - 1];
-                        return nb.setDynamicModuleVariable({
-                            cellId: lastCell.id,
-                            name: 'x$$',
-                            value: 0
-                        });
-                    }
-                })
-            })
-        }
-    }
+    WolframNotebookEmbedder.embed(
+        'https://www.wolframcloud.com/obj/jpoeschko/Public/Example.nb',
+        document.getElementById('container')
+    );
 </script>
 
 </body>

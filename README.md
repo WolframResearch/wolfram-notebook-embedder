@@ -30,6 +30,7 @@ and then use the global variable `WolframNotebookEmbedder`.
 ## Examples
 
 * [Basic example](./examples/basic.html)
+* [Manipulate example](./examples/manipulate.html)
 * [Dimensions examples](./examples/dimensions.html)
 * [Server-side rendering](./examples/ssr.html)
 
