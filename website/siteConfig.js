@@ -13,6 +13,8 @@ const users = [
   },
 ];
 
+const wlHighlighter = require('./wl.js').default;
+
 const siteConfig = {
   title: 'Wolfram Notebook Embedder', // Title for your website.
   tagline: 'A library to embed Wolfram Cloud notebooks on other sites',
@@ -75,6 +77,9 @@ const siteConfig = {
   highlight: {
     // Highlight.js theme to use for syntax highlighting in code blocks.
     theme: 'default',
+    hljs: function(hljs) {
+      hljs.registerLanguage('mathematica', wlHighlighter);
+    }
   },
 
   // Add custom scripts here that would be placed in <script> tags.
