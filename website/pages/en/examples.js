@@ -7,7 +7,7 @@ const Container = CompLibrary.Container;
 const EXAMPLES = [
     {
         title: 'Basic example',
-        description: 'Embed a certain notebook.',
+        description: 'Embed a particular notebook.',
         html: `<div id="container"></div>`,
         js: `
 WolframNotebookEmbedder.embed(
@@ -36,7 +36,7 @@ let embedding = null;
 
 function embedNotebook() {
     const url = document.getElementById('path').value;
-    embedding = WolframNotebookEmbedder.embed(url, document.getElementById('container'));
+    embedding = WolframNotebookEmbedder.embed(url, document.getElementById('container'), {allowInteract: true});
 }
 
 function resetX() {
