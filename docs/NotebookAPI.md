@@ -50,23 +50,27 @@ Retrieves the (top-level) elements in the notebook or a cell group.
 
 Example request:
 
-    {
-        "api": "notebook",
-        "version": 1,
-        "rid": "1",
-        "command": "getElements"
-        "groupId": "1"
-    }
+```json
+{
+    "api": "notebook",
+    "version": 1,
+    "rid": "1",
+    "command": "getElements",
+    "groupId": "1"
+}
+```
 
 Example response:
 
-    {
-        "rid": "1",
-        "success": true,
-        "elements": [{"type": "cell", "id": "2"}],
-        "isClosed": false,
-        "visibleElementIndex": null
-    }
+```json
+{
+    "rid": "1",
+    "success": true,
+    "elements": [{"type": "cell", "id": "2"}],
+    "isClosed": false,
+    "visibleElementIndex": null
+}
+```
 
 #### getElementParent
 
@@ -137,22 +141,26 @@ Sets outer options to be applied to the notebook. Currently, only the `"Magnific
 
 Example request:
 
-    {
-        "api": "notebook",
-        "version": 1,
-        "rid": "1",
-        "command": "setOptions",
-        "options": {
-            "Magnification": 2
-        }
+```json
+{
+    "api": "notebook",
+    "version": 1,
+    "rid": "1",
+    "command": "setOptions",
+    "options": {
+        "Magnification": 2
     }
+}
+```
 
 Example response:
 
-    {
-        "rid": "1",
-        "success": true
-    }
+```json
+{
+    "rid": "1",
+    "success": true
+}
+```
 
 #### getOption
 
@@ -169,22 +177,26 @@ Gets the value of an outer option. Currently, only the `"Magnification"` option 
 
 Example request:
 
-    {
-        "api": "notebook",
-        "version": 1,
-        "rid": "1",
-        "command": "getOption",
-        "option": "Magnification"
-    }
+```json
+{
+    "api": "notebook",
+    "version": 1,
+    "rid": "1",
+    "command": "getOption",
+    "option": "Magnification"
+}
+```
 
 Example response:
 
-    {
-        "rid": "1",
-        "success": true,
-        "option": "Magnification",
-        "value": 2
-    }
+```json
+{
+    "rid": "1",
+    "success": true,
+    "option": "Magnification",
+    "value": 2
+}
+```
 
 ### Selection
 
@@ -201,22 +213,26 @@ Gets information about the current selection.
 
 Example request:
 
-    {
-        "api": "notebook",
-        "version": 1,
-        "rid": "1",
-        "command": "getSelection"
-    }
+```json
+{
+    "api": "notebook",
+    "version": 1,
+    "rid": "1",
+    "command": "getSelection"
+}
+```
 
 Example response:
 
-    {
-        "rid": "1",
-        "success": true,
-        "cells": [],
-        "inCell": {"cellId": "1"},
-        "cursorPosition": {"left": 80, "top": 300}
-    }
+```json
+{
+    "rid": "1",
+    "success": true,
+    "cells": [],
+    "inCell": {"cellId": "1"},
+    "cursorPosition": {"left": 80, "top": 300}
+}
+```
 
 #### selectElements
 
