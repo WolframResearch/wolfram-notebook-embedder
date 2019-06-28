@@ -3,7 +3,7 @@ id: Development
 title: Development
 ---
 
-Please read the [Contributing guide](../CONTRIBUTING.md) first. By contributing to this repository, you agree to the licensing terms therein.
+Please read the [Contributing guide](https://github.com/WolframResearch/wolfram-notebook-embedder/CONTRIBUTING.md) first. By contributing to this repository, you agree to the licensing terms therein.
 
 To install all required dependencies for development of this library, run:
 

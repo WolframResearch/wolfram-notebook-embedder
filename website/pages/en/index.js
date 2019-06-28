@@ -114,8 +114,9 @@ class Index extends React.Component {
         {[
           {
             content:
-              'Wolfram Notebook Embedder takes a notebook on the [Wolfram Cloud](https://wwww.wolframcloud.com) and renders it into a given DOM node. ' +
-              'It automatically fetches all required dependencies, such as further scripts, styles, and fonts.',
+              'Wolfram Notebook Embedder takes a public notebook on the [Wolfram Cloud](https://wwww.wolframcloud.com) and renders it into a given DOM node. ' +
+              'It automatically fetches all required dependencies, such as further scripts, styles, and fonts. ' +
+              'The library and any additional notebook resources only need to be fetched, even if you embed multiple notebooks on a single page.',
             image: `${baseUrl}img/undraw_note_list.svg`,
             imageAlign: 'right',
             title: 'Background',
@@ -142,13 +143,13 @@ class Index extends React.Component {
       <Block layout="fourColumn">
         {[
           {
-            content: 'Embed notebooks on your site that grow as large as necessary or by constraining their width and height as you wish.',
+            content: 'Embed [notebooks](http://www.wolfram.com/notebooks/) on your site more seamlessly than what would be possible with iframes. An embedded notebook\'s dimensions can grow as large as necessary or you can constrain its width and height as you wish.',
             image: `${baseUrl}img/undraw_react.svg`,
             imageAlign: 'top',
             title: 'Seamless Embedding',
           },
           {
-            content: 'Control the notebook through an extensive JavaScript API.',
+            content: 'Control the notebook through an extensive JavaScript API. For instance, change the value of a Manipulate variable, open and close cell groups, or evaluate [Wolfram Language](https://www.wolfram.com/language/) expressions from your JavaScript code.',
             image: `${baseUrl}img/undraw_operating_system.svg`,
             imageAlign: 'top',
             title: 'Scriptable Control',
