@@ -16,8 +16,11 @@ const users = [
 const siteConfig = {
   title: 'Wolfram Notebook Embedder', // Title for your website.
   tagline: 'A library to embed Wolfram Cloud notebooks on other sites',
-  url: 'https://reference.wolfram.com/language/WolframNotebookEmbedder', // Your website URL
-  baseUrl: '/', // Base URL for your project */
+  // url: 'https://reference.wolfram.com', // Your website URL
+  // baseUrl: '/language/WolframNotebookEmbedder', // Base URL for your project */
+  // For now, references are generated to work with this location:
+  url: 'https://www.wolframcloud.com',
+  baseUrl: '/obj/jpoeschko/WolframNotebookEmbedderDocs/',
   // For github.io type URLs, you would set the url and baseUrl like:
   //   url: 'https://facebook.github.io',
   //   baseUrl: '/test-site/',
