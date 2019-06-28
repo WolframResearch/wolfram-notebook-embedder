@@ -14,6 +14,12 @@
       "LibraryInterface": {
         "title": "Library Interface"
       },
+      "NotebookAPI-Internal": {
+        "title": "NotebookAPI-Internal"
+      },
+      "NotebookAPI-Unsupported": {
+        "title": "NotebookAPI-Unsupported"
+      },
       "NotebookAPI": {
         "title": "Notebook API"
       },
