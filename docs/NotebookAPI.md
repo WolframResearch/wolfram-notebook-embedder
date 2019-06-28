@@ -8,7 +8,7 @@ This is the documentation of [methods](#methods) on the object returned by [`emb
 The API also exposes some [events](#events) that can be subscribed to using the API method `addEventListener(eventName, callback)`. The `callback` will receive a JS object with the specified *fields* as its single argument. Event listeners can be removed with `removeEventListener(eventName, callback)`. Some events are marked as *singular*, which means that they will usually fire exactly once, and an event listener added after they have already fired will still be executed (right away).
 
 
-## <a id="methods"></a> Methods
+## Methods
 
 ### Cell content
 
@@ -257,7 +257,7 @@ Moves the selection to the separator after a cell or cell group.
 
 ### Dimensions
 
-#### <a id="getDimensions"></a> getDimensions
+#### getDimensions
 
 Returns the dimensions of the notebook content.
 
@@ -390,7 +390,7 @@ Currently there are four different rendering methods, as shown below.
 
     + `"CellNotFound"` ... The cell ID given by `cellId` was not found.
 
-## <a id="events"></a> Events
+## Events
 
 ### Initial render progress
 
@@ -449,7 +449,7 @@ Fired when an evaluation ends.
 
 #### resize
 
-Fired when the notebook dimensions change. See [`getDimensions`](#getDimensions) for details.
+Fired when the notebook dimensions change. See [`getDimensions`](#getdimensions) for details.
 
 + Fields
 
