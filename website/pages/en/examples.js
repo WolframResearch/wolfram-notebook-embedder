@@ -102,10 +102,10 @@ function Help(props) {
                         <h1>Examples</h1>
                     </header>
                     <p>These examples are live demos using the Wolfram Notebook Embedder library.
-                        They import library from a CDN behind the scenes, which exposes the global <code>WolframNotebookEmbedder</code> JavaScript variable.
+                        They import the library from a CDN behind the scenes, which exposes the global <code>WolframNotebookEmbedder</code> JavaScript variable.
                         In your own project, you will probably want to install the library using npm or Yarn and import it locally,
                         as described in the <a href={docUrl('GettingStarted')}>Getting Started documentation</a>.</p>
-                    {EXAMPLES.map(data => <Example {...data} />)}
+                    {EXAMPLES.map(data => <Example key={data.title} {...data} />)}
                     <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
                 </div>
             </Container>

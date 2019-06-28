@@ -28,7 +28,8 @@
       }
     },
     "links": {
-      "Docs": "Docs"
+      "Docs": "Docs",
+      "Examples": "Examples"
     },
     "categories": {
       "Getting Started": "Getting Started",
