@@ -1,4 +1,7 @@
-# Notebook Loading Phases
+---
+id: NotebookLoadingPhases
+title: Notebook Loading Phases
+---
 
 ## Rendering phases
 

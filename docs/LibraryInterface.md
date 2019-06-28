@@ -1,4 +1,7 @@
-# Library Interface
+---
+id: LibraryInterface
+title: Library Interface
+---
 
 This library exposes a single function `embed` that renders a notebook into a given DOM node and returns an interface for further interaction with the notebook:
 

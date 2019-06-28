@@ -1,4 +1,7 @@
-# Notebook API
+---
+id: NotebookAPI
+title: Notebook API
+---
 
 This is the documentation of [methods](#methods) on the object returned by [`embed`](./LibraryInterface.md) to control a notebook from JS code. Each method takes a JS object with *parameters* and returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) resolving to a *response* object. Parameters with a default value (specified as "= `...`") are optional. In case of an error, the returned promise is rejected with a standard [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) object with a `message` property; the potential error messages are listed for each command.
 

@@ -1,4 +1,7 @@
-# Getting Started
+---
+id: GettingStarted
+title: Getting Started
+---
 
 1. Create a notebook in the [Wolfram Cloud](https://www.wolframcloud.com/) and make it public.
     * In the Cloud UI, use the "New Notebook" button and then use the "Share" dialog to make it public.

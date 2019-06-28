@@ -1,4 +1,7 @@
-# Development
+---
+id: Development
+title: Development
+---
 
 Please read the [Contributing guide](../CONTRIBUTING.md) first. By contributing to this repository, you agree to the licensing terms therein.
 

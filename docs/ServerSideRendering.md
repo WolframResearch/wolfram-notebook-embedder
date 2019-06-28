@@ -1,4 +1,7 @@
-# Server-Side Rendering
+---
+id: ServerSideRendering
+title: Server-Side Rendering
+---
 
 In some cases, you might want to include (static) HTML for a notebook on your page so it can be rendered even before the necessary JavaScript code is loaded and executed. This reduces the time until the user sees the notebook, and it also helps search engines to index your notebook content. Once your JS code executes, you can [embed](./LibraryInterface.md) the notebook into the same container node, and it will transition seamlessly from the static view to "live" (interactive) rendering. The same happens on [wolframcloud.com](https://www.wolframcloud.com) as well.
 

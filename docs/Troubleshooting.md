@@ -1,4 +1,7 @@
-# Troubleshooting
+---
+id: Troubleshooting
+title: Troubleshooting
+---
 
 ## Loading
 
