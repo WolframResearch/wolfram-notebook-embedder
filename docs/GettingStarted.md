@@ -7,9 +7,9 @@ title: Getting Started
     * In the Cloud UI, use the "New Notebook" button and then use the "Share" dialog to make it public.
     * From the Wolfram Language, you could deploy notebook content like so:
 
-        ```
-        CloudDeploy[Manipulate[Plot[Sin[a*x], {x, 0, 2Pi}], {a, 1, 3}],
-            Permissions->{All->{"Read", "Interact"}}]
+        ```mathematica
+        CloudDeploy[Manipulate[Plot[Sin[a * x], {x, 0, 2Pi}], {a, 1, 3}],
+            Permissions -> {All -> {"Read", "Interact"}}]
         ```
 2. Install this library in your JS project using
 
