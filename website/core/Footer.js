@@ -5,13 +5,16 @@ class Footer extends React.Component {
     const baseUrl = this.props.config.baseUrl;
     const docsUrl = this.props.config.docsUrl;
     const docsPart = `${docsUrl ? `${docsUrl}/` : ''}`;
-    const langPart = `${language ? `${language}/` : ''}`;
+    // const langPart = `${language ? `${language}/` : ''}`;
+    const langPart = '';
     return `${baseUrl}${docsPart}${langPart}${doc}`;
   }
 
   pageUrl(doc, language) {
     const baseUrl = this.props.config.baseUrl;
-    return baseUrl + (language ? `${language}/` : '') + doc;
+    // const langPart = (language ? `${language}/` : '');
+    const langPart = '';
+    return baseUrl + langPart + doc;
   }
 
   render() {
@@ -30,13 +33,19 @@ class Footer extends React.Component {
           </a>
           <div>
             <h5>Docs</h5>
-            <a href={this.docUrl('GettingStarted.html', this.props.language)}>
+            <a href={this.docUrl('GettingStarted', this.props.language)}>
               Getting Started
+            </a>
+            <a href={this.docUrl('LibraryInterface', this.props.language)}>
+              Library API
+            </a>
+            <a href={this.pageUrl('examples', this.props.language)}>
+              Examples
             </a>
           </div>
           <div>
             <h5>Community</h5>
-            <a href={this.pageUrl('users.html', this.props.language)}>
+            <a href={this.pageUrl('users', this.props.language)}>
               User Showcase
             </a>
             <a
