@@ -17,6 +17,22 @@ To manually test embedded notebooks, run
     
 and visit the resulting localhost URL (usually [http://localhost:5000](http://localhost:5000)). On that page, you can enter the path of a notebook on your localhost cloud to embed it.
 
+## Documentation
+
+The library's website is built using [Docusaurus](https://docusaurus.io). In the `website` directory, run
+
+    yarn install
+    
+to install all necessary dependencies, and then either
+
+    yarn start
+    
+to start a live-updating build process or
+
+    yarn build
+    
+to generate static HTML in `website/build`.
+
 ## Releasing a new version
 
 To release a new version, log in to npm using
