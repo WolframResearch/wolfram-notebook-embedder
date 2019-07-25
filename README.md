@@ -1,10 +1,10 @@
 # wolfram-notebook-embedder
 
-A library to embed [Wolfram Cloud](https://www.wolframcloud.com/) notebooks on other sites. It does *not* use an `<iframe>` but renders a notebook directly into a given DOM node, for a more seamless experience.
+A library to embed [Wolfram Cloud](https://www.wolframcloud.com/) notebooks on other sites. It does *not* use an `<iframe>`, but renders a notebook directly into a given DOM node for a more seamless experience.
 
 ## Installation
 
-If you're using a package manager such as [npm](https://www.npmjs.com/get-npm) or [Yarn](https://yarnpkg.com/en/), you can install this package from the npm repository:
+If you are using a package manager such as [npm](https://www.npmjs.com/get-npm) or [Yarn](https://yarnpkg.com/en/), you can install this package from the npm repository:
 
     npm install wolfram-notebook-embedder
     
@@ -20,23 +20,23 @@ and then use the global variable `WolframNotebookEmbedder`.
 
 ## Usage & Documentation
 
-* [**Getting started**](./docs/GettingStarted.md)
-* [Library interface](./docs/LibraryInterface.md)
+* [**Getting Started**](./docs/GettingStarted.md)
+* [Library Interface](./docs/LibraryInterface.md)
 * [Notebook API](./docs/NotebookAPI.md)
-* [Server-side rendering](./docs/ServerSideRendering.md)
-* [Notebook loading phases](./docs/NotebookLoadingPhases.md)
+* [Server-Side Rendering](./docs/ServerSideRendering.md)
+* [Notebook Loading Phases](./docs/NotebookLoadingPhases.md)
 * [Troubleshooting](./docs/Troubleshooting.md)
 
 ## Examples
 
-* [Basic example](./examples/basic.html)
-* [Manipulate example](./examples/manipulate.html)
-* [Dimensions examples](./examples/dimensions.html)
-* [Server-side rendering](./examples/ssr.html)
+* [Basic Example](./examples/basic.html)
+* [Manipulate Example](./examples/manipulate.html)
+* [Dimensions Examples](./examples/dimensions.html)
+* [Server-Side Rendering](./examples/ssr.html)
 
 ## Browser Support
 
-We support all modern browsers (the last 2 major versions of Chrome, Firefox, Edge, Safari), and Internet Explorer 11. Particularly for IE 11, this library includes an internal "ponyfill" for `Promise`, since this library's API heavily depends on promises.
+We support all modern browsers (the last two major versions of Chrome, Firefox, Edge, Safari) and Internet Explorer 11. Particularly for IE 11, this library includes an internal "ponyfill" for `Promise`, since this library's API heavily depends on promises.
 
 ## Contributing
 
@@ -46,7 +46,7 @@ Everyone is welcome to contribute. Please read the [Contributing guide](CONTRIBU
 
 We use [semantic versioning](https://semver.org/) for this library and its API.
 
-Each version of this library is compatible with a certain range of versions of Wolfram Cloud. Currently, the requirement is Wolfram Cloud 1.50 (which is not released yet) or higher. We try hard not to make any backward-incompatible changes on the Wolfram Cloud side, which would require an update of this library to keep embeddings working.
+Each version of this library is compatible with a certain range of versions of the Wolfram Cloud. Currently, the requirement is Wolfram Cloud 1.50 (which has not been released yet) or higher. We try hard not to make any backward-incompatible changes on the Wolfram Cloud side, which would require an update of this library to keep embeddings working.
 
 ## License
 
