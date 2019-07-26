@@ -7,7 +7,7 @@ const users = [
     caption: 'Wolfram Notebook Archive',
     // You will need to prepend the image path with your baseUrl
     // if it is not '/', like: '/test-site/img/image.jpg'.
-    image: '/img/undraw_open_source.svg',
+    image: '/obj/jpoeschko/WolframNotebookEmbedderDocs/img/undraw_open_source.svg',
     infoLink: 'https://notebookarchive.org/',
     pinned: true,
   },
