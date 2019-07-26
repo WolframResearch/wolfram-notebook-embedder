@@ -5,6 +5,9 @@
     "previous": "Previous",
     "tagline": "A library to embed Wolfram Cloud notebooks on other sites",
     "docs": {
+      "ContributingAgreement": {
+        "title": "Contributing to Wolfram®"
+      },
       "Development": {
         "title": "Development"
       },

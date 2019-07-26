@@ -40,7 +40,7 @@ We support all modern browsers (the last two major versions of Chrome, Firefox, 
 
 ## Contributing
 
-Everyone is welcome to contribute. Please read the [Contributing guide](CONTRIBUTING.md) and the [Development guide](./docs/Development.md) for more information, including how to run the tests.
+Everyone is welcome to contribute. Please read the [Contributing agreement](CONTRIBUTING.md) and the [Development guide](./docs/Development.md) for more information, including how to run the tests.
 
 ## Versioning
 

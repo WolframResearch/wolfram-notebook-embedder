@@ -3,6 +3,6 @@
     "Getting Started": ["GettingStarted"],
     "API Documentation": ["LibraryInterface", "NotebookAPI"],
     "More Information": ["ServerSideRendering", "NotebookLoadingPhases", "Troubleshooting"],
-    "Contributing": ["Development"]
+    "Contributing": ["Development", "ContributingAgreement"]
   }
 }
