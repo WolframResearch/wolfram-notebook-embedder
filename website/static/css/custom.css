@@ -1,5 +1,15 @@
 /* your custom css */
 
+a {
+    color: #d10;
+}
+a:hover {
+    color: red;
+}
+header a:hover {
+    color: white;
+}
+
 @media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
 }
 
