@@ -206,7 +206,7 @@ Gets information about the current selection.
 
 + Response
 
-    + `elements` (`Array.<{type: "cell"|"group", id: string}>`) — List of elements (cells or cell groups) selected via their cell bracket. Empty array if no cell brackets are selected.
+    + `elements` (`Array.<{type: "cell"|"group", id: string}>`) — List of elements (cells or cell groups) selected via their cell brackets. Empty array if no cell brackets are selected.
     + `separator` (`?{cellBefore: ?{cellId: string}, cellAfter: ?{cellId: string}}`) — If the selection is between cells, this gives the cell before and the cell after the separator. Either of them or `separator` itself can be `null`.
     + `inCell` (`?{cellId: string}`) — The cell the selection is inside (i.e. on the box level), if any. This is particularly the case when editing a cell. If the selection is on the cell (bracket) level, `inCell` is `null`.
     + `cursorPosition` (`?{left: number, top: number}`) — Cursor position, if a cell is edited. The position is relative to the document offset. This takes into account the scroll position.
@@ -410,7 +410,7 @@ There are currently four different rendering methods, as shown here.
 
 ### Initial render progress
 
-See [notebook loading phases](./NotebookLoadingPhases.md) for more information.
+See [Notebook Loading Phases](./NotebookLoadingPhases.md) for more information.
 
 #### first-paint-done (singular)
 
@@ -441,7 +441,7 @@ Fired when the notebook selection changes.
 
 + Fields
 
-    + `elements` (`Array.<{type: "cell"|"group", id: string}>`) — List of elements (cells or cell groups) selected via their cell bracket.
+    + `elements` (`Array.<{type: "cell"|"group", id: string}>`) — List of elements (cells or cell groups) selected via their cell brackets.
     + `separator` (`?{cellBefore: ?{cellId: string}, cellAfter: ?{cellId: string}}`) — If the selection is between cells, this gives the cell before and the cell after the separator.
     + `inCell` (`?{cellId: string}`) — The cell the selection is inside (i.e. on the box level), if any. This is particularly the case when editing a cell.
 
