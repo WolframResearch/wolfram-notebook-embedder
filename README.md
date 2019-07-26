@@ -8,7 +8,7 @@ If you are using a package manager such as [npm](https://www.npmjs.com/get-npm) 
 
     npm install wolfram-notebook-embedder
     
-and then import it in your JS code like so:
+and then import it in your JavaScript code like so:
 
     import WolframNotebookEmbedder from 'wolfram-notebook-embedder';    
     

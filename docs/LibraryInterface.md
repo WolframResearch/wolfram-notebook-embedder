@@ -11,7 +11,7 @@ WolframNotebookEmbedder.embed(notebookURL, domNode, attributes)
 
 * `notebookURL`: a string with a cloud object URL of the notebook to embed, e.g. `'https://www.wolframcloud.com/obj/4beadfbb-84dd-4b26-87b6-bcd30b9abd65'` or `'https://www.wolframcloud.com/obj/myusername/myfolder/mynotebook.nb'`
 * `domNode`: a DOM node in which to render the notebook, e.g. obtained by `document.getElementById('myContainer')`
-* `attributes `: a JS object with attributes
+* `attributes `: a JavaScript object with attributes
 
 The following attributes can be given:
 

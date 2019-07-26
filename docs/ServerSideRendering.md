@@ -3,7 +3,7 @@ id: ServerSideRendering
 title: Server-Side Rendering
 ---
 
-In some cases, you might want to include (static) HTML for a notebook on your page so it can be rendered even before the necessary JavaScript code is loaded and executed. This reduces the time until the user sees the notebook, and it also helps search engines to index your notebook content. Once your JS code executes, you can [embed](./LibraryInterface.md) the notebook into the same container node, and it will transition seamlessly from the static view to "live" (interactive) rendering. The same happens on [www.wolframcloud.com](https://www.wolframcloud.com) as well.
+In some cases, you might want to include (static) HTML for a notebook on your page so it can be rendered even before the necessary JavaScript code is loaded and executed. This reduces the time until the user sees the notebook, and it also helps search engines to index your notebook content. Once your JavaScript code executes, you can [embed](./LibraryInterface.md) the notebook into the same container node, and it will transition seamlessly from the static view to "live" (interactive) rendering. The same happens on [www.wolframcloud.com](https://www.wolframcloud.com) as well.
 
 Static HTML is generated ("pre-rendered") for each cloud notebook whenever it is created or changed. You can access it through an HTTP API, by making a `GET` request to
 
