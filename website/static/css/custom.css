@@ -83,6 +83,13 @@ footer a {
 }
 
 @media only screen and (max-width: 1023px) {
+    .nav-site {
+        background-color: #fe0000 !important;
+    }
+    .nav-site a,
+    .nav-site a:hover {
+        color: white !important;
+    }
 }
 
 @media only screen and (min-width: 1400px) {
