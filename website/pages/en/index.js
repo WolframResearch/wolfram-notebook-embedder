@@ -151,34 +151,34 @@ class Index extends React.Component {
       </Block>
     );
 
-    const Showcase = () => {
-      if ((siteConfig.users || []).length === 0) {
-        return null;
-      }
-
-      const showcase = siteConfig.users
-        .filter(user => user.pinned)
-        .map(user => (
-          <a href={user.infoLink} key={user.infoLink}>
-            <img src={user.image} alt={user.caption} title={user.caption} />
-          </a>
-        ));
-
-      const pageUrl = page => baseUrl + (language ? `${language}/` : '') + page;
-
-      return (
-        <div className="productShowcaseSection paddingBottom">
-          <h2>Who Is Using This?</h2>
-          <p>Notebooks are embedded on all these sites:</p>
-          <div className="logos">{showcase}</div>
-          <div className="more-users">
-            <a className="button" href={pageUrl('users.html')}>
-              More {siteConfig.title} Users
-            </a>
-          </div>
-        </div>
-      );
-    };
+    // const Showcase = () => {
+    //   if ((siteConfig.users || []).length === 0) {
+    //     return null;
+    //   }
+    //
+    //   const showcase = siteConfig.users
+    //     .filter(user => user.pinned)
+    //     .map(user => (
+    //       <a href={user.infoLink} key={user.infoLink}>
+    //         <img src={user.image} alt={user.caption} title={user.caption} />
+    //       </a>
+    //     ));
+    //
+    //   const pageUrl = page => baseUrl + (language ? `${language}/` : '') + page;
+    //
+    //   return (
+    //     <div className="productShowcaseSection paddingBottom">
+    //       <h2>Who Is Using This?</h2>
+    //       <p>Notebooks are embedded on all these sites:</p>
+    //       <div className="logos">{showcase}</div>
+    //       <div className="more-users">
+    //         <a className="button" href={pageUrl('users.html')}>
+    //           More {siteConfig.title} Users
+    //         </a>
+    //       </div>
+    //     </div>
+    //   );
+    // };
 
     return (
       <div>
@@ -189,7 +189,7 @@ class Index extends React.Component {
           {/*<LearnHow />*/}
           {/*<TryOut />*/}
           <Description />
-          <Showcase />
+          {/*<Showcase />*/}
         </div>
       </div>
     );

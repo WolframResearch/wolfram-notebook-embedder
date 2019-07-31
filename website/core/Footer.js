@@ -45,9 +45,9 @@ class Footer extends React.Component {
           </div>
           <div>
             <h5>Community</h5>
-            <a href={this.pageUrl('users', this.props.language)}>
-              User Showcase
-            </a>
+            {/*<a href={this.pageUrl('users', this.props.language)}>*/}
+            {/*  User Showcase*/}
+            {/*</a>*/}
             <a
               href="https://community.wolfram.com/content?curTag=wolfram%20cloud"
               target="_blank"

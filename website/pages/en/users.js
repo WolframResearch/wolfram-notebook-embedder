@@ -23,7 +23,7 @@ class Users extends React.Component {
         <Container padding={['bottom', 'top']}>
           <div className="showcaseSection">
             <div className="prose">
-              <h1>Who is Using This?</h1>
+              <h1>Who Is Using This?</h1>
               <p>The following sites are using Wolfram Notebook Embedder:</p>
             </div>
             <div className="logos">{showcase}</div>
