@@ -69,7 +69,7 @@ class Index extends React.Component {
         id={props.id}
         background={props.background}>
         <GridBlock
-          align="center"
+          align={props.align || 'center'}
           contents={props.children}
           layout={props.layout}
         />
@@ -103,7 +103,7 @@ class Index extends React.Component {
     // );
 
     const Description = () => (
-      <Block background="light">
+      <Block background="light" align="left">
         {[
           {
             content:
