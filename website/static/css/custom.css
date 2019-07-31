@@ -1,12 +1,55 @@
 /* your custom css */
 
+.fixedHeaderContainer {
+    background: #e6e6e6;
+    border-bottom: 5px solid #d80d18;
+}
+
+.fixedHeaderContainer header h2.headerTitleWithLogo {
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.64px;
+    color: #333;
+    text-transform: uppercase;
+}
+
 a {
     color: #d10;
 }
 a:hover {
-    color: red;
+    color: #fe0000;
+}
+header a {
+    color: #333 !important;
+    background: none !important;
 }
 header a:hover {
+    color: #fe0000 !important;
+}
+
+#docsNav h3.navGroupCategoryTitle {
+    color: #333;
+}
+
+#docsNav a.navItem {
+    color: #898989;
+}
+#docsNav a.navItem:hover {
+    color: #d10;
+}
+
+html a.button {
+    border: 1px solid #d10;
+    border-radius: 3px;
+    background: white;
+    color: #d10;
+}
+html a.button:hover {
+    border: 1px solid #fe0000;
+    background: #fe0000;
     color: white;
 }
 
