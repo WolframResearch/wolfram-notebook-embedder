@@ -4,25 +4,13 @@
     font-family: "Source Sans Pro";
     font-weight: normal;
     font-style: normal;
-    src: url("../fonts/SourceSansPro-Regular.ttf");
-}
-@font-face {
-    font-family: "Source Sans Pro";
-    font-weight: bold;
-    font-style: normal;
-    src: url("../fonts/SourceSansPro-Semibold.ttf");
+    src: url("https://www.wolframcdn.com/fonts/source-sans-pro/1.0/SourceSansPro-Regular.woff2");
 }
 @font-face {
     font-family: "Source Sans Pro";
     font-weight: normal;
     font-style: italic;
-    src: url("../fonts/SourceSansPro-Italic.ttf");
-}
-@font-face {
-    font-family: "Source Sans Pro";
-    font-weight: bold;
-    font-style: italic;
-    src: url("../fonts/SourceSansPro-SemiboldItalic.ttf");
+    src: url("https://www.wolframcdn.com/fonts/source-sans-pro/1.0/SourceSansPro-Italic.woff2");
 }
 
 body {
