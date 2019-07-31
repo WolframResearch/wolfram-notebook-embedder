@@ -85,7 +85,7 @@ html a.button:hover {
 footer h5,
 footer a {
     /* Make sure that the items in the footer don't cause a horizontal scrollbar. */
-    width: fit-content;
+    width: max-content;
 }
 
 @media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
