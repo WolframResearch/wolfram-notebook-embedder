@@ -96,10 +96,10 @@ html .imageAlignTop .blockImage {
 }
 
 #docsNav a.navItem {
-    color: #898989;
+    color: #d10;
 }
 #docsNav a.navItem:hover {
-    color: #d10;
+    color: #fe0000;
 }
 
 html a.button {
