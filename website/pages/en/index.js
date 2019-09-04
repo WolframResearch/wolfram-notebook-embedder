@@ -133,7 +133,7 @@ class Index extends React.Component {
     // );
 
     const Features = () => (
-      <Block layout="fourColumn">
+      <Block layout="fourColumn" align="left">
         {[
           {
             content: 'Embed [notebooks](http://www.wolfram.com/notebooks/) on your site more seamlessly than what would be possible with iframes. An embedded notebook\'s dimensions can grow as large as necessary, or you can constrain its width and height as you wish.',
