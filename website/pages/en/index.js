@@ -24,6 +24,7 @@ function pageUrl(siteConfig, doc) {
 class HomeSplash extends React.Component {
   render() {
     const {siteConfig} = this.props;
+    const {baseUrl} = siteConfig;
 
     const SplashContainer = props => (
       <div className="homeContainer">
@@ -63,6 +64,7 @@ class HomeSplash extends React.Component {
           <PromoSection>
             <PrimaryButton href={docUrl(siteConfig,'GettingStarted')}>Get Started</PrimaryButton>
           </PromoSection>
+          <img className="heroImage" src={`${baseUrl}img/hero.png`} alt="Wolfram Notebook Embedder workflow" />
         </div>
       </SplashContainer>
     );

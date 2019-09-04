@@ -35,6 +35,10 @@ html .projectTitle small {
     font-weight: 300;
 }
 
+.heroImage {
+    padding-top: 40px;
+}
+
 .fixedHeaderContainer {
     background: #e6e6e6;
     border-bottom: 5px solid #d80d18;
