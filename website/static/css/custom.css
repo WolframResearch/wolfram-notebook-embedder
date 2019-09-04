@@ -17,6 +17,18 @@ body {
     font-family: "Source Sans Pro", Arial, sans-serif;
 }
 
+@media only screen and (max-width: 1023px) {
+    html .nav-site {
+        background-color: #d10 !important;
+    }
+}
+
+html .projectTitle small {
+    font-size: 66%;
+    color: #898989;
+    font-weight: 300;
+}
+
 .fixedHeaderContainer {
     background: #e6e6e6;
     border-bottom: 5px solid #d80d18;
@@ -51,11 +63,22 @@ html .imageAlignTop .blockImage {
     max-width: 120px;
 }
 
+.mainLink {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+.mainLink a {
+    text-transform: uppercase;
+    font-size: 18px;
+}
+
 #background p {
     max-width: 100%;
 }
 #background  .blockImage {
-    max-width: 20%;
+    max-width: 120px;
+    margin-top: 3em;
 }
 
 #docsNav h3.navGroupCategoryTitle {
@@ -76,6 +99,20 @@ html a.button {
     color: #d10;
 }
 html a.button:hover {
+    border: 1px solid #fe0000;
+    background: #fe0000;
+    color: white;
+}
+
+html a.button.primary {
+    border: 1px solid #d10;
+    background: #d10;
+    color: white;
+    padding: 15px 50px;
+    border-radius: 5px;
+    font-size: 18px;
+}
+html a.button.primary:hover {
     border: 1px solid #fe0000;
     background: #fe0000;
     color: white;

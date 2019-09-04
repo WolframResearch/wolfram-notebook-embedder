@@ -6,13 +6,24 @@ const MarkdownBlock = CompLibrary.MarkdownBlock; /* Used to read markdown */
 const Container = CompLibrary.Container;
 const GridBlock = CompLibrary.GridBlock;
 
-class HomeSplash extends React.Component {
-  render() {
-    const {siteConfig, language = ''} = this.props;
+function docUrl(siteConfig, doc) {
     const {baseUrl, docsUrl} = siteConfig;
     const docsPart = `${docsUrl ? `${docsUrl}/` : ''}`;
-    const langPart = `${language ? `${language}/` : ''}`;
-    const docUrl = doc => `${baseUrl}${docsPart}${langPart}${doc}`;
+    // const langPart = `${language ? `${language}/` : ''}`;
+    const langPart = '';
+    return `${baseUrl}${docsPart}${langPart}${doc}`;
+}
+
+function pageUrl(siteConfig, doc) {
+    const {baseUrl} = siteConfig;
+    // const langPart = (language ? `${language}/` : '');
+    const langPart = '';
+    return baseUrl + langPart + doc;
+}
+
+class HomeSplash extends React.Component {
+  render() {
+    const {siteConfig} = this.props;
 
     const SplashContainer = props => (
       <div className="homeContainer">
@@ -37,9 +48,9 @@ class HomeSplash extends React.Component {
       </div>
     );
 
-    const Button = props => (
+    const PrimaryButton = props => (
       <div className="pluginWrapper buttonWrapper">
-        <a className="button" href={props.href} target={props.target}>
+        <a className="button primary" href={props.href} target={props.target}>
           {props.children}
         </a>
       </div>
@@ -50,7 +61,7 @@ class HomeSplash extends React.Component {
         <div className="inner">
           <ProjectTitle siteConfig={siteConfig} />
           <PromoSection>
-            <Button href={docUrl('GettingStarted')}>Get Started</Button>
+            <PrimaryButton href={docUrl(siteConfig,'GettingStarted')}>Get Started</PrimaryButton>
           </PromoSection>
         </div>
       </SplashContainer>
@@ -65,7 +76,7 @@ class Index extends React.Component {
 
     const Block = props => (
       <Container
-        padding={['bottom', 'top']}
+        padding={[]}
         id={props.id}
         background={props.background}>
         <GridBlock
@@ -118,6 +129,31 @@ class Index extends React.Component {
       </Block>
     );
 
+    const QuickStart = () => (
+        <Block align="left">
+            {[
+                {
+                    content: `
+Import the library from a CDN using a \`<script>\` tag such as
+\`\`\`html
+<script crossorigin src="https://unpkg.com/wolfram-notebook-embedder@0.1/dist/wolfram-notebook-embedder.min.js"></script>
+\`\`\`
+or install it in your JavaScript project using
+\`\`\`bash
+npm install wolfram-notebook-embedder
+\`\`\`
+in order to import it:
+\`\`\`js
+import WolframNotebookEmbedder from 'wolfram-notebook-embedder';
+\`\`\`
+Then you can call \`WolframNotebookEmbedder.embed\` to embed a public cloud notebook into a given DOM node.
+`,
+                    title: 'Quick Start'
+                }
+            ]}
+        </Block>
+    );
+
     // const LearnHow = () => (
     //   <Block background="light">
     //     {[
@@ -149,6 +185,18 @@ class Index extends React.Component {
           },
         ]}
       </Block>
+    );
+
+    const ViewExamples = () => (
+      <div className="mainLink">
+        <a href={pageUrl(siteConfig, 'Examples')}>View Examples »</a>
+      </div>
+    );
+
+    const FullDocumentation = () => (
+      <div className="mainLink">
+        <a href={docUrl(siteConfig,'LibraryInterface')}>Full Documentation »</a>
+      </div>
     );
 
     // const Showcase = () => {
@@ -185,10 +233,13 @@ class Index extends React.Component {
         <HomeSplash siteConfig={siteConfig} language={language} />
         <div className="mainContainer">
           <Features />
+          <ViewExamples />
           {/*<FeatureCallout />*/}
           {/*<LearnHow />*/}
           {/*<TryOut />*/}
           <Description />
+          <QuickStart />
+          <FullDocumentation />
           {/*<Showcase />*/}
         </div>
       </div>
