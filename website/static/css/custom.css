@@ -47,6 +47,17 @@ header a:hover {
     color: #fe0000 !important;
 }
 
+html .imageAlignTop .blockImage {
+    max-width: 120px;
+}
+
+#background p {
+    max-width: 100%;
+}
+#background  .blockImage {
+    max-width: 20%;
+}
+
 #docsNav h3.navGroupCategoryTitle {
     color: #333;
 }
