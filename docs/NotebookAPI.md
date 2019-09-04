@@ -346,12 +346,12 @@ Example response:
 
 #### getDynamicModuleVariable
 
-Retrieves the value of a DynamicModule variable.
+Retrieves the value of a [DynamicModule](https://reference.wolfram.com/language/ref/DynamicModule.html) variable.
 
 + Parameters
 
-    + `cellId` (`string`) — ID of the cell that contains the DynamicModuleBox. If the cell contains multiple DynamicModuleBoxes, the first DynamicModuleBox in a breadth-first search is chosen.
-    + `name` (`string`) — Name of the DynamicModule variable to retrieve.
+    + `cellId` (`string`) — ID of the cell that contains the `DynamicModuleBox`. If the cell contains more than one `DynamicModuleBox`, the first `DynamicModuleBox` in a breadth-first search is chosen.
+    + `name` (`string`) — Name of the `DynamicModule` variable to retrieve.
 
 + Response
 
@@ -360,24 +360,24 @@ Retrieves the value of a DynamicModule variable.
 + Errors
 
     + `"CellNotFound"` — The specified cell does not exist.
-    + `"NoDynamicModule"` — There is no DynamicModuleBox in the specified cell.
-    + `"UnknownVariableName"` — The DynamicModuleBox does not contain the specified variable.
+    + `"NoDynamicModule"` — There is no `DynamicModuleBox` in the specified cell.
+    + `"UnknownVariableName"` — The `DynamicModuleBox` does not contain the specified variable.
 
 #### setDynamicModuleVariable
 
-Sets the value of a DynamicModule variable.
+Sets the value of a [DynamicModule](https://reference.wolfram.com/language/ref/DynamicModule.html) variable.
 
 + Parameters
 
-    + `cellId` (`string`) — ID of the cell that contains the DynamicModuleBox. If the cell contains multiple DynamicModuleBoxes, the first DynamicModuleBox in a breadth-first search is chosen.
+    + `cellId` (`string`) — ID of the cell that contains the `DynamicModuleBox`. If the cell contains more than one `DynamicModuleBox`, the first `DynamicModuleBox` in a breadth-first search is chosen.
     + `name` (`string`) — Name of the DynamicModule variable to change.
     + `value` — The new value of the variable in JSON expression representation (see below).
 
 + Errors
 
     + `"CellNotFound"` — The specified cell does not exist.
-    + `"NoDynamicModule"` — There is no DynamicModuleBox in the specified cell.
-    + `"UnknownVariableName"` — The DynamicModuleBox does not contain the specified variable.
+    + `"NoDynamicModule"` — There is no `DynamicModuleBox` in the specified cell.
+    + `"UnknownVariableName"` — The `DynamicModuleBox` does not contain the specified variable.
 
 ### Cell rendering
 
@@ -455,7 +455,7 @@ Currently, only one kernel evaluation can happen at any time. However, this migh
 
 + Fields
 
-    + `isCellEvaluation` (`boolean`) — `true` if the evaluation is a whole-cell evaluation (e.g. from pressing Shift-Enter). `false` if the evaluation is triggered by a `Dynamic` or some other dynamic control (e.g. a `Button`).
+    + `isCellEvaluation` (`boolean`) — `true` if the evaluation is a whole-cell evaluation (e.g. from pressing Shift+Enter). `false` if the evaluation is triggered by a `Dynamic` or some other dynamic control (e.g. a `Button`).
 
 #### evaluation-stop
 

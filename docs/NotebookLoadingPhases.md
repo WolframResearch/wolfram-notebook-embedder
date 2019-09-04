@@ -21,6 +21,6 @@ If no static HTML is available for the notebook as a whole or for individual cel
 By default, notebooks show a (blue) progress indicator at the top during the initial render phase. It can be turned off by setting the option `showRenderProgress: false`. The progress indicator distinguishes between two groups of phases:
 
 1. (Phases 1–3 above.) An indeterminate progress indicator is shown.
-2. (Phases 4–6 above.) A determinate progress indicator is shown, based on the number of rendered vs. total cells, as long as there are at least three cells in the notebook. If there are fewer then three cells, another indeterminate progress indicator is shown (since a determinate progress indicator would jump too much and not give a real impression of progress).
+2. (Phases 4–6 above.) A determinate progress indicator is shown, based on the number of rendered vs. total cells, as long as there are at least three cells in the notebook. If there are fewer than three cells, another indeterminate progress indicator is shown (since a determinate progress indicator would jump too much and not give a real impression of progress).
 
 Once the initial render phase is over, the progress indicator is hidden.
