@@ -3,6 +3,7 @@ const React = require('react');
 const CompLibrary = require('../../core/CompLibrary.js');
 
 const Container = CompLibrary.Container;
+const MarkdownBlock = CompLibrary.MarkdownBlock;
 
 const EXAMPLES = [
     {
@@ -18,7 +19,7 @@ WolframNotebookEmbedder.embed(
     },
     {
         title: 'Controlling a Manipulate',
-        description: 'Render a notebook specified in an input field and control a Manipulate variable in its last cell.',
+        description: 'Render a notebook specified in an input field and control a [Manipulate](https://reference.wolfram.com/language/ref/Manipulate.html) variable in its last cell.',
         html: `
 <p>
     Enter the URL of a cloud object:
@@ -73,7 +74,7 @@ function Example(props) {
     return (
         <React.Fragment>
             <h2>{props.title}</h2>
-            <p>{props.description}</p>
+            <MarkdownBlock>{props.description}</MarkdownBlock>
             <div
                 className="codepen"
                 data-prefill={JSON.stringify(prefill)}
