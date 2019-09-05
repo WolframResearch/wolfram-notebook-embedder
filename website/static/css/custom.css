@@ -37,6 +37,10 @@ html .projectTitle small {
 
 .heroImage {
     padding-top: 40px;
+
+    /* Use 50% of the raw pixel width, but not more than 100% of the available width
+    (which is ensured by `max-width: 100%` set by Docusaurus). */
+    width: 716px;
 }
 
 .fixedHeaderContainer {
