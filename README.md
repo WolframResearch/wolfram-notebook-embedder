@@ -1,6 +1,6 @@
 # wolfram-notebook-embedder
 
-A library to embed [Wolfram Cloud](https://www.wolframcloud.com/) notebooks on other sites. It does *not* use an `<iframe>` but renders a notebook directly into a given DOM node, for a more seamless experience.
+A library to embed [Wolfram Cloud](https://www.wolframcloud.com/) notebooks on other websites. It does *not* use an `<iframe>` but renders a notebook directly into a given DOM node, for a more seamless experience.
 
 ## Installation
 

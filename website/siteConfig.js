@@ -17,7 +17,7 @@ const wlHighlighter = require('./wl.js').default;
 
 const siteConfig = {
   title: 'Wolfram Notebook Embedder', // Title for your website.
-  tagline: 'A library to embed Wolfram Cloud notebooks on other sites',
+  tagline: 'A library to embed Wolfram Cloud notebooks on other websites',
   url: 'https://reference.wolfram.com', // Your website URL
   baseUrl: '/language/WolframNotebookEmbedder/', // Base URL for your project */
   // For now, references are generated to work with this location:

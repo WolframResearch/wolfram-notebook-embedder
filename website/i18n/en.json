@@ -3,7 +3,7 @@
   "localized-strings": {
     "next": "Next",
     "previous": "Previous",
-    "tagline": "A library to embed Wolfram Cloud notebooks on other sites",
+    "tagline": "A library to embed Wolfram Cloud notebooks on other websites",
     "docs": {
       "ContributingAgreement": {
         "title": "Contributing to Wolfram®"
