@@ -8,7 +8,7 @@ const MarkdownBlock = CompLibrary.MarkdownBlock;
 const EXAMPLES = [
     {
         title: 'Basic example',
-        description: 'Embed a particular notebook.',
+        description: 'Embed a particular notebook on an HTML page.',
         html: `<div id="container"></div>`,
         js: `
 WolframNotebookEmbedder.embed(
@@ -18,7 +18,20 @@ WolframNotebookEmbedder.embed(
         `
     },
     {
-        title: 'Controlling a Manipulate',
+        title: 'Seamless embedding dimensions',
+        description: 'By default, embedded notebooks adapt to the width available to their container node, and adjust the height of the container node so that the whole notebook fits without requiring a vertical scrollbar. You can change that by passing different values for `width` and `maxHeight` to `WolframNotebookEmbedder.embed`, e.g. to set a fixed width and maximum height.',
+        html: `<div id="container"></div>
+<p>This text appears right after the embedded notebook content, even if the notebook does not need the full maximum height.</p>`,
+        js: `
+WolframNotebookEmbedder.embed(
+    'https://www.wolframcloud.com/obj/jpoeschko/Public/BasicExample.nb',
+    document.getElementById('container'),
+    {width: 400, maxHeight: 500}
+); 
+        `
+    },
+    {
+        title: 'Programmatic control of Manipulate variables',
         description: 'Render a notebook specified in an input field and control a [Manipulate](https://reference.wolfram.com/language/ref/Manipulate.html) variable in its last cell.',
         html: `
 <p>
