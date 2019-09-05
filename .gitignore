@@ -1,6 +1,7 @@
 dist/
 examples/dist/
 node_modules/
+website/build/
 
 .idea/
 .vscode/

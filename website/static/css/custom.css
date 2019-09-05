@@ -1,0 +1,168 @@
+/* your custom css */
+
+@font-face {
+    font-family: "Source Sans Pro";
+    font-weight: normal;
+    font-style: normal;
+    src: url("https://www.wolframcdn.com/fonts/source-sans-pro/1.0/SourceSansPro-Regular.woff2");
+}
+@font-face {
+    font-family: "Source Sans Pro";
+    font-weight: normal;
+    font-style: italic;
+    src: url("https://www.wolframcdn.com/fonts/source-sans-pro/1.0/SourceSansPro-Italic.woff2");
+}
+@font-face {
+    font-family: "Source Sans Pro";
+    font-weight: 300;
+    font-style: normal;
+    src: url("https://www.wolframcdn.com/fonts/source-sans-pro/1.0/SourceSansPro-Light.woff2");
+}
+
+body {
+    font-family: "Source Sans Pro", Arial, sans-serif;
+}
+
+@media only screen and (max-width: 1023px) {
+    html .nav-site {
+        background-color: #d10 !important;
+    }
+}
+
+html .projectTitle small {
+    font-size: 66%;
+    color: #898989;
+    font-weight: 300;
+}
+
+.heroImage {
+    padding-top: 40px;
+
+    /* Use 50% of the raw pixel width, but not more than 100% of the available width
+    (which is ensured by `max-width: 100%` set by Docusaurus). */
+    width: 716px;
+}
+
+.fixedHeaderContainer {
+    background: #e5e5e5;
+    border-bottom: 5px solid #d10;
+}
+
+.fixedHeaderContainer header h2.headerTitleWithLogo {
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.64px;
+    color: #333;
+    text-transform: uppercase;
+}
+
+a {
+    color: #d10;
+}
+a:hover {
+    color: #fe0000;
+}
+header a {
+    color: #333 !important;
+    background: none !important;
+}
+header a:hover {
+    color: #fe0000 !important;
+}
+
+html .imageAlignTop .blockImage {
+    max-width: 120px;
+}
+
+.mainLink {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+.mainLink a {
+    text-transform: uppercase;
+    font-size: 18px;
+}
+
+#background p {
+    max-width: 100%;
+}
+#background  .blockImage {
+    max-width: 120px;
+    margin-top: 3em;
+}
+
+#docsNav h3.navGroupCategoryTitle {
+    color: #333;
+}
+
+#docsNav a.navItem {
+    color: #d10;
+}
+#docsNav a.navItem:hover {
+    color: #fe0000;
+}
+
+html a.button {
+    border: 1px solid #d10;
+    border-radius: 3px;
+    background: white;
+    color: #d10;
+}
+html a.button:hover {
+    border: 1px solid #fe0000;
+    background: #fe0000;
+    color: white;
+}
+
+html a.button.primary {
+    border: 1px solid #d10;
+    background: #d10;
+    color: white;
+    padding: 15px 50px;
+    border-radius: 5px;
+    font-size: 18px;
+}
+html a.button.primary:hover {
+    border: 1px solid #fe0000;
+    background: #fe0000;
+    color: white;
+}
+
+footer h5,
+footer a {
+    /* Make sure that the items in the footer don't cause a horizontal scrollbar. */
+    width: max-content;
+}
+
+footer a {
+    color: rgba(255, 255, 255, 0.6);
+}
+footer a:hover {
+    color: white;
+}
+
+@media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
+}
+
+@media only screen and (min-width: 1024px) {
+}
+
+@media only screen and (max-width: 1023px) {
+    .nav-site {
+        background-color: #fe0000 !important;
+    }
+    .nav-site a,
+    .nav-site a:hover {
+        color: white !important;
+    }
+}
+
+@media only screen and (min-width: 1400px) {
+}
+
+@media only screen and (min-width: 1500px) {
+}
