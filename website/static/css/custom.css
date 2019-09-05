@@ -44,8 +44,8 @@ html .projectTitle small {
 }
 
 .fixedHeaderContainer {
-    background: #e6e6e6;
-    border-bottom: 5px solid #d80d18;
+    background: #e5e5e5;
+    border-bottom: 5px solid #d10;
 }
 
 .fixedHeaderContainer header h2.headerTitleWithLogo {
