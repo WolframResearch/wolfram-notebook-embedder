@@ -191,7 +191,7 @@ Then you can call \`WolframNotebookEmbedder.embed\` to embed a public cloud note
 
     const ViewExamples = () => (
       <div className="mainLink">
-        <a href={pageUrl(siteConfig, 'Examples')}>View Examples »</a>
+        <a href={pageUrl(siteConfig, 'examples')}>View Examples »</a>
       </div>
     );
 
