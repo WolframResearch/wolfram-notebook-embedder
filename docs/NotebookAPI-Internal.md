@@ -1,6 +1,6 @@
 This is the (unofficial) documentation of some *internal* Notebook API methods and events. **Do not rely on these in production code.** We still document these methods here to have a single authoritative place for the documentation of the Notebook API in its entirety.
 
-See [the main Notebook API documentation](./NotebookAPI.md) for all methods and events that do work in the context of this library.
+See [the main notebook API documentation](./NotebookAPI.md) for all methods and events that do work in the context of this library.
 
 
 ## Methods

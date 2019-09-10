@@ -35,7 +35,7 @@ title: Getting Started
     ```
     
     where `url` is the URL of your cloud object from step 1. More details about `embed` are described in the [library interface documentation](./LibraryInterface.md).
-4. If you want to control the notebook from your JavaScript code, wait for the `embed` result (a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises)) to resolve, and then use various [Notebook API methods](./NotebookAPI.md):
+4. If you want to control the notebook from your JavaScript code, wait for the `embed` result (a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises)) to resolve, and then use various [notebook API methods](./NotebookAPI.md):
 
     ```js
     embedding.then(function (nb) {
