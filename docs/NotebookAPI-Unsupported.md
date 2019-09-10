@@ -1,6 +1,6 @@
 This is the (unofficial) documentation of Notebook API methods that require an editable document. Consequently, they won't work in notebooks embedded through this Wolfram Notebook Embedder library, since that always gives a read-only view (effectively restricting permissions to `Read` and `Interact`). We still document these methods here to have a single authoritative place for the documentation of the Notebook API in its entirety.
 
-See [the main Notebook API documentation](./NotebookAPI.md) for all methods and events that do work in the context of this library.
+See [the main notebook API documentation](./NotebookAPI.md) for all methods and events that do work in the context of this library.
 
 
 ## Methods
