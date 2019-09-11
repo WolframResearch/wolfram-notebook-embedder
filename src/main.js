@@ -18,6 +18,9 @@ const Promise = globalNS.Promise || PromisePolyfill;
 const installedScripts = {};
 const libraryLoading = {};
 let counter = 0;
+let isStyleInsertionPatched = false;
+const insertedStyles = [];
+const styleInsertionCallbacks = [];
 
 function installScript(url) {
     if (!installedScripts[url]) {
@@ -74,6 +77,54 @@ function split(s, separators) {
     return [before, after];
 }
 
+function isNotebookStyleElement(element, domains) {
+    const name = element.tagName.toLowerCase();
+    if (name === 'link' && (element.rel === 'stylesheet' || element.type === 'text/css')) {
+        return domains.some(domain => element.href.startsWith(domain));
+    } else if (name === 'style') {
+        if (element.dataset.isWolframNotebookStyle) {
+            return true;
+        }
+        if (element.id === 'erd_scroll_detection_scrollbar_style') {
+            return true;
+        }
+    }
+    return false;
+}
+
+function patchShadowStyleInsertion(container, domains) {
+    function callback(element) {
+        container.appendChild(element);
+    }
+
+    if (!isStyleInsertionPatched) {
+        const head = document.getElementsByTagName('head')[0];
+        if (head) {
+            const originalAppendChild = head.appendChild;
+            head.appendChild = function (child) {
+                if (isNotebookStyleElement(child, domains)) {
+                    insertedStyles.push(child);
+                    styleInsertionCallbacks.forEach(callback => {
+                        callback(child);
+                    });
+                } else {
+                    originalAppendChild.call(this, child);
+                }
+            };
+        }
+        isStyleInsertionPatched = true;
+    }
+
+    insertedStyles.forEach(existingStyle => {
+        callback(existingStyle);
+    });
+    styleInsertionCallbacks.push(callback);
+    const index = styleInsertionCallbacks.length - 1;
+    return () => {
+        styleInsertionCallbacks.splice(index, 1);
+    };
+}
+
 function getNotebookData(url) {
     const [domain, path] = split(url, ['/obj/', '/objects/']);
     if (!domain || !path) {
@@ -90,7 +141,8 @@ function getNotebookData(url) {
                 resolve({
                     notebookID: data.notebookID,
                     mainScript: domain + data.mainScript,
-                    otherScripts: (data.otherScripts || []).map(script => domain + script)
+                    otherScripts: (data.otherScripts || []).map(script => domain + script),
+                    stylesheetDomains: [domain, ...data.stylesheetDomains]
                 });
             } else {
                 reject(new Error('ResolveError'));
@@ -118,11 +170,28 @@ function defaultValue(value, fallback) {
 export function embed(url, node, options) {
     let theNotebookID;
     const theOptions = options || {};
+    const {useShadowDOM = true} = theOptions;
+    const useShadow = useShadowDOM && node.attachShadow;
+    let container;
+    let shadowRoot;
     return Promise.resolve()
         .then(() => {
+            if (useShadow) {
+                container = document.createElement('div');
+                container.style.width = '100%';
+                container.style.height = '100%';
+                shadowRoot = node.attachShadow({mode: 'open'});
+                shadowRoot.appendChild(container);
+            } else {
+                container = node;
+            }
             return getNotebookData(url);
         })
-        .then(({notebookID, mainScript, otherScripts}) => {
+        .then(({notebookID, mainScript, otherScripts, stylesheetDomains}) => {
+            if (useShadow) {
+                patchShadowStyleInsertion(shadowRoot, stylesheetDomains);
+                // TODO: Call the returned cleanup callback when notebook is unmounted.
+            }
             theNotebookID = notebookID;
             for (let i = 0; i < otherScripts.length; ++i) {
                 installScript(otherScripts[i]);
@@ -130,11 +199,20 @@ export function embed(url, node, options) {
             return loadLibrary(mainScript);
         })
         .then(lib => {
-            return lib.embed(theNotebookID, node, {
+            return lib.embed(theNotebookID, container, {
                 width: defaultValue(theOptions.width, null),
                 maxHeight: defaultValue(theOptions.maxHeight, Infinity),
                 allowInteract: defaultValue(theOptions.allowInteract, true),
                 showRenderProgress: defaultValue(theOptions.showRenderProgress, true)
             });
+        })
+        .then(embedding => {
+            return {
+                ...embedding,
+                setAttributes: (attrs) => {
+                    const {useShadowDOM, ...rest} = attrs;
+                    embedding.setAttributes(rest);
+                }
+            };
         });
 }
