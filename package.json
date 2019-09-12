@@ -15,6 +15,10 @@
     "LICENSE",
     "README.md"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WolframResearch/wolfram-notebook-embedder.git"
+  },
   "scripts": {
     "prepublishOnly": "npm-run-all build",
     "build": "npm-run-all transpile minify",
