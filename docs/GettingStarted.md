@@ -7,8 +7,8 @@ title: Getting Started
     * In the cloud UI, use the New Notebook button and then use the Share dialog to make it public.
     * From the [Wolfram Language](https://www.wolfram.com/language/), you could publish notebook content like so:
 
-        ```mathematica
-        CloudPublish[Manipulate[Plot[Sin[a * x], {x, 0, 2Pi}], {a, 1, 3}]]
+        ```wl
+        CloudPublish[Manipulate[Plot[Sin[a x], {x, 0, 2 Pi}], {a, 1, 3}]]
         ```
 2. Install this library in your JavaScript project using
 

@@ -4,7 +4,7 @@
 
 exports.default = function(hljs) {
     return {
-        aliases: ['mma', 'wl'],
+        aliases: ['wl', 'mathematica', 'mma'],
         lexemes: '(\\$|\\b)' + hljs.IDENT_RE + '\\b',
         /*
         The list of "keywords" (System` symbols) was determined by evaluating the following Wolfram Language code in Mathematica 12.0:

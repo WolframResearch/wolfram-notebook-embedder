@@ -9,13 +9,13 @@ title: Troubleshooting
 
 Please double-check that the embedded cloud notebook is *public*, e.g. by opening its URL in an incognito window of your browser (where you are not logged in to the Wolfram Cloud). In the Wolfram Language, you can determine permissions of a cloud object using
 
-```mathematica
+```wl
 CloudObjectInformation[CloudObject["..."], "Permissions"]
 ```
     
 and you can make a cloud object public by evaluating the following:
 
-```mathematica
+```wl
 SetPermissions[CloudObject["..."], All -> {"Read", "Interact"}]
 ```
 
