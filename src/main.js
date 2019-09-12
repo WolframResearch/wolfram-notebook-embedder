@@ -1,5 +1,7 @@
 import PromisePolyfill from 'promise-polyfill';
 
+import retargetEvents from './retargetEvents';
+
 const globalNS = (function() {
     if (typeof self !== 'undefined') {
         return self;
@@ -190,7 +192,8 @@ export function embed(url, node, options) {
         .then(({notebookID, mainScript, otherScripts, stylesheetDomains}) => {
             if (useShadow) {
                 patchShadowStyleInsertion(shadowRoot, stylesheetDomains);
-                // TODO: Call the returned cleanup callback when notebook is unmounted.
+                retargetEvents(shadowRoot);
+                // TODO: Call the returned cleanup callbacks when notebook is unmounted.
             }
             theNotebookID = notebookID;
             for (let i = 0; i < otherScripts.length; ++i) {
