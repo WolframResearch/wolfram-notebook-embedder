@@ -87,6 +87,8 @@ function dispatchEvent(event, eventType, componentProps) {
     event.persist = function() {
         event.isPersistent = function(){ return true};
     };
+    // Set the nativeEvent so the event is more similar to React's synthetic events.
+    event.nativeEvent = event;
 
     if (componentProps[eventType]) {
         componentProps[eventType](event);
