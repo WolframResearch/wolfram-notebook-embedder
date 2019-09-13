@@ -46,6 +46,8 @@ Everyone is welcome to contribute. Please read the [Contributing agreement](CONT
 
 We use [semantic versioning](https://semver.org/) for this library and its API.
 
+See the [changelog](CHANGELOG.md) for details about the changes in each release.
+
 Each version of this library is compatible with a certain range of versions of the Wolfram Cloud. Currently, the requirement is Wolfram Cloud 1.50 or higher. We try hard not to make any backward-incompatible changes on the Wolfram Cloud side, which would require an update of this library to keep embeddings working.
 
 ## License
