@@ -76,7 +76,7 @@ class Footer extends React.Component {
             Copyright ©&nbsp;{new Date().getFullYear()}
             &nbsp;
             <a href="https://www.wolfram.com">Wolfram Research Inc.</a>
-            &nbsp;&middot;&nbsp;
+            &nbsp;|&nbsp;
             <a href="http://www.wolfram.com/legal/?source=footer">Legal</a>
             &nbsp;&amp;&nbsp;
             <a href="http://www.wolfram.com/legal/privacy/wolfram/?source=footer">Privacy Policy</a>
