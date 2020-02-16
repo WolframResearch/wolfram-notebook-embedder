@@ -1,6 +1,6 @@
 {
   "name": "wolfram-notebook-embedder",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Library to embed Wolfram Cloud notebooks on websites.",
   "main": "dist/wolfram-notebook-embedder.js",
   "keywords": [
@@ -15,6 +15,10 @@
     "LICENSE",
     "README.md"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WolframResearch/wolfram-notebook-embedder.git"
+  },
   "scripts": {
     "prepublishOnly": "npm-run-all build",
     "build": "npm-run-all transpile minify",

@@ -18,6 +18,18 @@
     font-style: normal;
     src: url("https://www.wolframcdn.com/fonts/source-sans-pro/1.0/SourceSansPro-Light.woff2");
 }
+@font-face {
+    font-family: "Source Code Pro";
+    font-weight: normal;
+    font-style: normal;
+    src: url("https://www.wolframcdn.com/fonts/source-code-pro/1.0/SourceCodePro-Regular.woff2");
+}
+@font-face {
+    font-family: "Source Code Pro";
+    font-weight: bold;
+    font-style: normal;
+    src: url("https://www.wolframcdn.com/fonts/source-code-pro/1.0/SourceCodePro-Bold.woff2");
+}
 
 body {
     font-family: "Source Sans Pro", Arial, sans-serif;
@@ -37,10 +49,6 @@ html .projectTitle small {
 
 .heroImage {
     padding-top: 40px;
-
-    /* Use 50% of the raw pixel width, but not more than 100% of the available width
-    (which is ensured by `max-width: 100%` set by Docusaurus). */
-    width: 716px;
 }
 
 .fixedHeaderContainer {
@@ -130,6 +138,10 @@ html a.button.primary:hover {
     border: 1px solid #fe0000;
     background: #fe0000;
     color: white;
+}
+
+html .hljs.language-wl {
+    font-family: "Source Code Pro", monospace;
 }
 
 footer h5,

@@ -192,6 +192,24 @@ Returns a status object that indicates if undo and redo entries are available.
     + `canUndo` (`boolean`) ... Whether undo history is available.
     + `canRedo` (`boolean`) ... Whether redo history is available.
 
+### Input Assistant
+
+#### insertInputAssistant [INTERNAL]
+
+Inserts an input assistant box of the given type in to a code cell at the current cursor position.
+
++ Parameters
+    
+    + `type` (`string`) ... Type of the assistant box to be inserted. Allowed values are `"Linguistic"`, `"InputForm"` and `"TeX"`.
+
++ Errors
+
+    + `"UnsupportedInputAssistantType"` ... The supplied `type` is not one of the allowed values.
+    + `"UnsupportedSelectionType"` ... The current cursor position is not suitable for the box insertion. The insertion only works when the current selection is at a cell separator, or inside an editable code cell.
+    + `"CellInsertionFailure"` ... The newly-created cell insertion fails for unspeicified reasons. The new cell is needed when the cursor is at a cell separator.
+    + `"NoEditorAvailable"` ... The target cell of the operation does not have an associated editor.
+    + `"InsertionFailure"` ... A blanket error for unforseen insertion failures.
+
 ## Events
 
 ### Scrolling
