@@ -94,7 +94,12 @@ function isNotebookStyleElement(element, domains) {
 
 function patchShadowStyleInsertion(container, domains) {
     function callback(element) {
-        container.appendChild(element);
+        // When inserting the style element for the first time, use the original element,
+        // to make sure that onload and onerror handlers are preserved.
+        // For subsequent insertions (second embedded notebook and beyond), clone the element.
+        const styleElement = !element.didInsertWithoutCloning ? element : element.cloneNode(true);
+        element.didInsertWithoutCloning = true;
+        container.appendChild(styleElement);
     }
 
     if (!isStyleInsertionPatched) {
