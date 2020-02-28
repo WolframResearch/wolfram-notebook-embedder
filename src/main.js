@@ -186,6 +186,8 @@ export function embed(url, node, options) {
     // but still include it here, just to be sure.
     const containerNodes = [node];
 
+    const cleanupHandlers = [];
+
     function onContainerDimensionsChange({width, height}) {
         containerNodes.forEach(containerNode => {
             if (width != null) {
@@ -236,8 +238,8 @@ export function embed(url, node, options) {
         })
         .then(({notebookID, mainScript, otherScripts, stylesheetDomains}) => {
             if (useShadow) {
-                patchShadowStyleInsertion(shadowRoot, stylesheetDomains);
-                // TODO: Call the returned cleanup callbacks when notebook is unmounted.
+                const cleanup = patchShadowStyleInsertion(shadowRoot, stylesheetDomains);
+                cleanupHandlers.push(cleanup);
             }
             theNotebookID = notebookID;
             for (let i = 0; i < otherScripts.length; ++i) {
@@ -257,6 +259,12 @@ export function embed(url, node, options) {
         .then(embedding => {
             return {
                 ...embedding,
+                detach: () => {
+                    embedding.detach();
+                    cleanupHandlers.forEach(cleanup => {
+                        cleanup();
+                    });
+                },
                 setAttributes: (attrs) => {
                     const {width, maxHeight, allowInteract, showRenderProgress} = attrs;
                     embedding.setAttributes({width, maxHeight, allowInteract, showRenderProgress});
