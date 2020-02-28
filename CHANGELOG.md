@@ -1,3 +1,7 @@
+## 0.2.0
+
+* New option `useShadowDOM` for better encapsulation of styling  (still experimental and off by default)
+
 ## 0.1.5
 
 * First official release
