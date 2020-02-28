@@ -170,17 +170,59 @@ function defaultValue(value, fallback) {
 export function embed(url, node, options) {
     let theNotebookID;
     const theOptions = options || {};
-    const {useShadowDOM = true} = theOptions;
+    const {useShadowDOM = false} = theOptions;
     const useShadow = useShadowDOM && node.attachShadow;
     let container;
     let shadowRoot;
+
+    // The list of nodes that have their dimensions updated
+    // when the notebook container dimensions are supposed to change.
+    // The CloudPlatform code will currently also update the node's dimensions,
+    // but still include it here, just to be sure.
+    const containerNodes = [node];
+
+    function onContainerDimensionsChange({width, height}) {
+        containerNodes.forEach(containerNode => {
+            if (width != null) {
+                containerNode.style.width = `${width}px`;
+            }
+            if (height != null) {
+                containerNode.style.height = `${height}px`;
+            }
+        });
+    }
+
     return Promise.resolve()
         .then(() => {
             if (useShadow) {
+                const shadowHost = document.createElement('div');
+                shadowHost.style.width = '100%';
+                shadowHost.style.height = '100%';
+                shadowRoot = shadowHost.attachShadow({mode: 'open'});
                 container = document.createElement('div');
                 container.style.width = '100%';
                 container.style.height = '100%';
-                shadowRoot = node.attachShadow({mode: 'open'});
+                node.appendChild(shadowHost);
+
+                // Workaround to make React's event handling work,
+                // as suggested in https://github.com/facebook/react/issues/9242#issuecomment-534096832
+                // This makes the shadow root appear like a "normal document", so React can use it
+                // for creating elements and registering event handlers.
+                // Otherwise, React event handlers wouldn't fire since events don't bubble up from
+                // the shadow DOM to the top document.
+                Object.defineProperty(container, 'ownerDocument', { value: shadowRoot });
+                shadowRoot.createElement = (...args) => document.createElement(...args);
+                shadowRoot.createElementNS = (...args) => document.createElementNS(...args);
+                shadowRoot.createTextNode = (...args) => document.createTextNode(...args);
+                shadowRoot.createDocumentFragment = (...args) => document.createDocumentFragment(...args);
+
+                // Needed by jQuery, particularly $(...).offset.
+                shadowRoot.documentElement = container;
+                shadowRoot.defaultView = window;
+
+                containerNodes.push(shadowHost);
+                containerNodes.push(container);
+
                 shadowRoot.appendChild(container);
             } else {
                 container = node;
@@ -203,7 +245,8 @@ export function embed(url, node, options) {
                 width: defaultValue(theOptions.width, null),
                 maxHeight: defaultValue(theOptions.maxHeight, Infinity),
                 allowInteract: defaultValue(theOptions.allowInteract, true),
-                showRenderProgress: defaultValue(theOptions.showRenderProgress, true)
+                showRenderProgress: defaultValue(theOptions.showRenderProgress, true),
+                onContainerDimensionsChange
             });
         })
         .then(embedding => {
