@@ -253,8 +253,8 @@ export function embed(url, node, options) {
             return {
                 ...embedding,
                 setAttributes: (attrs) => {
-                    const {useShadowDOM, ...rest} = attrs;
-                    embedding.setAttributes(rest);
+                    const {width, maxHeight, allowInteract, showRenderProgress} = attrs;
+                    embedding.setAttributes({width, maxHeight, allowInteract, showRenderProgress});
                 }
             };
         });
