@@ -352,6 +352,7 @@ Retrieves the value of a [DynamicModule](https://reference.wolfram.com/language/
 
     + `cellId` (`string`) — ID of the cell that contains the `DynamicModuleBox`. If the cell contains more than one `DynamicModuleBox`, the first `DynamicModuleBox` in a breadth-first search is chosen.
     + `name` (`string`) — Name of the `DynamicModule` variable to retrieve.
+    + `exactName` (`?boolean`) — Whether to require an exact name match. If set to `false` (the default), the provided name does not have to contain prefixes (such as ```$CellContext` ```) and suffixes (such as `$$`) that are typically added behind the scenes by `DynamicModule`.
 
 + Response
 
@@ -371,6 +372,7 @@ Sets the value of a [DynamicModule](https://reference.wolfram.com/language/ref/D
 
     + `cellId` (`string`) — ID of the cell that contains the `DynamicModuleBox`. If the cell contains more than one `DynamicModuleBox`, the first `DynamicModuleBox` in a breadth-first search is chosen.
     + `name` (`string`) — Name of the DynamicModule variable to change.
+    + `exactName` (`?boolean`) — Whether to require an exact name match. If set to `false` (the default), the provided name does not have to contain prefixes (such as ```$CellContext` ```) and suffixes (such as `$$`) that are typically added behind the scenes by `DynamicModule`.
     + `value` — The new value of the variable in JSON expression representation (see below).
 
 + Errors
