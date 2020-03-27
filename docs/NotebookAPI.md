@@ -352,10 +352,11 @@ Retrieves the value of a [DynamicModule](https://reference.wolfram.com/language/
 
     + `cellId` (`string`) — ID of the cell that contains the `DynamicModuleBox`. If the cell contains more than one `DynamicModuleBox`, the first `DynamicModuleBox` in a breadth-first search is chosen.
     + `name` (`string`) — Name of the `DynamicModule` variable to retrieve.
+    + `useExactName` = `false` (`?boolean`) — Whether to require an exact name match. If set to `false` (the default), the provided name does not have to contain prefixes (such as ```$CellContext` ```) and suffixes (such as `$$`) that are typically added behind the scenes by `DynamicModule`.
 
 + Response
 
-    + `value` — The value of the variable in JSON expression representation (see below).
+    + `value` (`exprjson`) — The value of the variable in JSON expression representation (see [below](#expressionjson)).
 
 + Errors
 
@@ -371,13 +372,26 @@ Sets the value of a [DynamicModule](https://reference.wolfram.com/language/ref/D
 
     + `cellId` (`string`) — ID of the cell that contains the `DynamicModuleBox`. If the cell contains more than one `DynamicModuleBox`, the first `DynamicModuleBox` in a breadth-first search is chosen.
     + `name` (`string`) — Name of the DynamicModule variable to change.
-    + `value` — The new value of the variable in JSON expression representation (see below).
+    + `useExactName` = `false` (`?boolean`) — Whether to require an exact name match. If set to `false` (the default), the provided name does not have to contain prefixes (such as ```$CellContext` ```) and suffixes (such as `$$`) that are typically added behind the scenes by `DynamicModule`.
+    + `value` (`exprjson`) — The new value of the variable in JSON expression representation (see [below](#expressionjson)).
 
 + Errors
 
     + `"CellNotFound"` — The specified cell does not exist.
     + `"NoDynamicModule"` — There is no `DynamicModuleBox` in the specified cell.
     + `"UnknownVariableName"` — The `DynamicModuleBox` does not contain the specified variable.
+
+Example request (setting a variable `x` to `N[Pi, 30]`):
+
+    {
+        "api": "notebook",
+        "version": 1,
+        "rid": "1",
+        "command": "setDynamicModuleVariable"
+        "cellId": "42",
+        "name": "x",
+        "value": ["N", "Pi", 30]
+    }
 
 ### Cell rendering
 
@@ -482,3 +496,26 @@ Fired when the scroll position changes.
 
     + `left` (`number`) — Number of pixels scrolled in horizontal direction (increases when scrolling to the right).
     + `top` (`number`) — Number of pixels scrolled in vertical direction (increases when scrolling down).
+
+
+## ExpressionJSON
+
+Some API methods accept or return WL expressions in the [ExpressionJSON](https://reference.wolfram.com/language/ref/format/ExpressionJSON.html) format:
+
+| WL | WL example | JSON | JSON example|
+|----|------------|------|-------------|
+| Symbol | `foo` | string | `"foo"` |
+| String | `"text"` | string with enclosing single or double quotes | `"'text'"` or `"\"text\""` |
+| Machine-size Integer (up to 53 bits) | `342` | number | `342` |
+| Double-precision Real (up to 64 bits) | `2.5`, `1.073741824*^9` | number | `2.5`, `1.073741824e9` |
+| Arbitrary-length Integer | `18014398509481984` | string | `"18014398509481984"` |
+| Arbitrary-precision Real | ```3.5074`15.65*^451``` | string | ```"3.5074`15.65*^451"``` |
+| Booleans | `True`, `False` | boolean | `true`, `false` |
+| Null | `Null` | null | `null` |
+| Expression | `f[x, y]` | array with head at index 0, followed by parts | `["f", "x", "y"]` |
+
+Note that there are several ways to represent the same expression, e.g. `True` can be represented as `true` or `"True"` in ExpressionJSON and a number such as `123` can be represented as the JSON number `123` or as the JSON string `"123"`. When the Notebook API returns expression data, it usually serializes it in the shortest form. However, that is not guaranteed, and readers of the format should make sure to accept all possible forms.
+
+As a courtesy, API methods also accept single strings containing the WL expression in [InputForm](https://reference.wolfram.com/language/ref/InputForm.html) (e.g. the string `"1+2"`) or [FullForm](https://reference.wolfram.com/language/ref/FullForm.html) (e.g. `"Plus[1,2]"`; `FullForm` is a subset of `InputForm`). A WL parser implemented in JavaScript is used to parse the given expression. However, there is some performance overhead to that and it has some limitations (e.g. not all operators might be supported), so it is generally recommended to use proper ExpressionJSON instead.
+
+Note that there is no ambiguity between ExpressionJSON and expressions given in InputForm, since all strings in ExpressionJSON contain the InputForm of the corresponding WL expression.
