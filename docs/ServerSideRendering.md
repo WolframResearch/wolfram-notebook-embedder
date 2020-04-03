@@ -71,3 +71,4 @@ Once client-side rendering of the notebook starts, the static HTML for all place
 
 This limited initial static HTML is what effectively happens for notebooks on [wolframcloud.com](https://www.wolframcloud.com).
 
+This parameter is introduced in Cloud 1.56.
