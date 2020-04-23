@@ -382,7 +382,8 @@ Retrieves the value of a [DynamicModule](https://reference.wolfram.com/language/
 
 + Parameters
 
-    + `cellId` (`string`) — ID of the cell that contains the `DynamicModuleBox`. If the cell contains more than one `DynamicModuleBox`, the first `DynamicModuleBox` in a breadth-first search is chosen.
+    + `cellId` (`string`) — ID of the cell that contains the `DynamicModuleBox`.
+    + `boxId` (`?string`) — `BoxID` value of the `DynamicModuleBox` to search for. If not specified, the first `DynamicModuleBox` in a breadth-first search is chosen. 
     + `name` (`string`) — Name of the `DynamicModule` variable to retrieve.
     + `useExactName` = `false` (`?boolean`) — Whether to require an exact name match. If set to `false` (the default), the provided name does not have to contain prefixes (such as ```$CellContext` ```) and suffixes (such as `$$`) that are typically added behind the scenes by `DynamicModule`.
 
@@ -393,7 +394,7 @@ Retrieves the value of a [DynamicModule](https://reference.wolfram.com/language/
 + Errors
 
     + `"CellNotFound"` — The specified cell does not exist.
-    + `"NoDynamicModule"` — There is no `DynamicModuleBox` in the specified cell.
+    + `"NoDynamicModule"` — There is no `DynamicModuleBox` in the specified cell (with the given `BoxID`, if `boxId` is specified).
     + `"UnknownVariableName"` — The `DynamicModuleBox` does not contain the specified variable.
 
 #### setDynamicModuleVariable
@@ -402,7 +403,8 @@ Sets the value of a [DynamicModule](https://reference.wolfram.com/language/ref/D
 
 + Parameters
 
-    + `cellId` (`string`) — ID of the cell that contains the `DynamicModuleBox`. If the cell contains more than one `DynamicModuleBox`, the first `DynamicModuleBox` in a breadth-first search is chosen.
+    + `cellId` (`string`) — ID of the cell that contains the `DynamicModuleBox`.
+    + `boxId` (`?string`) — `BoxID` value of the `DynamicModuleBox` to search for. If not specified, the first `DynamicModuleBox` in a breadth-first search is chosen. 
     + `name` (`string`) — Name of the DynamicModule variable to change.
     + `useExactName` = `false` (`?boolean`) — Whether to require an exact name match. If set to `false` (the default), the provided name does not have to contain prefixes (such as ```$CellContext` ```) and suffixes (such as `$$`) that are typically added behind the scenes by `DynamicModule`.
     + `value` (`exprjson`) — The new value of the variable in JSON expression representation (see [below](#expressionjson)).
@@ -410,7 +412,7 @@ Sets the value of a [DynamicModule](https://reference.wolfram.com/language/ref/D
 + Errors
 
     + `"CellNotFound"` — The specified cell does not exist.
-    + `"NoDynamicModule"` — There is no `DynamicModuleBox` in the specified cell.
+    + `"NoDynamicModule"` — There is no `DynamicModuleBox` in the specified cell (with the given `BoxID`, if `boxId` is specified).
     + `"UnknownVariableName"` — The `DynamicModuleBox` does not contain the specified variable.
 
 Example request (setting a variable `x` to `N[Pi, 30]`):
