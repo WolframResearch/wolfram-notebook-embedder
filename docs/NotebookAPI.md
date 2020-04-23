@@ -28,6 +28,23 @@ Gets the textual content of a cell.
 
     + `"CellNotFound"` — The cell ID given by `cellId` was not found.
 
+#### getCellExpression
+
+Gets the contents of a cell as an expression.
+
++ Parameters
+
+    + `cellId` (`string`) — ID of the cell to read.
+    + `convertDynamicToLiteral` = `false` (`?boolean`) — Whether to convert any dynamic content to literal values.
+
++ Response
+
+    + `cellExpr` (`exprjson`) — The content of the cell.    
+
++ Errors
+
+    + `"CellNotFound"` — The cell ID given by `cellId` was not found.
+
 ### Structure
 
 #### getElements
