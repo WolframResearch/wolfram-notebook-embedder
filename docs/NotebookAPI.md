@@ -341,6 +341,38 @@ Example response:
         "success": true,
         "result": {"head": "f", "args": ["x", 3]}
     }
+    
+#### evaluateInDynamicModule
+
+Evaluates a Wolfram Language expression inside a [DynamicModule](https://reference.wolfram.com/language/ref/DynamicModule.html), localizing variables as necessary.
+
++ Parameters
+
+    + `cellId` (`string`) — ID of the cell that contains the `DynamicModuleBox`.
+    + `boxId` (`?string`) — `BoxID` value of the `DynamicModuleBox` to search for. If not specified, the first `DynamicModuleBox` in a breadth-first search is chosen.
+    + `expression` (`string` or `exprjson`) — Wolfram Language expression to evaluate.
+
++ Response
+
+    + `result` (`exprjson`) — The result of the evaluation in JSON expression representation (see below).
+
++ Errors
+
+    + `"EvaluationError"` — There was some error during the evaluation, e.g. the kernel was not reachable.
+    + `"InsufficientPermissions"`
+
+#### clickButton
+
+Simulates clicking of a button, i.e. evaluates its `ButtonFunction`.
+
++ Parameters
+
+    + `cellId` (`string`) — ID of the cell that contains the `ButtonBox`.
+    + `boxId` (`?string`) — `BoxID` value of the `ButtonBox` to search for. If not specified, the first `ButtonBox ` in a breadth-first search is chosen.
+
++ Errors
+
+    + `"NoBox"` — The specified `ButtonBox` was not found.
 
 ### DynamicModule variables
 
