@@ -30,12 +30,12 @@ Gets the textual content of a cell.
 
 #### getCellExpression
 
-Gets the contents of a cell as an expression.
+Gets the contents of a cell as an expression. [Cloud 1.55]
 
 + Parameters
 
     + `cellId` (`string`) — ID of the cell to read.
-    + `convertDynamicToLiteral` = `false` (`?boolean`) — Whether to convert any dynamic content to literal values.
+    + `convertDynamicToLiteral` = `false` (`?boolean`) — Whether to convert any dynamic content to literal values. [Cloud 1.56, experimental]
 
 + Response
 
@@ -361,7 +361,7 @@ Example response:
     
 #### evaluateInDynamicModule
 
-Evaluates a Wolfram Language expression inside a [DynamicModule](https://reference.wolfram.com/language/ref/DynamicModule.html), localizing variables as necessary.
+Evaluates a Wolfram Language expression inside a [DynamicModule](https://reference.wolfram.com/language/ref/DynamicModule.html), localizing variables as necessary. [Cloud 1.56]
 
 + Parameters
 
@@ -380,7 +380,7 @@ Evaluates a Wolfram Language expression inside a [DynamicModule](https://referen
 
 #### clickButton
 
-Simulates clicking of a button, i.e. evaluates its `ButtonFunction`.
+Simulates clicking of a button, i.e. evaluates its `ButtonFunction`. [Cloud 1.56]
 
 + Parameters
 
@@ -400,7 +400,7 @@ Retrieves the value of a [DynamicModule](https://reference.wolfram.com/language/
 + Parameters
 
     + `cellId` (`string`) — ID of the cell that contains the `DynamicModuleBox`.
-    + `boxId` (`?string`) — `BoxID` value of the `DynamicModuleBox` to search for. If not specified, the first `DynamicModuleBox` in a breadth-first search is chosen. 
+    + `boxId` (`?string`) — `BoxID` value of the `DynamicModuleBox` to search for. If not specified, the first `DynamicModuleBox` in a breadth-first search is chosen. [Cloud 1.56]
     + `name` (`string`) — Name of the `DynamicModule` variable to retrieve.
     + `useExactName` = `false` (`?boolean`) — Whether to require an exact name match. If set to `false` (the default), the provided name does not have to contain prefixes (such as ```$CellContext` ```) and suffixes (such as `$$`) that are typically added behind the scenes by `DynamicModule`.
 
@@ -421,7 +421,7 @@ Sets the value of a [DynamicModule](https://reference.wolfram.com/language/ref/D
 + Parameters
 
     + `cellId` (`string`) — ID of the cell that contains the `DynamicModuleBox`.
-    + `boxId` (`?string`) — `BoxID` value of the `DynamicModuleBox` to search for. If not specified, the first `DynamicModuleBox` in a breadth-first search is chosen. 
+    + `boxId` (`?string`) — `BoxID` value of the `DynamicModuleBox` to search for. If not specified, the first `DynamicModuleBox` in a breadth-first search is chosen. [Cloud 1.56]
     + `name` (`string`) — Name of the DynamicModule variable to change.
     + `useExactName` = `false` (`?boolean`) — Whether to require an exact name match. If set to `false` (the default), the provided name does not have to contain prefixes (such as ```$CellContext` ```) and suffixes (such as `$$`) that are typically added behind the scenes by `DynamicModule`.
     + `value` (`exprjson`) — The new value of the variable in JSON expression representation (see [below](#expressionjson)).
