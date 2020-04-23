@@ -312,12 +312,12 @@ The API responds with the resulting expression when the evaluation is finished.
 
 + Parameters
 
-    + `expression` (`string`) — Wolfram Language expression to evaluate.
+    + `expression` (`string` or `exprjson`) — Wolfram Language expression to evaluate.
     + `originatingCellId` = `null` (optional, `?string`) — ID of the cell the evaluation is supposed to be originating from (for the purpose of `EvaluationCell[]`).
 
 + Response
 
-    + `result` — The result of the evaluation in JSON expression representation (see below).
+    + `result` (`exprjson`) — The result of the evaluation in JSON expression representation (see below).
 
 + Errors
 
