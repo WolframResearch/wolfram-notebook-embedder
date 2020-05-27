@@ -28,6 +28,23 @@ Gets the textual content of a cell.
 
     + `"CellNotFound"` — The cell ID given by `cellId` was not found.
 
+#### getCellExpression
+
+Gets the contents of a cell as an expression. [Cloud 1.55]
+
++ Parameters
+
+    + `cellId` (`string`) — ID of the cell to read.
+    + `convertDynamicToLiteral` = `false` (`?boolean`) — Whether to convert any dynamic content to literal values. [Cloud 1.56, experimental]
+
++ Response
+
+    + `cellExpr` (`exprjson`) — The content of the cell.    
+
++ Errors
+
+    + `"CellNotFound"` — The cell ID given by `cellId` was not found.
+
 ### Structure
 
 #### getElements
@@ -312,12 +329,12 @@ The API responds with the resulting expression when the evaluation is finished.
 
 + Parameters
 
-    + `expression` (`string`) — Wolfram Language expression to evaluate.
+    + `expression` (`string` or `exprjson`) — Wolfram Language expression to evaluate.
     + `originatingCellId` = `null` (optional, `?string`) — ID of the cell the evaluation is supposed to be originating from (for the purpose of `EvaluationCell[]`).
 
 + Response
 
-    + `result` — The result of the evaluation in JSON expression representation (see below).
+    + `result` (`exprjson`) — The result of the evaluation in JSON expression representation (see below).
 
 + Errors
 
@@ -341,6 +358,38 @@ Example response:
         "success": true,
         "result": {"head": "f", "args": ["x", 3]}
     }
+    
+#### evaluateInDynamicModule
+
+Evaluates a Wolfram Language expression inside a [DynamicModule](https://reference.wolfram.com/language/ref/DynamicModule.html), localizing variables as necessary. [Cloud 1.56]
+
++ Parameters
+
+    + `cellId` (`string`) — ID of the cell that contains the `DynamicModuleBox`.
+    + `boxId` (`?string`) — `BoxID` value of the `DynamicModuleBox` to search for. If not specified, the first `DynamicModuleBox` in a breadth-first search is chosen.
+    + `expression` (`string` or `exprjson`) — Wolfram Language expression to evaluate.
+
++ Response
+
+    + `result` (`exprjson`) — The result of the evaluation in JSON expression representation (see below).
+
++ Errors
+
+    + `"EvaluationError"` — There was some error during the evaluation, e.g. the kernel was not reachable.
+    + `"InsufficientPermissions"`
+
+#### clickButton
+
+Simulates clicking of a button, i.e. evaluates its `ButtonFunction`. [Cloud 1.56]
+
++ Parameters
+
+    + `cellId` (`string`) — ID of the cell that contains the `ButtonBox`.
+    + `boxId` (`?string`) — `BoxID` value of the `ButtonBox` to search for. If not specified, the first `ButtonBox ` in a breadth-first search is chosen.
+
++ Errors
+
+    + `"NoBox"` — The specified `ButtonBox` was not found.
 
 ### DynamicModule variables
 
@@ -350,7 +399,8 @@ Retrieves the value of a [DynamicModule](https://reference.wolfram.com/language/
 
 + Parameters
 
-    + `cellId` (`string`) — ID of the cell that contains the `DynamicModuleBox`. If the cell contains more than one `DynamicModuleBox`, the first `DynamicModuleBox` in a breadth-first search is chosen.
+    + `cellId` (`string`) — ID of the cell that contains the `DynamicModuleBox`.
+    + `boxId` (`?string`) — `BoxID` value of the `DynamicModuleBox` to search for. If not specified, the first `DynamicModuleBox` in a breadth-first search is chosen. [Cloud 1.56]
     + `name` (`string`) — Name of the `DynamicModule` variable to retrieve.
     + `useExactName` = `false` (`?boolean`) — Whether to require an exact name match. If set to `false` (the default), the provided name does not have to contain prefixes (such as ```$CellContext` ```) and suffixes (such as `$$`) that are typically added behind the scenes by `DynamicModule`.
 
@@ -361,7 +411,7 @@ Retrieves the value of a [DynamicModule](https://reference.wolfram.com/language/
 + Errors
 
     + `"CellNotFound"` — The specified cell does not exist.
-    + `"NoDynamicModule"` — There is no `DynamicModuleBox` in the specified cell.
+    + `"NoDynamicModule"` — There is no `DynamicModuleBox` in the specified cell (with the given `BoxID`, if `boxId` is specified).
     + `"UnknownVariableName"` — The `DynamicModuleBox` does not contain the specified variable.
 
 #### setDynamicModuleVariable
@@ -370,7 +420,8 @@ Sets the value of a [DynamicModule](https://reference.wolfram.com/language/ref/D
 
 + Parameters
 
-    + `cellId` (`string`) — ID of the cell that contains the `DynamicModuleBox`. If the cell contains more than one `DynamicModuleBox`, the first `DynamicModuleBox` in a breadth-first search is chosen.
+    + `cellId` (`string`) — ID of the cell that contains the `DynamicModuleBox`.
+    + `boxId` (`?string`) — `BoxID` value of the `DynamicModuleBox` to search for. If not specified, the first `DynamicModuleBox` in a breadth-first search is chosen. [Cloud 1.56]
     + `name` (`string`) — Name of the DynamicModule variable to change.
     + `useExactName` = `false` (`?boolean`) — Whether to require an exact name match. If set to `false` (the default), the provided name does not have to contain prefixes (such as ```$CellContext` ```) and suffixes (such as `$$`) that are typically added behind the scenes by `DynamicModule`.
     + `value` (`exprjson`) — The new value of the variable in JSON expression representation (see [below](#expressionjson)).
@@ -378,7 +429,7 @@ Sets the value of a [DynamicModule](https://reference.wolfram.com/language/ref/D
 + Errors
 
     + `"CellNotFound"` — The specified cell does not exist.
-    + `"NoDynamicModule"` — There is no `DynamicModuleBox` in the specified cell.
+    + `"NoDynamicModule"` — There is no `DynamicModuleBox` in the specified cell (with the given `BoxID`, if `boxId` is specified).
     + `"UnknownVariableName"` — The `DynamicModuleBox` does not contain the specified variable.
 
 Example request (setting a variable `x` to `N[Pi, 30]`):
