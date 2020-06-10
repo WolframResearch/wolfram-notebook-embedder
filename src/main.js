@@ -131,8 +131,13 @@ function patchShadowStyleInsertion(container, domains) {
 }
 
 function getNotebookData(url) {
-    const [domain, path] = split(url, ['/obj/', '/objects/']);
-    if (!domain || !path) {
+    const [domain, remainingPaths] = split(url, ['/obj/', '/objects/']);
+    if (!domain || !remainingPaths) {
+        throw new Error('InvalidCloudObjectURL');
+    }
+    // For now the query string is simply pruned.
+    const path = remainingPaths.split('?', 1)[0];
+    if (!path) {
         throw new Error('InvalidCloudObjectURL');
     }
     const embeddingAPI = domain + '/notebooks/embedding?path=' + path;
