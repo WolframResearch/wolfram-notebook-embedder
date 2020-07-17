@@ -215,6 +215,78 @@ Example response:
 }
 ```
 
+### Formatting
+
+#### getPrimaryCellStyle
+
+Gets the primary style of a cell.
+
++ Parameters
+
+    + `cellId` (`string`) — ID of the cell.
+
++ Response
+
+    + `style` (`string`) — Primary style name of the cell.
+
++ Errors
+
+    + `"CellNotFound"` — The specified cell does not exist.
+
+#### getElementOption
+
+Gets an option value of a cell, group or the notebook.
+
++ Parameters
+
+    + `id` (`?string`) — ID of the cell or group. If the parameter is omitted, the notebook is taken.
+    + `name` (`string`) — Name of the option to retrieve.
+
++ Response
+
+    + `value` (`?exprjson`) — Option value or `null` if the option is not set.
+
++ Errors
+
+    + `"ElementNotFound"` — The specified element does not exist.
+
+#### getSelectionOption
+
+Gets the option value(s) of the current selection in the notebook.
+
++ Parameters
+
+    + `name` (`string`) — Name of the option to retrieve
+
++ Response
+
+    + `values` (`Array.<exprjson>`) — Array of values that occur for the given option in the current selection. Might be empty or contain only a single value.
+
+Example request:
+
+```json
+{
+    "api": "notebook",
+    "version": 1,
+    "rid": "1",
+    "command": "getSelectionOption",
+    "option": "FontFamily"
+}
+```
+
+Example response:
+
+```json
+{
+    "rid": "1",
+    "success": true,
+    "values": [
+        "\"Source Code Pro\"",
+        "\"Source Sans Pro\""
+    ]
+}
+```    
+
 ### Selection
 
 #### getSelection
@@ -318,6 +390,22 @@ Scrolls to the specified position in the notebook.
 
     + `left` (`number`) — Number of pixels to scroll to in horizontal direction (increases when scrolling to the right).
     + `top` (`number`) — Number of pixels to scroll to in vertical direction (increases when scrolling down).
+
+#### scrollToElement
+
+Scrolls the specified element into view.
+
++ Parameters
+
+    + `id` — ID of the element to scroll into view.
+
++ Errors
+
+    + `"ElementNotFound"` — The specified element does not exist.
+
+#### scrollToSelection
+
+Scrolls the currently selected element(s) into view.    
 
 ### Evaluation
 

@@ -88,6 +88,59 @@ Sets the content of a cell.
     + `cellId` (`string`) ... ID of the cell to modify.
     + `content` (`string`) ... New textual content of the cell.
 
+### Formatting
+
+#### setPrimaryCellStyle
+
+Sets the primary style of a cell.
+
++ Parameters
+
+    + `cellId` (`string`) — ID of the cell.
+    + `style` (`string`) — Primary style name of the cell.
+
++ Errors
+
+    + `"CellNotFound"` — The specified cell does not exist.
+
+#### setElementOptions
+
+Sets options of a cell, group or the notebook.
+
++ Parameters
+
+    + `id` (`?string`) — ID of the cell or group. If the parameter is omitted, the notebook is taken.
+    + `options` (`Object.<string, exprjson>`) — Dictionary of option names and their respective (expression) values.
+
++ Errors
+
+    + `"ElementNotFound"` — The specified element does not exist.
+
+#### setSelectionOptions
+
+Sets options of the current selection.
+
++ Parameters
+
+    + `options` (`Object.<string, exprjson>`) — Dictionary of option names and their respective (expression) values.
+
+Example request:
+
+```json
+{
+    "api": "notebook",
+    "version": 1,
+    "rid": "1",
+    "command": "setSelectionOptions",
+    "options": {
+        "FontWeight": "Bold",
+        "FontSize": 20,
+        "FontFamily": "\"Arial\"",
+        "FontColor": ["RGBColor", 1, 1, 0]
+    }
+}
+```
+
 ### Evaluation
 
 #### evaluateCell
