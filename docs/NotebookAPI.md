@@ -219,7 +219,7 @@ Example response:
 
 #### getPrimaryCellStyle
 
-Gets the primary style of a cell.
+Gets the primary style of a cell. [Cloud 1.56]
 
 + Parameters
 
@@ -235,7 +235,7 @@ Gets the primary style of a cell.
 
 #### getElementOption
 
-Gets an option value of a cell, group or the notebook.
+Gets an option value of a cell, group or the notebook. [Cloud 1.56]
 
 + Parameters
 
@@ -252,7 +252,7 @@ Gets an option value of a cell, group or the notebook.
 
 #### getSelectionOption
 
-Gets the option value(s) of the current selection in the notebook.
+Gets the option value(s) of the current selection in the notebook. [Cloud 1.56]
 
 + Parameters
 
@@ -393,7 +393,7 @@ Scrolls to the specified position in the notebook.
 
 #### scrollToElement
 
-Scrolls the specified element into view.
+Scrolls the specified element into view. [Cloud 1.56]
 
 + Parameters
 
@@ -405,7 +405,7 @@ Scrolls the specified element into view.
 
 #### scrollToSelection
 
-Scrolls the currently selected element(s) into view.    
+Scrolls the currently selected element(s) into view. [Cloud 1.56]   
 
 ### Evaluation
 

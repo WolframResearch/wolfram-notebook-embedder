@@ -92,7 +92,7 @@ Sets the content of a cell.
 
 #### setPrimaryCellStyle
 
-Sets the primary style of a cell.
+Sets the primary style of a cell. [Cloud 1.56]
 
 + Parameters
 
@@ -105,7 +105,7 @@ Sets the primary style of a cell.
 
 #### setElementOptions
 
-Sets options of a cell, group or the notebook.
+Sets options of a cell, group or the notebook. [Cloud 1.56]
 
 + Parameters
 
@@ -118,7 +118,7 @@ Sets options of a cell, group or the notebook.
 
 #### setSelectionOptions
 
-Sets options of the current selection.
+Sets options of the current selection. [Cloud 1.56]
 
 + Parameters
 
