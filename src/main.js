@@ -93,20 +93,20 @@ function isNotebookStyleElement(element, domains) {
 }
 
 function patchShadowStyleInsertion(container, domains) {
-    function callback(element) {
+    function callback(element, allowMove) {
         // When inserting the style element for the first time, use the original element,
         // to make sure that onload and onerror handlers are preserved.
         // For subsequent insertions (second embedded notebook and beyond), clone the element.
-        const styleElement = !element.didInsertWithoutCloning ? element : element.cloneNode(true);
+        const styleElement = allowMove && !element.didInsertWithoutCloning ? element : element.cloneNode(true);
         element.didInsertWithoutCloning = true;
         container.appendChild(styleElement);
     }
 
-    function handleStyleElement(element) {
+    function handleStyleElement(element, allowMove) {
         if (isNotebookStyleElement(element, domains)) {
             insertedStyles.push(element);
             styleInsertionCallbacks.forEach(cb => {
-                cb(element);
+                cb(element, allowMove);
             });
             return true;
         }
@@ -121,17 +121,17 @@ function patchShadowStyleInsertion(container, domains) {
         // so it's important we look for them anywhere in the document.
         const existingLinks = document.getElementsByTagName('link');
         for (let i = 0; i < existingLinks.length; ++i) {
-            handleStyleElement(existingLinks[i]);
+            handleStyleElement(existingLinks[i], true);
         }
         const existingStyles = document.getElementsByTagName('style');
         for (let i = 0; i < existingStyles.length; ++i) {
-            handleStyleElement(existingStyles[i]);
+            handleStyleElement(existingStyles[i], true);
         }
         const head = document.getElementsByTagName('head')[0];
         if (head) {
             const originalAppendChild = head.appendChild;
             head.appendChild = function (child) {
-                if (!handleStyleElement(child)) {
+                if (!handleStyleElement(child, false)) {
                     originalAppendChild.call(this, child);
                 }
             };
@@ -140,7 +140,7 @@ function patchShadowStyleInsertion(container, domains) {
     }
 
     insertedStyles.forEach(existingStyle => {
-        callback(existingStyle);
+        callback(existingStyle, false);
     });
     styleInsertionCallbacks.push(callback);
     const index = styleInsertionCallbacks.length - 1;
