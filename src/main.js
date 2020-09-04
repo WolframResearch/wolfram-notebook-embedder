@@ -264,6 +264,11 @@ export function embed(url, node, options) {
             if (useShadow) {
                 const cleanup = patchShadowStyleInsertion(shadowRoot, stylesheetDomains);
                 cleanupHandlers.push(cleanup);
+                // Move other children from the outer node into the container inside the shadow DOM.
+                // This is important so that a potential HTML cache is picked up by the notebook.
+                for (let i = 0; i < node.children.length - 1; ++i) {
+                    container.appendChild(node.children[i]);
+                }
             }
             theNotebookID = notebookID;
             for (let i = 0; i < otherScripts.length; ++i) {
