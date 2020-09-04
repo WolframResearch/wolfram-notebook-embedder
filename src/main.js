@@ -102,17 +102,36 @@ function patchShadowStyleInsertion(container, domains) {
         container.appendChild(styleElement);
     }
 
+    function handleStyleElement(element) {
+        if (isNotebookStyleElement(element, domains)) {
+            insertedStyles.push(element);
+            styleInsertionCallbacks.forEach(cb => {
+                cb(element);
+            });
+            return true;
+        }
+        return false;
+    }
+
     if (!isStyleInsertionPatched) {
+        // There might be notebook-related <link> or <style> elements on the page already,
+        // e.g. when static HTML is already included on the page.
+        // These elements are not even necessarily in the document's <head>,
+        // but the notebook JS code will still not insert them again,
+        // so it's important we look for them anywhere in the document.
+        const existingLinks = document.getElementsByTagName('link');
+        for (let i = 0; i < existingLinks.length; ++i) {
+            handleStyleElement(existingLinks[i]);
+        }
+        const existingStyles = document.getElementsByTagName('style');
+        for (let i = 0; i < existingStyles.length; ++i) {
+            handleStyleElement(existingStyles[i]);
+        }
         const head = document.getElementsByTagName('head')[0];
         if (head) {
             const originalAppendChild = head.appendChild;
             head.appendChild = function (child) {
-                if (isNotebookStyleElement(child, domains)) {
-                    insertedStyles.push(child);
-                    styleInsertionCallbacks.forEach(callback => {
-                        callback(child);
-                    });
-                } else {
+                if (!handleStyleElement(child)) {
                     originalAppendChild.call(this, child);
                 }
             };
