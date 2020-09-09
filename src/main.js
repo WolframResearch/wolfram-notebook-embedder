@@ -121,17 +121,17 @@ function patchShadowStyleInsertion(container, domains) {
         // so it's important we look for them anywhere in the document.
         const existingLinks = document.getElementsByTagName('link');
         for (let i = 0; i < existingLinks.length; ++i) {
-            handleStyleElement(existingLinks[i], true);
+            handleStyleElement(existingLinks[i], false);
         }
         const existingStyles = document.getElementsByTagName('style');
         for (let i = 0; i < existingStyles.length; ++i) {
-            handleStyleElement(existingStyles[i], true);
+            handleStyleElement(existingStyles[i], false);
         }
         const head = document.getElementsByTagName('head')[0];
         if (head) {
             const originalAppendChild = head.appendChild;
             head.appendChild = function (child) {
-                if (!handleStyleElement(child, false)) {
+                if (!handleStyleElement(child, true)) {
                     originalAppendChild.call(this, child);
                 }
             };
