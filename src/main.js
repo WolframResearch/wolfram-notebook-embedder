@@ -82,7 +82,7 @@ function isNotebookStyleElement(element, domains) {
     if (name === 'link' && (element.rel === 'stylesheet' || element.type === 'text/css')) {
         return domains.some(domain => element.href.startsWith(domain));
     } else if (name === 'style') {
-        if (element.dataset.isWolframNotebookStyle) {
+        if (element.dataset.isWolframNotebookStyle || element.innerText.indexOf('._ccc') >= 0) {
             return true;
         }
         if (element.id === 'erd_scroll_detection_scrollbar_style') {
