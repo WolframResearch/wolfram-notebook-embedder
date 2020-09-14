@@ -82,7 +82,7 @@ function isNotebookStyleElement(element, domains) {
     if (name === 'link' && (element.rel === 'stylesheet' || element.type === 'text/css')) {
         return domains.some(domain => element.href.startsWith(domain));
     } else if (name === 'style') {
-        if (element.dataset.isWolframNotebookStyle) {
+        if (element.dataset.isWolframNotebookStyle || element.innerText.indexOf('._ccc') >= 0) {
             return true;
         }
         if (element.id === 'erd_scroll_detection_scrollbar_style') {
@@ -93,26 +93,45 @@ function isNotebookStyleElement(element, domains) {
 }
 
 function patchShadowStyleInsertion(container, domains) {
-    function callback(element) {
+    function callback(element, allowMove) {
         // When inserting the style element for the first time, use the original element,
         // to make sure that onload and onerror handlers are preserved.
         // For subsequent insertions (second embedded notebook and beyond), clone the element.
-        const styleElement = !element.didInsertWithoutCloning ? element : element.cloneNode(true);
+        const styleElement = allowMove && !element.didInsertWithoutCloning ? element : element.cloneNode(true);
         element.didInsertWithoutCloning = true;
         container.appendChild(styleElement);
     }
 
+    function handleStyleElement(element, allowMove) {
+        if (isNotebookStyleElement(element, domains)) {
+            insertedStyles.push(element);
+            styleInsertionCallbacks.forEach(cb => {
+                cb(element, allowMove);
+            });
+            return true;
+        }
+        return false;
+    }
+
     if (!isStyleInsertionPatched) {
+        // There might be notebook-related <link> or <style> elements on the page already,
+        // e.g. when static HTML is already included on the page.
+        // These elements are not even necessarily in the document's <head>,
+        // but the notebook JS code will still not insert them again,
+        // so it's important we look for them anywhere in the document.
+        const existingLinks = document.getElementsByTagName('link');
+        for (let i = 0; i < existingLinks.length; ++i) {
+            handleStyleElement(existingLinks[i], false);
+        }
+        const existingStyles = document.getElementsByTagName('style');
+        for (let i = 0; i < existingStyles.length; ++i) {
+            handleStyleElement(existingStyles[i], false);
+        }
         const head = document.getElementsByTagName('head')[0];
         if (head) {
             const originalAppendChild = head.appendChild;
             head.appendChild = function (child) {
-                if (isNotebookStyleElement(child, domains)) {
-                    insertedStyles.push(child);
-                    styleInsertionCallbacks.forEach(callback => {
-                        callback(child);
-                    });
-                } else {
+                if (!handleStyleElement(child, true)) {
                     originalAppendChild.call(this, child);
                 }
             };
@@ -121,7 +140,7 @@ function patchShadowStyleInsertion(container, domains) {
     }
 
     insertedStyles.forEach(existingStyle => {
-        callback(existingStyle);
+        callback(existingStyle, false);
     });
     styleInsertionCallbacks.push(callback);
     const index = styleInsertionCallbacks.length - 1;
@@ -245,6 +264,11 @@ export function embed(url, node, options) {
             if (useShadow) {
                 const cleanup = patchShadowStyleInsertion(shadowRoot, stylesheetDomains);
                 cleanupHandlers.push(cleanup);
+                // Move other children from the outer node into the container inside the shadow DOM.
+                // This is important so that a potential HTML cache is picked up by the notebook.
+                for (let i = 0; i < node.children.length - 1; ++i) {
+                    container.appendChild(node.children[i]);
+                }
             }
             theNotebookID = notebookID;
             for (let i = 0; i < otherScripts.length; ++i) {
