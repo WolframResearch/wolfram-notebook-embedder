@@ -1,6 +1,10 @@
+## 0.2.1
+
+* Fix issues with `useShadowDOM` when there are existing notebook-related style definitions on the page  
+
 ## 0.2.0
 
-* New option `useShadowDOM` for better encapsulation of styling  (still experimental and off by default)
+* New option `useShadowDOM` for better encapsulation of styling (still experimental and off by default)
 
 ## 0.1.5
 
