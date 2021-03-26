@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Notebook URL example</title>
+</head>
+<body>
+
+<h1>Notebook expression example</h1>
+<p>
+    <label for="url">Enter a URL referencing a notebook file:</label>
+    <input id="url" value="https://raw.githubusercontent.com/WolframResearch/COVID-19/master/Computational-Essays/COVID-19-Visualizing-Epidemic-Data.nb" />
+    <label for="cloudbase">Cloud Base:</label>
+    <input id="cloudbase" value="https://www.wolframcloud.com" />
+    <button onclick="embedNotebook()">Embed Notebook</button>
+</p>
+<div id="container"></div>
+
+<script src="./dist/wolfram-notebook-embedder.js"></script>
+<script>
+    function embedNotebook() {
+        const cloudBase = document.getElementById('cloudbase').value;
+        const urlString = document.getElementById('url').value;
+        const container = document.getElementById('container');
+        WolframNotebookEmbedder.embed({cloudBase: cloudBase, url: urlString}, container);
+    }
+</script>
+
+</body>
+</html>

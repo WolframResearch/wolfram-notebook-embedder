@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Notebook expression example</title>
+    <style>
+        #expr {
+            width: 100%;
+            height: 5em;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Notebook expression example</h1>
+<p>
+    <label for="expr">Enter a Notebook expression:</label>
+    <textarea id="expr">Notebook[{Cell[TextData["Hello world!"], "Text"]}]</textarea>
+    <label for="cloudbase">Cloud Base:</label>
+    <input id="cloudbase" value="https://www.wolframcloud.com" />
+    <button onclick="embedNotebook()">Embed Notebook</button>
+</p>
+<div id="container"></div>
+
+<script src="./dist/wolfram-notebook-embedder.js"></script>
+<script>
+    function embedNotebook() {
+        const cloudBase = document.getElementById('cloudbase').value;
+        const exprString = document.getElementById('expr').value;
+        const container = document.getElementById('container');
+        WolframNotebookEmbedder.embed({cloudBase: cloudBase, expr: exprString}, container);
+    }
+</script>
+
+</body>
+</html>
