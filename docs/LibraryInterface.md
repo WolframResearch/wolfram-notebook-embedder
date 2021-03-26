@@ -6,12 +6,22 @@ title: Library Interface
 This library exposes a single function `embed` that renders a notebook into a given DOM node and returns an interface for further interaction with the notebook:
 
 ```js
-WolframNotebookEmbedder.embed(notebookURL, domNode, attributes)
+WolframNotebookEmbedder.embed(source, domNode, attributes)
 ```
 
-* `notebookURL`: a string with a cloud object URL of the notebook to embed, e.g. `'https://www.wolframcloud.com/obj/4beadfbb-84dd-4b26-87b6-bcd30b9abd65'` or `'https://www.wolframcloud.com/obj/myusername/myfolder/mynotebook.nb'`
+* `source`:
+    * a string with a cloud object URL of the notebook to embed, e.g. `'https://www.wolframcloud.com/obj/4beadfbb-84dd-4b26-87b6-bcd30b9abd65'` or `'https://www.wolframcloud.com/obj/myusername/myfolder/mynotebook.nb'`, *or*
+    * an object with the following properties:
+        * `cloudBase` (optional): a string denoting the [cloud base](https://reference.wolfram.com/language/ref/$CloudBase.html) to use (defaulting to `https://www.wolframcloud.com`)
+        * `expr` (a string containing a `Notebook[...]` expression in [InputForm](https://reference.wolfram.com/language/ref/InputForm.html)) *or* `url` (a URL to fetch a notebook file from) *or* `path` (the path of a cloud object in the specified `cloudBase`)
 * `domNode`: a DOM node in which to render the notebook, e.g. obtained by `document.getElementById('myContainer')`
-* `attributes `: a JavaScript object with attributes
+* `attributes`: a JavaScript object with attributes
+
+A `source` string such as `'https://www.wolframcloud.com/obj/myusername/myfolder/mynotebook.nb'` is equivalent to an object such as
+```json
+{"cloudBase": "https://www.wolframcloud.com", "path": "myusername/myfolder/mynotebook.nb"}
+```
+where the `cloudBase` and the `path` are determined based on the given string.
 
 The following attributes can be given:
 
