@@ -171,7 +171,13 @@ function getNotebookData(url) {
                     notebookID: data.notebookID,
                     mainScript: domain + data.mainScript,
                     otherScripts: (data.otherScripts || []).map(script => domain + script),
-                    stylesheetDomains: [domain, ...data.stylesheetDomains]
+                    stylesheetDomains: [domain, ...data.stylesheetDomains],
+
+                    // Extra data sent by the server in response to the initial request
+                    // to /notebooks/embedding, which we just pass through to the `.embed`
+                    // call. Could contain data such as a token for load balancing or
+                    // to maintain a session.
+                    extraData: data.extraData
                 });
             } else {
                 reject(new Error('ResolveError'));
@@ -197,7 +203,6 @@ function defaultValue(value, fallback) {
 }
 
 export function embed(url, node, options) {
-    let theNotebookID;
     const theOptions = options || {};
     const {useShadowDOM = false} = theOptions;
     const useShadow = useShadowDOM && node.attachShadow;
@@ -260,7 +265,7 @@ export function embed(url, node, options) {
             }
             return getNotebookData(url);
         })
-        .then(({notebookID, mainScript, otherScripts, stylesheetDomains}) => {
+        .then(({notebookID, mainScript, otherScripts, stylesheetDomains, extraData}) => {
             if (useShadow) {
                 const cleanup = patchShadowStyleInsertion(shadowRoot, stylesheetDomains);
                 cleanupHandlers.push(cleanup);
@@ -270,18 +275,18 @@ export function embed(url, node, options) {
                     container.appendChild(node.children[i]);
                 }
             }
-            theNotebookID = notebookID;
             for (let i = 0; i < otherScripts.length; ++i) {
                 installScript(otherScripts[i]);
             }
-            return loadLibrary(mainScript);
+            return loadLibrary(mainScript).then(lib => [theNotebookID, lib, extraData]);
         })
-        .then(lib => {
+        .then(([theNotebookID, lib, extraData]) => {
             return lib.embed(theNotebookID, container, {
                 width: defaultValue(theOptions.width, null),
                 maxHeight: defaultValue(theOptions.maxHeight, Infinity),
                 allowInteract: defaultValue(theOptions.allowInteract, true),
                 showRenderProgress: defaultValue(theOptions.showRenderProgress, true),
+                extraData: extraData,
                 onContainerDimensionsChange
             });
         })
