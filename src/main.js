@@ -278,7 +278,7 @@ export function embed(url, node, options) {
             for (let i = 0; i < otherScripts.length; ++i) {
                 installScript(otherScripts[i]);
             }
-            return loadLibrary(mainScript).then(lib => [theNotebookID, lib, extraData]);
+            return loadLibrary(mainScript).then(lib => [notebookID, lib, extraData]);
         })
         .then(([theNotebookID, lib, extraData]) => {
             return lib.embed(theNotebookID, container, {
