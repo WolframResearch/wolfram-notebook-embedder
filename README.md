@@ -36,7 +36,7 @@ and then use the global variable `WolframNotebookEmbedder`.
 
 ## Browser Support
 
-We support all modern browsers (the last two major versions of Chrome, Firefox, Edge, Safari) and Internet Explorer 11. Particularly for IE 11, this library includes an internal "ponyfill" for `Promise`, since this library's API heavily depends on promises.
+We support all modern browsers (the last two major versions of Chrome, Firefox, Edge, Safari). Internet Explorer is *not* supported anymore.
 
 ## Contributing
 
