@@ -54,6 +54,7 @@ Each version of this library is compatible with a certain range of versions of t
 |-----------------|-------------------------------|
 |           0.1.x |                          1.50 |
 |           0.2.x |                          1.55 |
+|           0.3.x |                          1.59 |
 
 ## License
 
