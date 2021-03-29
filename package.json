@@ -38,7 +38,5 @@
     "serve": "^10.1.1",
     "uglify-js": "^3.4.9"
   },
-  "dependencies": {
-    "promise-polyfill": "^8.1.0"
-  }
+  "dependencies": {}
 }
