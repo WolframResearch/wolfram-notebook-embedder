@@ -1,6 +1,6 @@
 {
   "name": "wolfram-notebook-embedder",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Library to embed Wolfram Cloud notebooks on websites.",
   "main": "dist/wolfram-notebook-embedder.js",
   "keywords": [
