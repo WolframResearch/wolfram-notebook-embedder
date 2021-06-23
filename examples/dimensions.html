@@ -51,13 +51,13 @@
     let fixedHeight = 300;
 
     function embedNotebooks() {
-        embedNotebook('containerInfiniteNB', 'dimensionsInfiniteNB', null, Infinity);
-        fixedEmbedding = embedNotebook('containerFixedNB', 'dimensionsFixedNB', fixedWidth, fixedHeight);
+        embedNotebook('containerInfiniteNB', 'dimensionsInfiniteNB', null, Infinity, true);
+        fixedEmbedding = embedNotebook('containerFixedNB', 'dimensionsFixedNB', fixedWidth, fixedHeight, true);
         embedNotebook('containerFixedCSS', 'dimensionsFixedCSS', null, null, true);
         embedNotebook('containerRelativeCSS', 'dimensionsRelativeCSS', null, null, true);
     }
 
-    function embedNotebook(containerID, dimensionsID, width, maxHeight, showBorders = false) {
+    function embedNotebook(containerID, dimensionsID, width, maxHeight, showBorders) {
         const url = document.getElementById('path').value;
         return WolframNotebookEmbedder.embed(url, document.getElementById(containerID), {
             width: width,
