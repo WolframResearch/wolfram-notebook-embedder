@@ -1,0 +1,43 @@
+<html>
+<head>
+    <title>Show borders example</title>
+    <style>
+        #path {
+            width: 500px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Show borders example</h1>
+<p>
+    Enter the URL of a cloud object:
+    <input id="path" value="https://www.wolframcloud.com/obj/jpoeschko/Public/Example.nb" />
+    <button onclick="embedNotebooks()">Embed Notebook</button>
+</p>
+
+<h2>Without borders (the default)</h2>
+<div id="containerWithoutBorder"></div>
+
+<h2>With borders</h2>
+<div id="containerWithBorder"></div>
+
+<script src="./dist/wolfram-notebook-embedder.js"></script>
+<script>
+    function embedNotebooks() {
+        embedNotebook('containerWithoutBorder', false);
+        embedNotebook('containerWithBorder', true);
+    }
+
+    function embedNotebook(containerID, showBorders) {
+        const url = document.getElementById('path').value;
+        return WolframNotebookEmbedder.embed(url, document.getElementById(containerID), {
+            width: 500,
+            maxHeight: 500,
+            showBorders
+        });
+    }
+</script>
+
+</body>
+</html>
