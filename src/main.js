@@ -284,7 +284,7 @@ export function embed(url, node, options) {
             return lib.embed(theNotebookID, container, {
                 width: defaultValue(theOptions.width, null),
                 maxHeight: defaultValue(theOptions.maxHeight, Infinity),
-                showBorders: defaultValue(theOptions.showBorders, false),
+                showBorder: defaultValue(theOptions.showBorder, false),
                 allowInteract: defaultValue(theOptions.allowInteract, true),
                 showRenderProgress: defaultValue(theOptions.showRenderProgress, true),
                 extraData: extraData,
@@ -301,8 +301,8 @@ export function embed(url, node, options) {
                     });
                 },
                 setAttributes: (attrs) => {
-                    const {width, maxHeight, showBorders, allowInteract, showRenderProgress} = attrs;
-                    embedding.setAttributes({width, maxHeight, showBorders, allowInteract, showRenderProgress});
+                    const {width, maxHeight, showBorder, allowInteract, showRenderProgress} = attrs;
+                    embedding.setAttributes({width, maxHeight, showBorder, allowInteract, showRenderProgress});
                 }
             };
         });

@@ -29,12 +29,12 @@
         embedNotebook('containerWithBorder', true);
     }
 
-    function embedNotebook(containerID, showBorders) {
+    function embedNotebook(containerID, showBorder) {
         const url = document.getElementById('path').value;
         return WolframNotebookEmbedder.embed(url, document.getElementById(containerID), {
             width: 500,
             maxHeight: 500,
-            showBorders
+            showBorder
         });
     }
 </script>

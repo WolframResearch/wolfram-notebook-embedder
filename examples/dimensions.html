@@ -57,12 +57,12 @@
         embedNotebook('containerRelativeCSS', 'dimensionsRelativeCSS', null, null, true);
     }
 
-    function embedNotebook(containerID, dimensionsID, width, maxHeight, showBorders) {
+    function embedNotebook(containerID, dimensionsID, width, maxHeight, showBorder) {
         const url = document.getElementById('path').value;
         return WolframNotebookEmbedder.embed(url, document.getElementById(containerID), {
             width: width,
             maxHeight: maxHeight,
-            showBorders: showBorders
+            showBorder: showBorder
         }).then(nb => {
             nb.addEventListener('resize', dimensions => {
                 const span = document.getElementById(dimensionsID);
