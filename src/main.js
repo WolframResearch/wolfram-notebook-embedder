@@ -180,11 +180,11 @@ function getNotebookData(source) {
             params = 'path=' + encodeURIComponent(source.path);
         } else if (hasURL) {
             params = 'url=' + encodeURIComponent(source.url);
-            cloudObjectShareURI = '?' + params;
+            cloudObjectShareURI = '/view?' + params;
         } else if (hasExpr) {
             notebookExpr = source.expr;
             params = 'expr=' + encodeURIComponent(source.expr);
-            cloudObjectShareURI = '?' + params;
+            cloudObjectShareURI = '/view?' + params;
             usePost = true;
         }
     }
