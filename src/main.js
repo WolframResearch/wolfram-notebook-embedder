@@ -154,6 +154,7 @@ function getNotebookData(source) {
     let params = '';
     let usePost = false;
     let notebookExpr = null;
+    let cloudObjectShareURI = '';
     if (typeof source === 'string') {
         const [domain, remainingPaths] = split(source, ['/obj/', '/objects/']);
         if (!domain || !remainingPaths) {
@@ -179,9 +180,11 @@ function getNotebookData(source) {
             params = 'path=' + encodeURIComponent(source.path);
         } else if (hasURL) {
             params = 'url=' + encodeURIComponent(source.url);
+            cloudObjectShareURI = '?' + params;
         } else if (hasExpr) {
             notebookExpr = source.expr;
             params = 'expr=' + encodeURIComponent(source.expr);
+            cloudObjectShareURI = '?' + params;
             usePost = true;
         }
     }
@@ -214,7 +217,8 @@ function getNotebookData(source) {
                     // to /notebooks/embedding, which we just pass through to the `.embed`
                     // call. Could contain data such as a token for load balancing or
                     // to maintain a session.
-                    extraData: data.extraData
+                    extraData: data.extraData,
+                    shareURI: cloudObjectShareURI
                 });
             } else {
                 reject(new Error('ResolveError'));
@@ -311,7 +315,7 @@ export function embed(source, node, options) {
             }
             return getNotebookData(source);
         })
-        .then(({notebookID, mainScript, otherScripts, stylesheetDomains, notebookExpr, extraData}) => {
+        .then(({notebookID, mainScript, otherScripts, stylesheetDomains, notebookExpr, extraData, shareURI}) => {
             if (useShadow) {
                 const cleanup = patchShadowStyleInsertion(shadowRoot, stylesheetDomains);
                 cleanupHandlers.push(cleanup);
@@ -324,9 +328,9 @@ export function embed(source, node, options) {
             for (let i = 0; i < otherScripts.length; ++i) {
                 installScript(otherScripts[i]);
             }
-            return loadLibrary(mainScript).then(lib => [notebookID, lib, notebookExpr, extraData]);
+            return loadLibrary(mainScript).then(lib => [notebookID, lib, notebookExpr, extraData, shareURI]);
         })
-        .then(([theNotebookID, lib, notebookExpr, extraData]) => {
+        .then(([theNotebookID, lib, notebookExpr, extraData, shareURI]) => {
             return lib.embed(theNotebookID, container, {
                 width: defaultValue(theOptions.width, null),
                 maxHeight: defaultValue(theOptions.maxHeight, Infinity),
@@ -337,6 +341,7 @@ export function embed(source, node, options) {
                 // (It only relies on the notebookData sent through extraData.)
                 notebookExpr: notebookExpr,
                 extraData: extraData,
+                shareURI,
                 onContainerDimensionsChange
             });
         })
