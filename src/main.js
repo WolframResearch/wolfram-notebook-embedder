@@ -206,6 +206,8 @@ function getNotebookData(source) {
             if (req.status === 200) {
                 const text = req.responseText;
                 const data = JSON.parse(text);
+                let extraData = data.extraData;
+                extraData.shareURI = cloudObjectShareURI;
                 resolve({
                     notebookID: data.notebookID,
                     mainScript: cloudBase + data.mainScript,
@@ -217,8 +219,7 @@ function getNotebookData(source) {
                     // to /notebooks/embedding, which we just pass through to the `.embed`
                     // call. Could contain data such as a token for load balancing or
                     // to maintain a session.
-                    extraData: data.extraData,
-                    shareURI: cloudObjectShareURI
+                    extraData: data.extraData
                 });
             } else {
                 reject(new Error('ResolveError'));
@@ -315,7 +316,7 @@ export function embed(source, node, options) {
             }
             return getNotebookData(source);
         })
-        .then(({notebookID, mainScript, otherScripts, stylesheetDomains, notebookExpr, extraData, shareURI}) => {
+        .then(({notebookID, mainScript, otherScripts, stylesheetDomains, notebookExpr, extraData}) => {
             if (useShadow) {
                 const cleanup = patchShadowStyleInsertion(shadowRoot, stylesheetDomains);
                 cleanupHandlers.push(cleanup);
@@ -328,9 +329,9 @@ export function embed(source, node, options) {
             for (let i = 0; i < otherScripts.length; ++i) {
                 installScript(otherScripts[i]);
             }
-            return loadLibrary(mainScript).then(lib => [notebookID, lib, notebookExpr, extraData, shareURI]);
+            return loadLibrary(mainScript).then(lib => [notebookID, lib, notebookExpr, extraData]);
         })
-        .then(([theNotebookID, lib, notebookExpr, extraData, shareURI]) => {
+        .then(([theNotebookID, lib, notebookExpr, extraData]) => {
             return lib.embed(theNotebookID, container, {
                 width: defaultValue(theOptions.width, null),
                 maxHeight: defaultValue(theOptions.maxHeight, Infinity),
@@ -341,7 +342,6 @@ export function embed(source, node, options) {
                 // (It only relies on the notebookData sent through extraData.)
                 notebookExpr: notebookExpr,
                 extraData: extraData,
-                shareURI,
                 onContainerDimensionsChange
             });
         })
