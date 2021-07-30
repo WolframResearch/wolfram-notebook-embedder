@@ -219,7 +219,7 @@ function getNotebookData(source) {
                     // to /notebooks/embedding, which we just pass through to the `.embed`
                     // call. Could contain data such as a token for load balancing or
                     // to maintain a session.
-                    extraData: data.extraData
+                    extraData: extraData
                 });
             } else {
                 reject(new Error('ResolveError'));
