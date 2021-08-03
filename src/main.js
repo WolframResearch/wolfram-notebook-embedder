@@ -284,7 +284,7 @@ export function embed(url, node, options) {
             return lib.embed(theNotebookID, container, {
                 width: defaultValue(theOptions.width, null),
                 maxHeight: defaultValue(theOptions.maxHeight, Infinity),
-                showBorder: defaultValue(theOptions.showBorder, false),
+                showBorder: defaultValue(theOptions.showBorder, null),
                 allowInteract: defaultValue(theOptions.allowInteract, true),
                 showRenderProgress: defaultValue(theOptions.showRenderProgress, true),
                 extraData: extraData,
