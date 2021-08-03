@@ -17,7 +17,7 @@ The following attributes can be given:
 
 * `width`: width of the notebook in pixels; a value of `null` (the default) makes the notebook adapt to the width of the container node
 * `maxHeight`: maximum height of the notebook in pixels; a value of `Infinity` (the default) allows the notebook to grow infinitely; a value of `null` makes the notebook adapt to the height of the container node
-* `showBorder`: whether to show border around the notebook; the default `false` does not show a border
+* `showBorder`: whether to show a border around the notebook; the default `null` looks `AppearanceElements` of the object. If border value is not specified in `AppearanceElements`, does not show a border
 * `allowInteract`: whether to enable interactivity in the notebook, which might use the server-side Wolfram Engine for computations; even if this is set to `true` (the default), the `Permissions` of the cloud notebook must also include `All -> {"Read", "Interact"}` for interactions to actually work
 * `showRenderProgress`: whether to show the render progress indicator at the top of the notebook during the initial loading phase (see [Notebook Loading Phases](./NotebookLoadingPhases.md) for more information); the default is `true`
 * `useShadowDOM` (experimental): whether to use a shadow DOM container for the notebook; the default is `false` (but might change in a future release after 0.2.x)
