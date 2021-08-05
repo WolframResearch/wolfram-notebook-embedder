@@ -5,9 +5,6 @@
         #path {
             width: 500px;
         }
-        .container {
-            border: 1px solid gray;
-        }
         #containerFixedCSS {
             width: 500px;
             height: 400px;
@@ -29,7 +26,7 @@
 
 <h2>Infinite height granted to the notebook, width adapting to container node (the default)</h2>
 <p>Current dimensions: <span id="dimensionsInfiniteNB"></span></p>
-<div id="containerInfiniteNB" class="container"></div>
+<div id="containerInfiniteNB"></div>
 
 <h2>Fixed maximum dimensions granted to the notebook</h2>
 <p>
@@ -37,15 +34,15 @@
     Maximum height: <input onchange="updateNBDimensions()" oninput="updateNBDimensions()" id="nbHeight" value="300" />
 </p>
 <p>Current dimensions: <span id="dimensionsFixedNB"></span></p>
-<div id="containerFixedNB" class="container"></div>
+<div id="containerFixedNB"></div>
 
 <h2>Fixed dimensions set in CSS, notebook adapting accordingly</h2>
 <p>Current dimensions: <span id="dimensionsFixedCSS"></span></p>
-<div id="containerFixedCSS" class="container"></div>
+<div id="containerFixedCSS"></div>
 
 <h2>Relative dimensions set in CSS, notebook adapting accordingly</h2>
 <p>Current dimensions: <span id="dimensionsRelativeCSS"></span></p>
-<div id="containerRelativeCSS" class="container"></div>
+<div id="containerRelativeCSS"></div>
 
 <script src="./dist/wolfram-notebook-embedder.js"></script>
 <script>
@@ -54,17 +51,18 @@
     let fixedHeight = 300;
 
     function embedNotebooks() {
-        embedNotebook('containerInfiniteNB', 'dimensionsInfiniteNB', null, Infinity);
-        fixedEmbedding = embedNotebook('containerFixedNB', 'dimensionsFixedNB', fixedWidth, fixedHeight);
-        embedNotebook('containerFixedCSS', 'dimensionsFixedCSS', null, null);
-        embedNotebook('containerRelativeCSS', 'dimensionsRelativeCSS', null, null);
+        embedNotebook('containerInfiniteNB', 'dimensionsInfiniteNB', null, Infinity, true);
+        fixedEmbedding = embedNotebook('containerFixedNB', 'dimensionsFixedNB', fixedWidth, fixedHeight, true);
+        embedNotebook('containerFixedCSS', 'dimensionsFixedCSS', null, null, true);
+        embedNotebook('containerRelativeCSS', 'dimensionsRelativeCSS', null, null, true);
     }
 
-    function embedNotebook(containerID, dimensionsID, width, maxHeight) {
+    function embedNotebook(containerID, dimensionsID, width, maxHeight, showBorder) {
         const url = document.getElementById('path').value;
         return WolframNotebookEmbedder.embed(url, document.getElementById(containerID), {
             width: width,
-            maxHeight: maxHeight
+            maxHeight: maxHeight,
+            showBorder: showBorder
         }).then(nb => {
             nb.addEventListener('resize', dimensions => {
                 const span = document.getElementById(dimensionsID);
