@@ -154,7 +154,6 @@ function getNotebookData(source) {
     let params = '';
     let usePost = false;
     let notebookExpr = null;
-    let cloudObjectShareURI = '';
     if (typeof source === 'string') {
         const [domain, remainingPaths] = split(source, ['/obj/', '/objects/']);
         if (!domain || !remainingPaths) {
@@ -180,11 +179,9 @@ function getNotebookData(source) {
             params = 'path=' + encodeURIComponent(source.path);
         } else if (hasURL) {
             params = 'url=' + encodeURIComponent(source.url);
-            cloudObjectShareURI = '/view?' + params;
         } else if (hasExpr) {
             notebookExpr = source.expr;
             params = 'expr=' + encodeURIComponent(source.expr);
-            cloudObjectShareURI = '/view?' + params;
             usePost = true;
         }
     }
@@ -207,7 +204,7 @@ function getNotebookData(source) {
                 const text = req.responseText;
                 const data = JSON.parse(text);
                 let extraData = data.extraData;
-                extraData.shareURI = cloudObjectShareURI;
+                extraData.urlParams = params;
                 resolve({
                     notebookID: data.notebookID,
                     mainScript: cloudBase + data.mainScript,
