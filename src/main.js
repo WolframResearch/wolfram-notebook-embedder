@@ -204,6 +204,7 @@ function getNotebookData(source) {
                 const text = req.responseText;
                 const data = JSON.parse(text);
                 let extraData = data.extraData;
+                // This will also pass on the prefix (i.e. path= or expr=)
                 extraData.urlParams = params;
                 resolve({
                     notebookID: data.notebookID,
