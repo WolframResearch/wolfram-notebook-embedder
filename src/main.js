@@ -154,6 +154,7 @@ function getNotebookData(source) {
     let params = '';
     let usePost = false;
     let notebookExpr = null;
+    const notebookSource = [];
     if (typeof source === 'string') {
         const [domain, remainingPaths] = split(source, ['/obj/', '/objects/']);
         if (!domain || !remainingPaths) {
@@ -168,6 +169,7 @@ function getNotebookData(source) {
         params = 'path=' + encodeURIComponent(path);
     } else if (source && typeof source === 'object') {
         cloudBase = source.cloudBase || 'https://www.wolframcloud.com';
+        notebookSource.cloudBase = cloudBase;
         const hasPath = typeof source.path !== 'undefined'
         const hasExpr = typeof source.expr !== 'undefined';
         const hasURL = typeof source.url !== 'undefined';
@@ -175,14 +177,18 @@ function getNotebookData(source) {
         if (paramCount !== 1) {
             throw new Error('InvalidSourceParameters');
         }
+
         if (hasPath) {
             params = 'path=' + encodeURIComponent(source.path);
+            notebookSource.path = encodeURIComponent(source.path);
         } else if (hasURL) {
             params = 'url=' + encodeURIComponent(source.url);
+            notebookSource.url = encodeURIComponent(source.url);
         } else if (hasExpr) {
             notebookExpr = source.expr;
             params = 'expr=' + encodeURIComponent(source.expr);
             usePost = true;
+            notebookSource.expr = encodeURIComponent(source.expr);
         }
     }
     if (!cloudBase) {
@@ -203,9 +209,8 @@ function getNotebookData(source) {
             if (req.status === 200) {
                 const text = req.responseText;
                 const data = JSON.parse(text);
-                let extraData = data.extraData;
-                // This will also pass on the prefix (i.e. path= or expr=)
-                extraData.urlParams = params;
+                let extraData = data.extraData || [];
+                extraData.notebookSource = notebookSource;
                 resolve({
                     notebookID: data.notebookID,
                     mainScript: cloudBase + data.mainScript,
