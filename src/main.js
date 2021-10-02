@@ -149,17 +149,53 @@ function patchShadowStyleInsertion(container, domains) {
     };
 }
 
-function getNotebookData(url) {
-    const [domain, remainingPaths] = split(url, ['/obj/', '/objects/']);
-    if (!domain || !remainingPaths) {
-        throw new Error('InvalidCloudObjectURL');
+function getNotebookData(source) {
+    let cloudBase = null;
+    let params = '';
+    let usePost = false;
+    let notebookExpr = null;
+    if (typeof source === 'string') {
+        const [domain, remainingPaths] = split(source, ['/obj/', '/objects/']);
+        if (!domain || !remainingPaths) {
+            throw new Error('InvalidCloudObjectURL');
+        }
+        cloudBase = domain;
+        // For now the query string is simply pruned.
+        const path = remainingPaths.split('?', 1)[0];
+        if (!path) {
+            throw new Error('InvalidCloudObjectURL');
+        }
+        params = 'path=' + encodeURIComponent(path);
+    } else if (source && typeof source === 'object') {
+        cloudBase = source.cloudBase || 'https://www.wolframcloud.com';
+        const hasPath = typeof source.path !== 'undefined'
+        const hasExpr = typeof source.expr !== 'undefined';
+        const hasURL = typeof source.url !== 'undefined';
+        const paramCount = (hasPath ? 1 : 0) + (hasExpr ? 1 : 0) + (hasURL ? 1 : 0);
+        if (paramCount !== 1) {
+            throw new Error('InvalidSourceParameters');
+        }
+        if (hasPath) {
+            params = 'path=' + encodeURIComponent(source.path);
+        } else if (hasURL) {
+            params = 'url=' + encodeURIComponent(source.url);
+        } else if (hasExpr) {
+            notebookExpr = source.expr;
+            params = 'expr=' + encodeURIComponent(source.expr);
+            usePost = true;
+        }
     }
-    // For now the query string is simply pruned.
-    const path = remainingPaths.split('?', 1)[0];
-    if (!path) {
-        throw new Error('InvalidCloudObjectURL');
+    if (!cloudBase) {
+        throw new Error('InvalidSource');
     }
-    const embeddingAPI = domain + '/notebooks/embedding?path=' + path;
+    if (cloudBase.charAt(cloudBase.length - 1) === '/') {
+        // Remove trailing '/' from the cloud base, as a courtesy.
+        cloudBase = cloudBase.substring(0, cloudBase.length - 1);
+    }
+    let embeddingAPI = cloudBase + '/notebooks/embedding';
+    if (!usePost) {
+        embeddingAPI += '?' + params;
+    }
     return new Promise((resolve, reject) => {
         // Use XMLHttpRequest instead of fetch to be compatible with older browsers.
         const req = new XMLHttpRequest();
@@ -169,9 +205,10 @@ function getNotebookData(url) {
                 const data = JSON.parse(text);
                 resolve({
                     notebookID: data.notebookID,
-                    mainScript: domain + data.mainScript,
-                    otherScripts: (data.otherScripts || []).map(script => domain + script),
-                    stylesheetDomains: [domain, ...data.stylesheetDomains],
+                    mainScript: cloudBase + data.mainScript,
+                    otherScripts: (data.otherScripts || []).map(script => cloudBase + script),
+                    stylesheetDomains: [cloudBase, ...data.stylesheetDomains],
+                    notebookExpr: notebookExpr,
 
                     // Extra data sent by the server in response to the initial request
                     // to /notebooks/embedding, which we just pass through to the `.embed`
@@ -189,8 +226,17 @@ function getNotebookData(url) {
         req.addEventListener('abort', () => {
             reject(new Error('RequestAborted'));
         });
-        req.open('GET', embeddingAPI);
-        req.send();
+        if (usePost) {
+            req.open('POST', embeddingAPI, true);
+            req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        } else {
+            req.open('GET', embeddingAPI, true);
+        }
+        if (usePost) {
+            req.send(params);
+        } else {
+            req.send();
+        }
     });
 }
 
@@ -202,7 +248,7 @@ function defaultValue(value, fallback) {
     }
 }
 
-export function embed(url, node, options) {
+export function embed(source, node, options) {
     const theOptions = options || {};
     const {useShadowDOM = false} = theOptions;
     const useShadow = useShadowDOM && node.attachShadow;
@@ -263,9 +309,9 @@ export function embed(url, node, options) {
             } else {
                 container = node;
             }
-            return getNotebookData(url);
+            return getNotebookData(source);
         })
-        .then(({notebookID, mainScript, otherScripts, stylesheetDomains, extraData}) => {
+        .then(({notebookID, mainScript, otherScripts, stylesheetDomains, notebookExpr, extraData}) => {
             if (useShadow) {
                 const cleanup = patchShadowStyleInsertion(shadowRoot, stylesheetDomains);
                 cleanupHandlers.push(cleanup);
@@ -278,15 +324,19 @@ export function embed(url, node, options) {
             for (let i = 0; i < otherScripts.length; ++i) {
                 installScript(otherScripts[i]);
             }
-            return loadLibrary(mainScript).then(lib => [notebookID, lib, extraData]);
+            return loadLibrary(mainScript).then(lib => [notebookID, lib, notebookExpr, extraData]);
         })
-        .then(([theNotebookID, lib, extraData]) => {
+        .then(([theNotebookID, lib, notebookExpr, extraData]) => {
             return lib.embed(theNotebookID, container, {
                 width: defaultValue(theOptions.width, null),
                 maxHeight: defaultValue(theOptions.maxHeight, Infinity),
                 showBorder: defaultValue(theOptions.showBorder, null),
                 allowInteract: defaultValue(theOptions.allowInteract, true),
                 showRenderProgress: defaultValue(theOptions.showRenderProgress, true),
+                // Pass in the original notebook expression string,
+                // even if the CloudPlatform JS code does not currently use it.
+                // (It only relies on the notebookData sent through extraData.)
+                notebookExpr: notebookExpr,
                 extraData: extraData,
                 onContainerDimensionsChange
             });
