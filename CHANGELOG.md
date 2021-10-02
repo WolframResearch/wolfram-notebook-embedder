@@ -1,3 +1,13 @@
+## 0.3
+
+* Embedding of external notebooks at a given URL (`{url: ...}`) or with a given `Notebook` expression (`{expr: ...}`)
+* New option `showBorder` to control whether to show a border around the embedded notebook
+* Officially dropped support for IE11
+
+## 0.2.2
+
+* Pass through extra data from the initial server call to the cloud JS code, for better forward-compatibility 
+
 ## 0.2.1
 
 * Fix issues with `useShadowDOM` when there are existing notebook-related style definitions on the page  
