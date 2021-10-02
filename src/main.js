@@ -1,20 +1,3 @@
-import PromisePolyfill from 'promise-polyfill';
-
-const globalNS = (function() {
-    if (typeof self !== 'undefined') {
-        return self;
-    }
-    if (typeof window !== 'undefined') {
-        return window;
-    }
-    if (typeof global !== 'undefined') {
-        return global;
-    }
-    throw new Error('Unable to locate global object');
-})();
-
-const Promise = globalNS.Promise || PromisePolyfill;
-
 const installedScripts = {};
 const libraryLoading = {};
 let counter = 0;
