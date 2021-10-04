@@ -25,7 +25,7 @@ title: Getting Started
     or import it as a `<script>` tag from a CDN:
     
     ```html
-    <script crossorigin src="https://unpkg.com/wolfram-notebook-embedder@0.1/dist/wolfram-notebook-embedder.min.js"></script>
+    <script crossorigin src="https://unpkg.com/wolfram-notebook-embedder@0.3/dist/wolfram-notebook-embedder.min.js"></script>
     ```
 3. In your HTML, create a container where you want the notebook to be rendered (say `<div id="notebookContainer"></div>`) and add the following JavaScript code:
 
