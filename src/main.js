@@ -180,15 +180,15 @@ function getNotebookData(source) {
 
         if (hasPath) {
             params = 'path=' + encodeURIComponent(source.path);
-            notebookSource.path = encodeURIComponent(source.path);
+            notebookSource.path = source.path;
         } else if (hasURL) {
             params = 'url=' + encodeURIComponent(source.url);
-            notebookSource.url = encodeURIComponent(source.url);
+            notebookSource.url = source.url;
         } else if (hasExpr) {
             notebookExpr = source.expr;
             params = 'expr=' + encodeURIComponent(source.expr);
             usePost = true;
-            notebookSource.expr = encodeURIComponent(source.expr);
+            notebookSource.expr = source.expr;
         }
     }
     if (!cloudBase) {
