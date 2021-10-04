@@ -154,7 +154,7 @@ function getNotebookData(source) {
     let params = '';
     let usePost = false;
     let notebookExpr = null;
-    const notebookSource = [];
+    const notebookSource = {};
     if (typeof source === 'string') {
         const [domain, remainingPaths] = split(source, ['/obj/', '/objects/']);
         if (!domain || !remainingPaths) {
