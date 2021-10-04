@@ -340,3 +340,12 @@ export function embed(source, node, options) {
             };
         });
 }
+
+// As a courtesy, also expose a default export, so consumers of the library can write
+//   import WolframNotebookEmbedder from 'wolfram-notebook-embedder';
+// even though the named-import forms
+//   import * as WolframNotebookEmbedder from 'wolfram-notebook-embedder';
+// or
+//   import {embed} from 'wolfram-notebook-embedder';
+// are preferred.
+export default {embed};

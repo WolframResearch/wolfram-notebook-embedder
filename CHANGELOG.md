@@ -3,6 +3,7 @@
 * Embedding of external notebooks at a given URL (`{url: ...}`) or with a given `Notebook` expression (`{expr: ...}`)
 * New option `showBorder` to control whether to show a border around the embedded notebook
 * Officially dropped support for IE11
+* Add a default export, but encourage named imports
 
 ## 0.2.2
 

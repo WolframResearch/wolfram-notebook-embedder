@@ -19,7 +19,7 @@ title: Getting Started
     so you can import it in JavaScript as
     
     ```js
-    import WolframNotebookEmbedder from 'wolfram-notebook-embedder';
+    import * as WolframNotebookEmbedder from 'wolfram-notebook-embedder';
     ```
         
     or import it as a `<script>` tag from a CDN:

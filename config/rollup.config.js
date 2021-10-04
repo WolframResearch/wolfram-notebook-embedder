@@ -5,6 +5,7 @@ export default {
     input: 'src/main.js',
     output: {
         format: 'umd',
+        exports: 'named',
         file: 'dist/wolfram-notebook-embedder.js',
         name: 'WolframNotebookEmbedder',
         sourcemap: true,

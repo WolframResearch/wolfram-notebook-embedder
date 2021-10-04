@@ -10,7 +10,7 @@ If you are using a package manager such as [npm](https://www.npmjs.com/get-npm) 
     
 and then import it in your JavaScript code like so:
 
-    import WolframNotebookEmbedder from 'wolfram-notebook-embedder';    
+    import * as WolframNotebookEmbedder from 'wolfram-notebook-embedder';    
     
 You can also import this library as a `<script>` tag from a CDN:
 
